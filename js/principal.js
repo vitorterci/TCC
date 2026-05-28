@@ -1,6 +1,6 @@
 /**
  * Projeto TCC - Game Search
- * Script principal para controle de interface, filtros e carrossel
+ * Script principal para controle de interface, filtros e carrossel multimídia
  */
 
 // Dados de exemplo para os jogos
@@ -15,11 +15,20 @@ const listaDeJogos = [
     { id: 8, nome: "Among Us", categoria: "multiplayer", img: "img/among.jpg" }
 ];
 
-// Dados para o carrossel
+// Dados para o carrossel (Suporta YouTube, Vídeo Local e Imagem)
 const slidesDestaque = [
-    { type: "image", src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1000&q=80" },
-    { type: "image", src: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80" },
-    { type: "image", src: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=1000&q=80" }
+    {
+        tipo: "youtube",
+        src: "https://youtu.be/fubBetdSZcw?si=Nnp4Hu3O4VtqQS3z"
+    },
+    {
+        tipo: "imagem",
+        src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+        tipo: "video",
+        src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+    }
 ];
 
 // Seleção de elementos do DOM
@@ -33,6 +42,17 @@ const carrosselIndicadores = document.getElementById('carrossel-indicadores');
 let indiceCarrosselAtual = 0;
 let categoriaAtiva = "todos";
 let termoPesquisa = "";
+let intervaloAutoPlay;
+
+/**
+ * Converte URL do YouTube para formato embed amigável
+ * @param {string} url 
+ * @returns {string}
+ */
+function obterUrlEmbedYouTube(url) {
+    const videoId = url.split('v=')[1] || url.split('/').pop().split('?')[0];
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0`;
+}
 
 /**
  * Renderiza a grade de jogos baseada em uma lista
@@ -54,29 +74,23 @@ function renderizarJogos(lista) {
 }
 
 /**
- * Filtra a lista de jogos com base na categoria e termo de busca
- */
-function aplicarFiltros() {
-    const jogosFiltrados = listaDeJogos.filter(jogo => {
-        const correspondeCategoria = categoriaAtiva === "todos" || jogo.categoria === categoriaAtiva;
-        const correspondeBusca = jogo.nome.toLowerCase().includes(termoPesquisa.toLowerCase());
-        return correspondeCategoria && correspondeBusca;
-    });
-    renderizarJogos(jogosFiltrados);
-}
-
-/**
- * Inicializa o carrossel de destaques
+ * Inicializa o carrossel de destaques com suporte multimídia
  */
 function inicializarCarrossel() {
     if (!carrosselTrilho || !carrosselIndicadores) return;
 
-    // Criar slides
-    carrosselTrilho.innerHTML = slidesDestaque.map((slide, index) => `
-        <div class="carrossel__item">
-            <img src="${slide.src}" alt="Destaque ${index + 1}">
-        </div>
-    `).join('');
+    // Criar slides dinamicamente
+    carrosselTrilho.innerHTML = slidesDestaque.map((slide, index) => {
+        let conteudo = '';
+        if (slide.tipo === 'youtube') {
+            conteudo = `<iframe src="${obterUrlEmbedYouTube(slide.src)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        } else if (slide.tipo === 'video') {
+            conteudo = `<video muted loop playsinline><source src="${slide.src}" type="video/mp4"></video>`;
+        } else {
+            conteudo = `<img src="${slide.src}" alt="Destaque ${index + 1}">`;
+        }
+        return `<div class="carrossel__item ${index === 0 ? 'carrossel__item--ativo' : ''}">${conteudo}</div>`;
+    }).join('');
 
     // Criar indicadores
     carrosselIndicadores.innerHTML = slidesDestaque.map((_, index) => `
@@ -88,14 +102,12 @@ function inicializarCarrossel() {
         botao.addEventListener('click', () => {
             const index = parseInt(botao.getAttribute('data-index'));
             moverCarrossel(index);
+            reiniciarAutoPlay();
         });
     });
 
-    // Auto-play
-    setInterval(() => {
-        let proximo = (indiceCarrosselAtual + 1) % slidesDestaque.length;
-        moverCarrossel(proximo);
-    }, 5000);
+    iniciarAutoPlay();
+    atualizarEstadoVideos();
 }
 
 /**
@@ -110,9 +122,63 @@ function moverCarrossel(indice) {
     document.querySelectorAll('.indicador').forEach((ind, i) => {
         ind.classList.toggle('indicador--ativo', i === indice);
     });
+
+    // Atualizar classes dos itens para controle de vídeo
+    document.querySelectorAll('.carrossel__item').forEach((item, i) => {
+        item.classList.toggle('carrossel__item--ativo', i === indice);
+    });
+
+    atualizarEstadoVideos();
 }
 
-// Event Listeners
+/**
+ * Controla a reprodução de vídeos locais baseada na visibilidade
+ */
+function atualizarEstadoVideos() {
+    const itens = document.querySelectorAll('.carrossel__item');
+    itens.forEach((item, i) => {
+        const video = item.querySelector('video');
+        if (video) {
+            if (i === indiceCarrosselAtual) {
+                video.play().catch(e => console.log("Auto-play bloqueado pelo navegador"));
+            } else {
+                video.pause();
+            }
+        }
+    });
+}
+
+/**
+ * Inicia o ciclo automático do carrossel
+ */
+function iniciarAutoPlay() {
+    intervaloAutoPlay = setInterval(() => {
+        let proximo = (indiceCarrosselAtual + 1) % slidesDestaque.length;
+        moverCarrossel(proximo);
+    }, 8000);
+}
+
+/**
+ * Reinicia o temporizador do auto-play após interação manual
+ */
+function reiniciarAutoPlay() {
+    clearInterval(intervaloAutoPlay);
+    iniciarAutoPlay();
+}
+
+/**
+ * Filtra a lista de jogos com base na categoria e termo de busca
+ */
+function aplicarFiltros() {
+    const jogosFiltrados = listaDeJogos.filter(jogo => {
+        const correspondeCategoria = categoriaAtiva === "todos" || jogo.categoria === categoriaAtiva;
+        const correspondeBusca = jogo.nome.toLowerCase().includes(termoPesquisa.toLowerCase());
+        return correspondeCategoria && correspondeBusca;
+    });
+    renderizarJogos(jogosFiltrados);
+}
+
+// Event Listeners para Busca e Filtros
 if (campoBusca) {
     campoBusca.addEventListener('input', (e) => {
         termoPesquisa = e.target.value;
@@ -122,11 +188,8 @@ if (campoBusca) {
 
 botoesFiltro.forEach(botao => {
     botao.addEventListener('click', () => {
-        // Atualizar UI dos botões
         botoesFiltro.forEach(b => b.classList.remove('botao-filtro--ativo'));
         botao.classList.add('botao-filtro--ativo');
-
-        // Atualizar estado e filtrar
         categoriaAtiva = botao.getAttribute('data-categoria');
         aplicarFiltros();
     });
@@ -136,5 +199,5 @@ botoesFiltro.forEach(botao => {
 document.addEventListener('DOMContentLoaded', () => {
     renderizarJogos(listaDeJogos);
     inicializarCarrossel();
-    console.log("Aplicação Game Search inicializada com sucesso!");
+    console.log("Game Search: Carrossel Multimídia e Filtros Inicializados.");
 });

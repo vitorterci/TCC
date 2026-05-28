@@ -144,6 +144,11 @@ body {
     height: 100%;
     object-fit: cover;
     border: none;
+    pointer-events: none; /* Evita que cliques no vídeo/iframe interfiram no carrossel se necessário */
+}
+
+.carrossel__item iframe {
+    pointer-events: auto; /* Permite interação com YouTube se desejado, ou mantenha none para apenas visual */
 }
 
 .carrossel__indicadores {
