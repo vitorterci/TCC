@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Search - Busca de Jogos</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="layout-principal">
+        <!-- Barra Lateral de Navegação -->
+        <aside class="barra-lateral">
+            <nav class="navegacao">
+                <ul class="navegacao__lista">
+                    <li class="navegacao__item navegacao__item--ativo">
+                        <a href="index.html" class="navegacao__link"><i class="fas fa-home"></i> INÍCIO</a>
+                    </li>
+                    <li class="navegacao__item">
+                        <a href="sobre.html" class="navegacao__link"><i class="fas fa-users"></i> SOBRE NÓS</a>
+                    </li>
+                    <li class="navegacao__item">
+                        <a href="feedback.html" class="navegacao__link"><i class="fas fa-comment-dots"></i> FEEDBACK</a>
+                    </li>
+                    <li class="navegacao__item">
+                        <a href="desejos.html" class="navegacao__link"><i class="fas fa-heart"></i> DESEJOS</a>
+                    </li>
+                    <li class="navegacao__separador"></li>
+                    <li class="navegacao__item">
+                        <a href="perfil.html" class="navegacao__link"><i class="fas fa-user"></i> PERFIL</a>
+                    </li>
+                    <li class="navegacao__item">
+                        <a href="configuracoes.html" class="navegacao__link"><i class="fas fa-cog"></i> CONFIGURAÇÕES</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal da Página -->
+        <main class="conteudo-principal">
+            <!-- Barra Superior com Campo de Pesquisa -->
+            <header class="barra-superior">
+                <div class="container-busca" id="container-busca">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="BUSCAR JOGOS..." class="campo-busca" id="campo-busca">
+                </div>
+            </header>
+
+            <!-- Seção de Carrossel (Destaque) -->
+            <section class="carrossel" id="carrossel-destaque">
+                <div class="carrossel__container">
+                    <div class="carrossel__trilho" id="carrossel-trilho">
+                        <!-- Os slides serão inseridos via JavaScript -->
+                    </div>
+                    <div class="carrossel__indicadores" id="carrossel-indicadores">
+                        <!-- Indicadores inseridos via JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Hero / Identidade do Site -->
+            <section class="apresentacao">
+                <div class="apresentacao__logo">
+                    <img src="img/logo_placeholder.jpg" alt="Logo Game Search" class="apresentacao__imagem">
+                    <h1 class="apresentacao__titulo">GAME<br>SEARCH</h1>
+                </div>
+                <div class="apresentacao__acoes">
+                    <a href="sobre.html" class="botao botao--secundario">Sobre Nós</a>
+                    <a href="feedback.html" class="botao botao--primario">Feedback</a>
+                </div>
+            </section>
+
+            <!-- Filtros de Categorias de Jogos -->
+            <section class="filtros" id="filtros-categorias">
+                <div class="filtros__grupo">
+                    <button class="botao-filtro botao-filtro--ativo" data-categoria="todos">todos</button>
+                    <button class="botao-filtro" data-categoria="ação">ação</button>
+                    <button class="botao-filtro" data-categoria="clássicos">clássicos</button>
+                    <button class="botao-filtro" data-categoria="terror">terror</button>
+                    <button class="botao-filtro" data-categoria="indie">indie</button>
+                    <button class="botao-filtro" data-categoria="multiplayer">multiplayer</button>
+                </div>
+                <div class="filtros__grupo">
+                    <button class="botao-filtro" data-categoria="puzzle">puzzle</button>
+                    <button class="botao-filtro" data-categoria="RPG">RPG</button>
+                    <button class="botao-filtro" data-categoria="esporte">esporte</button>
+                    <button class="botao-filtro" data-categoria="roguelike">roguelike</button>
+                    <button class="botao-filtro" data-categoria="estratégia">estratégia</button>
+                </div>
+            </section>
+
+            <!-- Grade de Exibição dos Jogos -->
+            <section class="grade-jogos" id="grade-jogos">
+                <!-- Os cards de jogos serão renderizados via JavaScript -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts do Projeto -->
+    <script src="js/principal.js"></script>
+</body>
+</html>
