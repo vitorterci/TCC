@@ -15,19 +15,22 @@ const listaDeJogos = [
     { id: 8, nome: "Among Us", categoria: "multiplayer", img: "img/among.jpg" }
 ];
 
-// Dados para o carrossel (Suporta YouTube, Vídeo Local e Imagem)
+// Dados para o carrossel (Atualizado com links do usuário)
 const slidesDestaque = [
     {
-        tipo: "youtube",
-        src: "https://youtu.be/fubBetdSZcw?si=Nnp4Hu3O4VtqQS3z"
+        tipo: "imagem",
+        src: "https://cdna.artstation.com/p/assets/images/images/050/393/214/large/naughty-dog-tlou-part-i-remake-official-key-art.jpg?1654720165",
+        link: "https://www.artstation.com/artwork/wJ41QL"
     },
     {
         tipo: "imagem",
-        src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1000&q=80"
+        src: "https://tpucdn.com/review/assassin-s-creed-mirage-benchmark-test-performance-analysis/images/header.jpg",
+        link: "https://www.techpowerup.com/review/assassin-s-creed-mirage-benchmark-test-performance-analysis/"
     },
     {
-        tipo: "video",
-        src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+        tipo: "imagem",
+        src: "https://news.instant-gaming.com/wp-content/uploads/2024/02/ea-battlefield-redsec-elite-series.jpg",
+        link: "https://news.instant-gaming.com/pt/artigos/16582-ea-adia-a-battlefield-redsec-elite-series-devido-a-problemas-tecnicos"
     }
 ];
 
@@ -43,16 +46,6 @@ let indiceCarrosselAtual = 0;
 let categoriaAtiva = "todos";
 let termoPesquisa = "";
 let intervaloAutoPlay;
-
-/**
- * Converte URL do YouTube para formato embed amigável
- * @param {string} url 
- * @returns {string}
- */
-function obterUrlEmbedYouTube(url) {
-    const videoId = url.split('v=')[1] || url.split('/').pop().split('?')[0];
-    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0`;
-}
 
 /**
  * Renderiza a grade de jogos baseada em uma lista
@@ -74,22 +67,20 @@ function renderizarJogos(lista) {
 }
 
 /**
- * Inicializa o carrossel de destaques com suporte multimídia
+ * Inicializa o carrossel de destaques
  */
 function inicializarCarrossel() {
     if (!carrosselTrilho || !carrosselIndicadores) return;
 
     // Criar slides dinamicamente
     carrosselTrilho.innerHTML = slidesDestaque.map((slide, index) => {
-        let conteudo = '';
-        if (slide.tipo === 'youtube') {
-            conteudo = `<iframe src="${obterUrlEmbedYouTube(slide.src)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-        } else if (slide.tipo === 'video') {
-            conteudo = `<video muted loop playsinline><source src="${slide.src}" type="video/mp4"></video>`;
-        } else {
-            conteudo = `<img src="${slide.src}" alt="Destaque ${index + 1}">`;
-        }
-        return `<div class="carrossel__item ${index === 0 ? 'carrossel__item--ativo' : ''}">${conteudo}</div>`;
+        return `
+            <div class="carrossel__item ${index === 0 ? 'carrossel__item--ativo' : ''}">
+                <a href="${slide.link}" target="_blank">
+                    <img src="${slide.src}" alt="Destaque ${index + 1}">
+                </a>
+            </div>
+        `;
     }).join('');
 
     // Criar indicadores
@@ -107,7 +98,6 @@ function inicializarCarrossel() {
     });
 
     iniciarAutoPlay();
-    atualizarEstadoVideos();
 }
 
 /**
@@ -123,28 +113,9 @@ function moverCarrossel(indice) {
         ind.classList.toggle('indicador--ativo', i === indice);
     });
 
-    // Atualizar classes dos itens para controle de vídeo
+    // Atualizar classes dos itens
     document.querySelectorAll('.carrossel__item').forEach((item, i) => {
         item.classList.toggle('carrossel__item--ativo', i === indice);
-    });
-
-    atualizarEstadoVideos();
-}
-
-/**
- * Controla a reprodução de vídeos locais baseada na visibilidade
- */
-function atualizarEstadoVideos() {
-    const itens = document.querySelectorAll('.carrossel__item');
-    itens.forEach((item, i) => {
-        const video = item.querySelector('video');
-        if (video) {
-            if (i === indiceCarrosselAtual) {
-                video.play().catch(e => console.log("Auto-play bloqueado pelo navegador"));
-            } else {
-                video.pause();
-            }
-        }
     });
 }
 
@@ -155,7 +126,7 @@ function iniciarAutoPlay() {
     intervaloAutoPlay = setInterval(() => {
         let proximo = (indiceCarrosselAtual + 1) % slidesDestaque.length;
         moverCarrossel(proximo);
-    }, 8000);
+    }, 6000);
 }
 
 /**
@@ -199,5 +170,5 @@ botoesFiltro.forEach(botao => {
 document.addEventListener('DOMContentLoaded', () => {
     renderizarJogos(listaDeJogos);
     inicializarCarrossel();
-    console.log("Game Search: Carrossel Multimídia e Filtros Inicializados.");
+    console.log("Game Search: Carrossel de Destaques e Filtros Atualizados.");
 });
