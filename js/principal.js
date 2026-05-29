@@ -70,14 +70,17 @@ function renderizarJogos(lista) {
  * Inicializa o carrossel de destaques
  */
 function inicializarCarrossel() {
-    if (!carrosselTrilho || !carrosselIndicadores) return;
+    if (!carrosselTrilho || !carrosselIndicadores) {
+        console.error("Elementos do carrossel não encontrados!");
+        return;
+    }
 
     // Criar slides dinamicamente
     carrosselTrilho.innerHTML = slidesDestaque.map((slide, index) => {
         return `
             <div class="carrossel__item ${index === 0 ? 'carrossel__item--ativo' : ''}">
-                <a href="${slide.link}" target="_blank">
-                    <img src="${slide.src}" alt="Destaque ${index + 1}">
+                <a href="${slide.link}" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; height: 100%;">
+                    <img src="${slide.src}" alt="Destaque ${index + 1}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 </a>
             </div>
         `;
@@ -98,6 +101,7 @@ function inicializarCarrossel() {
     });
 
     iniciarAutoPlay();
+    console.log("Carrossel inicializado com sucesso!");
 }
 
 /**
