@@ -5,14 +5,14 @@
 
 // Dados de exemplo para os jogos
 const listaDeJogos = [
-    { id: 1, nome: "Minecraft", categoria: "indie", img: "img/minecraft.jpg" },
-    { id: 2, nome: "The Escapists", categoria: "estratégia", img: "img/escapists.png" },
-    { id: 3, nome: "Graveyard Keeper", categoria: "indie", img: "img/graveyard_keeper.jpg" },
-    { id: 4, nome: "Towerborne", categoria: "ação", img: "img/towerborne.jpg" },
-    { id: 5, nome: "Hades", categoria: "roguelike", img: "img/hades.jpg" },
-    { id: 6, nome: "FIFA 23", categoria: "esporte", img: "img/fifa.jpg" },
-    { id: 7, nome: "Resident Evil", categoria: "terror", img: "img/resident.jpg" },
-    { id: 8, nome: "Among Us", categoria: "multiplayer", img: "img/among.jpg" }
+    { id: 1, nome: "Minecraft", categoria: "indie", img: "https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft-OG-KeyArt.jpg" },
+    { id: 2, nome: "The Escapists", categoria: "estratégia", img: "https://cdn.akamai.steamstatic.com/steam/apps/298630/header.jpg" },
+    { id: 3, nome: "Graveyard Keeper", categoria: "indie", img: "https://cdn.akamai.steamstatic.com/steam/apps/599140/header.jpg" },
+    { id: 4, nome: "Towerborne", categoria: "ação", img: "https://cdn.akamai.steamstatic.com/steam/apps/2458830/header.jpg" },
+    { id: 5, nome: "Hades", categoria: "roguelike", img: "https://cdn.akamai.steamstatic.com/steam/apps/1145360/header.jpg" },
+    { id: 6, nome: "FIFA 23", categoria: "esporte", img: "https://cdn.akamai.steamstatic.com/steam/apps/1811260/header.jpg" },
+    { id: 7, nome: "Resident Evil Village", categoria: "terror", img: "https://cdn.akamai.steamstatic.com/steam/apps/1196590/header.jpg" },
+    { id: 8, nome: "Among Us", categoria: "multiplayer", img: "https://cdn.akamai.steamstatic.com/steam/apps/945360/header.jpg" }
 ];
 
 // Dados para o carrossel (Atualizado com links do usuário)
