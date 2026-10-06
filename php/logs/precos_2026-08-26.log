@@ -1,0 +1,961 @@
+[2026-08-26 13:48:03] [INFO] Requisição recebida: buscar
+{
+    "id": 30,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:48:03] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.platforma' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:48:03] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:48:14] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:48:14] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.platforma' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:48:14] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:51:11] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:51:11] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.platforma' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:51:11] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:45] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:45] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:45] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:48] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 13:53:49] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 14:07:54] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:07:54] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:07:54] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 14:22:51] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:22:51] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:22:51] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-26 14:34:18] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:34:18] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:34:18] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:34:20] [ERRO] Erro HTTP da Apify: 201
+{
+    "response": "{\n  \"data\": {\n    \"id\": \"fJTwsS2GWXivw54p4\",\n    \"actId\": \"fMiOtTgLXl7pq8xff\",\n    \"userId\": \"PXAxO4KMEQ7BVJffA\",\n    \"startedAt\": \"2026-08-26T12:34:21.073Z\",\n    \"finishedAt\": null,\n    \"status\": \"READY\",\n    \"meta\": {\n      \"origin\": \"API\",\n      \"userAgent\": \"\"\n    },\n    \"stats\": {\n      \"inputBodyLen\": 1698,\n      \"migrationCount\": 0,\n      \"rebootCount\": 0,\n      \"restartCount\": 0,\n      \"resurrectCount\": 0,\n      \"computeUnits\": 0\n    },\n    \"options\": {\n      \"build\": \"latest\",\n      \"timeoutSecs\": 3600,\n      \"memoryMbytes\": 4096,\n      \"maxTotalChargeUsd\": 5,\n      \"maxItems\": 1250,\n      \"isMaxTotalChargeUsdSetByUser\": false,\n      \"diskMbytes\": 8192\n    },\n    \"buildId\": \"6FMSgRI47ZKv5Aenv\",\n    \"defaultKeyValueStoreId\": \"dxrDYXvxTaeeQrKyh\",\n    \"defaultDatasetId\": \"bAp748UX2mSoZCPUG\",\n    \"defaultRequestQueueId\": \"dLcEoC9dooJHTlJg1\",\n    \"storageIds\": {\n      \"keyValueStores\": {\n        \"default\": \"dxrDYXvxTaeeQrKyh\"\n      },\n      \"datasets\": {\n        \"default\": \"bAp748UX2mSoZCPUG\"\n      },\n      \"requestQueues\": {\n        \"default\": \"dLcEoC9dooJHTlJg1\"\n      }\n    },\n    \"pricingInfo\": {\n      \"minimalMaxTotalChargeUsd\": null,\n      \"isPPEPlatformUsagePaidByUser\": true,\n      \"pricingModel\": \"PAY_PER_EVENT\",\n      \"isPriceChangeNotificationSuppressed\": false,\n      \"startedAt\": \"2026-05-29T16:35:11.264Z\",\n      \"createdAt\": \"2026-05-29T16:35:11.544Z\",\n      \"apifyMarginPercentage\": 0.2,\n      \"pricingPerEvent\": {\n        \"actorChargeEvents\": {\n          \"apify-actor-start\": {\n            \"eventTitle\": \"Actor Start\",\n            \"eventDescription\": \"Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event).\",\n            \"isOneTimeEvent\": true,\n            \"eventPriceUsd\": 0.01\n          },\n          \"apify-default-dataset-item\": {\n            \"eventTitle\": \"result\",\n            \"eventDescription\": \"Single result in the default dataset.\",\n            \"isPrimaryEvent\": true,\n            \"eventPriceUsd\": 0.004\n          }\n        }\n      }\n    },\n    \"chargedEventCounts\": {\n      \"apify-actor-start\": 4,\n      \"apify-default-dataset-item\": 0\n    },\n    \"platformUsageBillingModel\": \"USER\",\n    \"accountedChargedEventCounts\": {\n      \"apify-actor-start\": 0,\n      \"apify-default-dataset-item\": 0\n    },\n    \"generalAccess\": \"FOLLOW_USER_SETTING\",\n    \"buildNumber\": \"0.1.50\",\n    \"containerUrl\": \"https:\/\/pwukassc7sb6.runs.apify.net\",\n    \"usage\": {\n      \"ACTOR_COMPUTE_UNITS\": 0,\n      \"DATASET_READS\": 0,\n      \"DATASET_WRITES\": 0,\n      \"KEY_VALUE_STORE_READS\": 0,\n      \"KEY_VALUE_STORE_WRITES\": 1,\n      \"KEY_VALUE_STORE_LISTS\": 0,\n      \"REQUEST_QUEUE_READS\": 0,\n      \"REQUEST_QUEUE_WRITES\": 0,\n      \"DATA_TRANSFER_INTERNAL_GBYTES\": 0,\n      \"DATA_TRANSFER_EXTERNAL_GBYTES\": 0,\n      \"PROXY_RESIDENTIAL_TRANSFER_GBYTES\": 0,\n      \"PROXY_SERPS\": 0\n    },\n    \"usageTotalUsd\": 0.00005,\n    \"usageUsd\": {\n      \"ACTOR_COMPUTE_UNITS\": 0,\n      \"DATASET_READS\": 0,\n      \"DATASET_WRITES\": 0,\n      \"KEY_VALUE_STORE_READS\": 0,\n      \"KEY_VALUE_STORE_WRITES\": 0.00005,\n      \"KEY_VALUE_STORE_LISTS\": 0,\n      \"REQUEST_QUEUE_READS\": 0,\n      \"REQUEST_QUEUE_WRITES\": 0,\n      \"DATA_TRANSFER_INTERNAL_GBYTES\": 0,\n      \"DATA_TRANSFER_EXTERNAL_GBYTES\": 0,\n      \"PROXY_RESIDENTIAL_TRANSFER_GBYTES\": 0,\n      \"PROXY_SERPS\": 0\n    },\n    \"eventUsage\": {\n      \"apify-actor-start\": {\n        \"eventTitle\": \"Actor Start\",\n        \"eventTotalUsd\": 0\n      },\n      \"apify-default-dataset-item\": {\n        \"eventTitle\": \"result\",\n        \"eventTotalUsd\": 0\n      }\n    },\n    \"output\": {\n      \"dataset\": \"https:\/\/api.apify.com\/v2\/datasets\/bAp748UX2mSoZCPUG\/items?signature=MC4wLjFPSnJUOXdUWVBqMWNqcG5PTWx2UQ\"\n    }\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:18] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:18] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:18] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:18] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:19] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:19] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:19] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:20] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:56:21] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:57:09] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:57:09] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 14:57:09] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:57:09] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:57:19] [INFO] Requisição recebida: manual
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:57:19] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 14:57:19] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 15:04:09] [INFO] Requisição recebida: buscar
+{
+    "id": 47,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-26 15:04:09] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.loja' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-26 15:04:09] [INFO] Buscando preços para: The Witcher 3 Wild Hunt
+{
+    "plataformas": [
+        "steam",
+        "epicgames",
+        "xbox",
+        "gog",
+        "ea",
+        "ubisoft",
+        "battlenet",
+        "rockstar",
+        "squareenix",
+        "capcom",
+        "nuuvem",
+        "humblebundle",
+        "greenmangaming",
+        "fanatical",
+        "gamesplanet",
+        "gamersgate",
+        "indiegala",
+        "dlgamer",
+        "wingamestore",
+        "2game"
+    ]
+}
+--------------------------------------------------------------------------------
+[2026-08-26 15:04:09] [ERRO] Erro HTTP da Apify: 403
+{
+    "response": "{\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}"
+}
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:38] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:39] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:41] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:41] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:43] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:44] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:44] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:45] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:46] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:46] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:58] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:06:58] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:07:01] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:07:02] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:07:03] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:07:03] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:08:44] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:08:44] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:09:10] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:09:10] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:09:12] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:09:13] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:09:24] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:57] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:57] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:13:59] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:14:00] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:14:00] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:14:00] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:35:47] [ERRO] Falha ao preparar leitura do cache
+--------------------------------------------------------------------------------
+[2026-08-26 15:35:48] [ERRO] Falha de comunicação com a fonte de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:21] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:23] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:23] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:24] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:24] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:24] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:41] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:44] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:44] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:44] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:44] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:44] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:39:44] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:47:34] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:49:06] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:50:12] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:50:47] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:50:48] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:50:48] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:50:48] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:50:48] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 15:50:52] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 16:21:13] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 16:21:42] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"SSL certificate problem: self-signed certificate in certificate chain"}
+--------------------------------------------------------------------------------
+[2026-08-26 17:42:44] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"error setting certificate path: ","codigo_curl":77,"status_http":0,"tempo":0.38064,"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","url_final":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20"}
+--------------------------------------------------------------------------------
+[2026-08-26 17:46:22] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"error setting certificate path: ","codigo_curl":77,"status_http":0,"tempo":0.458946,"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","url_final":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20"}
+--------------------------------------------------------------------------------
+[2026-08-26 17:46:25] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"error setting certificate path: ","codigo_curl":77,"status_http":0,"tempo":0.37338,"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","url_final":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20"}
+--------------------------------------------------------------------------------
+[2026-08-26 17:47:21] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"error setting certificate path: ","codigo_curl":77,"status_http":0,"tempo":0.484517,"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","url_final":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20"}
+--------------------------------------------------------------------------------
+[2026-08-26 18:09:54] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 18:10:08] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:00:12] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:00:12] [DEBUG] Resposta de /games?title=
+{"nome":"Mortal Kombat 1","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:00:19] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:00:19] [DEBUG] Resposta de /games?title=
+{"nome":"Mortal Kombat 1","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:11:26] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:11:26] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:11:35] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:11:35] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:11:40] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:11:40] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:11:59] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"","codigo_curl":56,"status_http":0,"tempo":0.090393,"url":"https://www.cheapshark.com/api/1.0/games?title=Brawlhalla&limit=20","url_final":"https://www.cheapshark.com/api/1.0/games?title=Brawlhalla&limit=20"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:12:05] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:12:05] [DEBUG] Resposta de /games?title=
+{"nome":"Brawlhalla","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:12:36] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:12:36] [DEBUG] Resposta de /games?title=
+{"nome":"Avatar: Frontiers of Pandora","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:14:41] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:14:41] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:15:37] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:15:37] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:15:41] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:15:41] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:15:50] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:15:50] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:18:46] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:18:46] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:35:19] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:35:19] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:35:34] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:35:34] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:35:39] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:35:39] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:38:54] [ERRO] Resposta JSON inválida do serviço de preços
+{"status":200,"resposta":"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n\n<html>\n\t<head>\n\t\t<meta name=\"robots\" content=\"noindex,nofollow\" />\n\t\t<meta content=\"yes\" name=\"apple-mobile-web-app-capable\" />\n        \t<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n\t\t\n\t\t<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>                          <link rel=\"shortcut icon\" type=\"image/vnd.microsoft.icon\" href=\"img/favicon.ico\"/>         \t\t<lin"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:38:54] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:39:07] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"","codigo_curl":56,"status_http":0,"tempo":0.070178,"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","url_final":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:09] [ERRO] Resposta HTML indica bloqueio ou interceptação da CheapShark
+{"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","status_http":200,"content_type":"text/html;charset=UTF-8","motivo":"content_type_text_html"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:09] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:11] [ERRO] Resposta HTML indica bloqueio ou interceptação da CheapShark
+{"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","status_http":200,"content_type":"text/html;charset=UTF-8","motivo":"content_type_text_html"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:11] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:14] [ERRO] Resposta HTML indica bloqueio ou interceptação da CheapShark
+{"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","status_http":200,"content_type":"text/html;charset=UTF-8","motivo":"content_type_text_html"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:14] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:14] [ERRO] Falha de comunicação com o serviço de preços
+{"erro":"","codigo_curl":56,"status_http":0,"content_type":"","tempo":0.349071,"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","url_final":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:14] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:15] [ERRO] Resposta HTML indica bloqueio ou interceptação da CheapShark
+{"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","status_http":200,"content_type":"text/html;charset=UTF-8","motivo":"content_type_text_html"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:15] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:17] [ERRO] Resposta HTML indica bloqueio ou interceptação da CheapShark
+{"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","status_http":200,"content_type":"text/html;charset=UTF-8","motivo":"content_type_text_html"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:17] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:17] [ERRO] Resposta HTML indica bloqueio ou interceptação da CheapShark
+{"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","status_http":200,"content_type":"text/html;charset=UTF-8","motivo":"content_type_text_html"}
+--------------------------------------------------------------------------------
+[2026-08-26 19:59:17] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 20:01:29] [ERRO] Resposta HTML indica bloqueio ou interceptação da CheapShark
+{"url":"https://www.cheapshark.com/api/1.0/games?title=The+Witcher+3%3A+Wild+Hunt&limit=20","status_http":200,"content_type":"text/html;charset=UTF-8","motivo":"content_type_text_html"}
+--------------------------------------------------------------------------------
+[2026-08-26 20:01:29] [DEBUG] Resposta de /games?title=
+{"nome":"The Witcher 3: Wild Hunt","ok":false,"dados":null}
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:05] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:08] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:09] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:10] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:10] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:10] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:10] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:11] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:11] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:11] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:11] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:11] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:55:12] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 20:59:56] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 21:03:39] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 21:05:13] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 21:05:16] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 21:19:16] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 21:19:16] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 21:19:23] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 21:20:16] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 21:25:32] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------
+[2026-08-26 21:28:59] [ERRO] API Key do GG.deals ausente
+--------------------------------------------------------------------------------

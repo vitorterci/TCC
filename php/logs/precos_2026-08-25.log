@@ -1,0 +1,206 @@
+[2026-08-25 14:02:44] [INFO] Requisição recebida: buscar
+{
+    "id": 220,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 14:02:44] [ERRO] Erro ao preparar consulta de cache: Unknown column 'p.platforma' in 'field list'
+--------------------------------------------------------------------------------
+[2026-08-25 14:02:44] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 14:17:04] [INFO] Requisição recebida: buscar
+{
+    "id": 220,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 14:17:04] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 14:17:40] [INFO] Requisição recebida: buscar
+{
+    "id": 220,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 14:17:40] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 14:17:48] [INFO] Requisição recebida: buscar
+{
+    "id": 220,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 14:17:48] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 14:18:52] [INFO] Requisição recebida: buscar
+{
+    "id": 220,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 14:18:52] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 16:02:44] [INFO] Requisição recebida: buscar
+{
+    "id": 220,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:02:44] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 16:03:31] [INFO] Requisição recebida: buscar
+{
+    "id": 219,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:03:31] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 16:04:24] [INFO] Requisição recebida: buscar
+{
+    "id": 219,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:04:24] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 16:04:32] [INFO] Requisição recebida: buscar
+{
+    "id": 223,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:04:32] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 16:04:36] [INFO] Requisição recebida: buscar
+{
+    "id": 223,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:04:36] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 16:05:09] [INFO] Requisição recebida: buscar
+{
+    "id": 223,
+    "forcar": true
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:05:09] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 16:05:18] [INFO] Requisição recebida: buscar
+{
+    "id": 216,
+    "forcar": false
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:05:18] [ERRO] Token da Apify não configurado
+--------------------------------------------------------------------------------
+[2026-08-25 16:17:52] [ERRO] Erro ao preparar consulta de cache
+{
+    "erro": "Unknown column 'p.platforma' in 'field list'"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:17:53] [ERRO] Falha de comunicação com CheapShark
+{
+    "erro": "SSL certificate problem: self-signed certificate in certificate chain"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:18:13] [ERRO] Erro ao preparar consulta de cache
+{
+    "erro": "Unknown column 'p.platforma' in 'field list'"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:18:13] [ERRO] Falha de comunicação com CheapShark
+{
+    "erro": "SSL certificate problem: self-signed certificate in certificate chain"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:18:20] [ERRO] Erro ao preparar consulta de cache
+{
+    "erro": "Unknown column 'p.platforma' in 'field list'"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:18:20] [ERRO] Falha de comunicação com CheapShark
+{
+    "erro": "SSL certificate problem: self-signed certificate in certificate chain"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:18:34] [ERRO] Erro ao preparar consulta de cache
+{
+    "erro": "Unknown column 'p.platforma' in 'field list'"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 16:18:34] [ERRO] Falha de comunicação com CheapShark
+{
+    "erro": "SSL certificate problem: self-signed certificate in certificate chain"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:16:03] [ERRO] Erro ao preparar consulta de cache
+{
+    "erro": "Unknown column 'p.platforma' in 'field list'"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:16:04] [ERRO] Falha de comunicação com CheapShark
+{
+    "erro": "SSL certificate problem: self-signed certificate in certificate chain"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:16:10] [ERRO] Erro ao preparar consulta de cache
+{
+    "erro": "Unknown column 'p.platforma' in 'field list'"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:16:10] [ERRO] Falha de comunicação com CheapShark
+{
+    "erro": "SSL certificate problem: self-signed certificate in certificate chain"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:16:11] [ERRO] Erro ao preparar consulta de cache
+{
+    "erro": "Unknown column 'p.platforma' in 'field list'"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:16:11] [ERRO] Falha de comunicação com CheapShark
+{
+    "erro": "SSL certificate problem: self-signed certificate in certificate chain"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:42:42] [ERRO] Erro ao preparar consulta de cache
+{
+    "erro": "Unknown column 'p.platforma' in 'field list'"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:42:43] [ERRO] Falha de comunicação com CheapShark
+{
+    "erro": "SSL certificate problem: self-signed certificate in certificate chain"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:47:01] [ERRO] Erro ao preparar consulta de cache
+{
+    "erro": "Unknown column 'p.imagem' in 'field list'"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:47:02] [ERRO] Falha de comunicação com CheapShark
+{
+    "erro": "SSL certificate problem: self-signed certificate in certificate chain"
+}
+--------------------------------------------------------------------------------
+[2026-08-25 17:48:37] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:48:47] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:48:47] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:48:48] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:48:48] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:48:48] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:49:30] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:49:31] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:50:27] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:50:32] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:50:33] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:50:33] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:50:33] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:50:33] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:50:34] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:50:34] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:50:53] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}
+[2026-08-25 17:55:57] [ERRO] Falha no provider {"http":0,"erro":"Could not resolve host: store.steampowered.com"}

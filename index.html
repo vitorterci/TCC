@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base-path" content="" />
+    <title>Game Search — Catálogo</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/pages/index.css" />
+    <link rel="stylesheet" href="css/PixelBlast.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Estilos adicionais para as fileiras horizontais de categorias */
+      .galeria-categorias {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding-bottom: 60px;
+      }
+
+      .galeria-categoria {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: relative;
+      }
+
+      .galeria-categoria__cabecalho {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 0 4px;
+      }
+
+      .galeria-categoria__titulo {
+        font-family: var(--font-titulo);
+        font-size: 1.35rem;
+        color: var(--cor-texto);
+        letter-spacing: 0.05em;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .galeria-categoria__ver-todos {
+        font-family: var(--font-corpo);
+        font-size: 0.85rem;
+        color: var(--cor-texto-destaque);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s ease;
+      }
+
+      .galeria-categoria__ver-todos:hover {
+        color: var(--cor-texto);
+        text-decoration: underline;
+      }
+
+      .galeria-categoria__container {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .galeria-categoria__grade {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+        padding: 8px 4px 16px 4px;
+        width: 100%;
+      }
+
+      .galeria-categoria__grade::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+      }
+
+      /* Cada card na fileira horizontal possui largura fixa para scroll fluido */
+      .galeria-categoria__grade .card-jogo {
+        flex: 0 0 220px;
+        max-width: 220px;
+        min-height: 280px;
+        max-height: 320px;
+        flex-direction: column;
+      }
+
+      .galeria-categoria__grade .card-jogo .card-jogo-sidebar {
+        width: 100%;
+        height: 140px;
+        overflow: hidden;
+      }
+
+      .galeria-categoria__grade .card-jogo .card-jogo-sidebar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .galeria-categoria__grade .card-jogo .card-jogo-content {
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+      }
+
+      .galeria-categoria__grade .card-jogo .card-jogo-titulo {
+        font-size: 0.95rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+      }
+
+      .galeria-categoria__grade .card-jogo .card-jogo-descricao {
+        font-size: 0.75rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin: 0;
+    color: var(--font-corpo);
+      }
+
+      .galeria-categoria__grade .card-jogo .card-jogo-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        font-size: 0.7rem;
+      }
+
+      .galeria-categoria__grade .card-jogo .botao-detalhes {
+        margin-top: auto;
+        padding: 6px 10px;
+        font-size: 0.75rem;
+      }
+
+      /* Botões de navegação horizontal (setas) */
+      .galeria-botao-navegacao {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: var(--cor-primaria);
+        color: var(--cor-texto);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+      }
+
+      .galeria-categoria:hover .galeria-botao-navegacao {
+        opacity: 1;
+      }
+
+      .galeria-botao-navegacao:hover {
+        background: var(--cor-primaria);
+        border-color: var(--cor-primaria);
+        color: var(--cor-texto-sobre-destaque);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .galeria-botao-navegacao--esquerda {
+        left: -22px;
+      }
+
+      .galeria-botao-navegacao--direita {
+        right: -22px;
+      }
+
+      @media (max-width: 768px) {
+        .galeria-botao-navegacao {
+          display: none; /* No mobile usa touch scroll direto */
+        }
+        .galeria-categoria__grade .card-jogo {
+          flex: 0 0 170px;
+          max-width: 170px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="layout-principal">
+      <!-- Sidebar -->
+      <aside class="barra-lateral" id="sidebarDrawer">
+        <div class="sidebar-logo">
+          <a href="index.html" aria-label="Ir para a página inicial">
+            <img src="img/logo2.png" alt="Game Search" />
+          </a>
+        </div>
+
+        <!-- Navegação Principal -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Navegação Principal</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li class="ativo">
+                <a href="index.html"
+                  ><i class="fas fa-home"></i><span>Início</span></a
+                >
+              </li>
+              <li class="ativo">
+                <a href="pages/Apresentação.html"
+                  ><i class="fas fa-layer-group"></i
+                  ><span>Apresentação</span></a
+                >
+              </li>
+
+              <li>
+                <a href="pages/biblioteca.html"
+                  ><i class="fas fa-book"></i><span>Biblioteca</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Informações -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Informações</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="pages/sobre.html"
+                  ><i class="fas fa-users"></i><span>Sobre nós</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Usuário -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Usuário</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="pages/login.html"
+                  ><i class="fas fa-sign-in-alt"></i><span>Entrar</span></a
+                >
+              </li>
+              <li>
+                <a href="pages/perfil.html"
+                  ><i class="fas fa-user"></i><span>Perfil</span></a
+                >
+              </li>
+              <li>
+                <a href="pages/configuracao.html"
+                  ><i class="fas fa-cog"></i><span>Configurações</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Suporte -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Suporte</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="pages/feedback.html"
+                  ><i class="fas fa-envelope"></i><span>Feedback</span></a
+                >
+              </li>
+              <li>
+                <a href="pages/ajuda.html"
+                  ><i class="fas fa-question-circle"></i><span>Ajuda</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Overlay para fechar o drawer -->
+      <div class="drawer-overlay" id="drawerOverlay"></div>
+
+      <!-- Conteúdo -->
+      <main class="conteudo-principal">
+        <header class="barra-superior">
+          <div class="container-busca">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              placeholder="BUSCAR"
+              class="campo-busca"
+              autocomplete="off"
+            />
+          </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Navegação">
+          <i class="fas fa-home"></i>
+          <span>Início</span>
+        </nav>
+
+        <!-- Hero -->
+        <section class="destaque">
+          <div class="logo-hero">
+            <a
+              href="pages/Apresentação.html"
+              aria-label="Ir para a página inicial"
+            >
+              <img
+                src="img/logo.png"
+                alt="Game Search Logo"
+                class="logo-principal"
+              />
+            </a>
+          </div>
+
+          <div
+            class="carousel-wrapper"
+            role="region"
+            aria-label="Destaques em carrossel"
+          >
+            <div class="carousel-track-container">
+              <div class="carousel-track" id="carouselTrack">
+                <article class="carousel-slide">
+                  <a
+                    href="https://www.marvel.com/articles/games/marvels-wolverine-gameplay-trailer-playstation-state-of-play-2025"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div class="carousel-img-wrap">
+                      <img
+                        src="img/news/marvel-wolverine.jpg"
+                        alt="Marvel's Wolverine em cena de gameplay"
+                        loading="lazy"
+                      />
+                    </div>
+                  </a>
+                  <p class="carousel-caption">
+                    Games · 15/09/2026 — Marvel's Wolverine chega ao PS5
+                  </p>
+                </article>
+                <article class="carousel-slide">
+                  <a
+                    href="https://www.nintendo.com/my/news/article/4KShZr5RL51mwsTHNRkrZ3"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div class="carousel-img-wrap">
+                      <img
+                        src="img/news/fire-emblem-fortunes-weave.jpg"
+                        alt="Fire Emblem: Fortune's Weave"
+                        loading="lazy"
+                      />
+                    </div>
+                  </a>
+                  <p class="carousel-caption">
+                    Nintendo Switch 2 · 17/09/2026 — Fire Emblem: Fortune's
+                    Weave
+                  </p>
+                </article>
+                <article class="carousel-slide">
+                  <a
+                    href="https://www.nintendo.com/us/whatsnew/nintendo-direct-reveals-metroid-ravenous-kirby-and-the-world-beyond-and-more-games-for-nintendo-switch-2-and-nintendo-switch/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div class="carousel-img-wrap">
+                      <img
+                        src="img/news/metroid-ravenous.jpg"
+                        alt="Metroid Ravenous"
+                        loading="lazy"
+                      />
+                    </div>
+                  </a>
+                  <p class="carousel-caption">
+                    Anúncio · 09/09/2026 — Metroid Ravenous é revelado
+                  </p>
+                </article>
+                <article class="carousel-slide">
+                  <a
+                    href="https://www.nintendo.com/us/whatsnew/nintendo-direct-reveals-metroid-ravenous-kirby-and-the-world-beyond-and-more-games-for-nintendo-switch-2-and-nintendo-switch/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div class="carousel-img-wrap">
+                      <img
+                        src="img/news/kirby-world-beyond.jpg"
+                        alt="Kirby and the World Beyond"
+                        loading="lazy"
+                      />
+                    </div>
+                  </a>
+                  <p class="carousel-caption">
+                    Anúncio · 09/09/2026 — Kirby and the World Beyond
+                  </p>
+                </article>
+                <article class="carousel-slide">
+                  <a
+                    href="https://www.nintendo.com/us/whatsnew/nintendo-direct-reveals-metroid-ravenous-kirby-and-the-world-beyond-and-more-games-for-nintendo-switch-2-and-nintendo-switch/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div class="carousel-img-wrap">
+                      <img
+                        src="img/news/nintendo-direct-september-2026.png"
+                        alt="Nintendo Direct de setembro de 2026"
+                        loading="lazy"
+                      />
+                    </div>
+                  </a>
+                  <p class="carousel-caption">
+                    Nintendo Direct · 09/09/2026 — Principais novidades
+                  </p>
+                </article>
+              </div>
+            </div>
+            <div
+              class="carousel-indicators"
+              id="carouselIndicators"
+              role="tablist"
+            ></div>
+          </div>
+        </section>
+
+        <!-- Filtros -->
+
+        <!-- Galeria de Categorias em Fileiras Horizontais -->
+        <section
+          class="galeria-categorias"
+          id="galeria-categorias"
+          aria-label="Catálogo de jogos por categorias"
+        >
+          <!-- Renderizado dinamicamente via home.js -->
+        </section>
+      </main>
+    </div>
+
+    <!-- Overlay do Card Expandido -->
+    <div class="card-overlay" id="cardOverlay"></div>
+
+    <!-- Botão Hambúrguer -->
+    <button
+      class="hamburger-btn"
+      id="hamburgerBtn"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <script src="js/global.js"></script>
+    <script src="js/navegacao/sidebar.js"></script>
+    <script src="js/navegacao/navegacao.js"></script>
+    <script src="js/precos/precos.js"></script>
+    <script src="js/jogos/cards.js"></script>
+    <script src="js/jogos/cards-expansiveis.js"></script>
+    <script src="js/home.js"></script>
+
+    <!-- PixelBlast Background Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/PixelBlast.js"></script>
+  </body>
+</html>
