@@ -1,0 +1,73 @@
+/* Classificação etária extraída e consolidada de global.css — Game Search */
+
+.badge-etaria {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-xs);
+  font-weight: 900;
+  color: var(--cor-texto);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  font-family: var(--font-corpo);
+}
+
+/* Variante usada sobre a imagem do card. */
+.card-jogo-sidebar .badge-etaria {
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  padding: 2px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+}
+
+.etaria-L {
+  background-color: #00a651;
+  color: var(--cor-texto);
+}
+
+.etaria-10 {
+  background-color: #00aeef;
+  color: var(--cor-texto);
+}
+
+.etaria-12 {
+  background-color: #ffc20e;
+  color: #000;
+}
+
+.etaria-14 {
+  background-color: #f7941d;
+  color: var(--cor-texto);
+}
+
+.etaria-16 {
+  background-color: #ed1c24;
+  color: var(--cor-texto);
+}
+
+.etaria-18 {
+  background-color: #231f20;
+  color: var(--cor-texto);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.etaria-nao-informada {
+  background-color: #5f6368;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  font-size: 0.6rem;
+}
+
+
+html.tema-claro .etaria-18,
+body.tema-claro .etaria-18 {
+  color: #ffffff;
+}

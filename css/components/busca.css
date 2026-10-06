@@ -1,0 +1,63 @@
+/* Estilos de busca extraídos de global.css — Game Search */
+
+.container-busca {
+  background: linear-gradient(
+    135deg,
+    var(--cor-primaria),
+    var(--cor-primaria-hover)
+  );
+  width: 50%;
+  padding: 12px 24px;
+  border-radius: var(--border-radius-xl);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow:
+    var(--shadow-glow),
+    0 4px 20px rgba(46, 0, 230, 0.2);
+  transition:
+    box-shadow var(--transition-speed) ease,
+    transform var(--transition-speed) ease,
+    border-color var(--transition-speed) ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.container-busca:focus-within {
+  box-shadow:
+    var(--shadow-glow-hover),
+    0 8px 30px rgba(46, 0, 230, 0.3);
+  transform: scale(1.02);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.container-busca i {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--fs-base);
+  flex-shrink: 0;
+}
+
+.campo-busca {
+  background: none;
+  border: none;
+  color: var(--cor-texto);
+  font-family: var(--font-corpo);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.05em;
+  outline: none;
+  width: 100%;
+}
+
+.campo-busca::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* Responsividade da busca */
+/* Responsividade da busca — permanece no global.css até a migração do componente. */
+@media (max-width: 768px) {
+  .container-busca {
+    width: 85%;
+  }
+}

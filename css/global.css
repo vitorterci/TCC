@@ -1,0 +1,226 @@
+/* Folhas compartilhadas já separadas por componente e layout. */
+@import url("./core/temas.css");
+@import url("./components/botoes.css");
+@import url("./components/breadcrumb.css");
+@import url("./components/atalho-tema.css");
+@import url("./components/atalho-tema-classico.css");
+@import url("./components/busca.css");
+@import url("./components/card-censura.css");
+@import url("./components/card-expandido.css");
+@import url("./components/cards.css");
+@import url("./components/carrossel.css");
+@import url("./components/classificacao-etaria.css");
+@import url("./components/filtros.css");
+@import url("./components/grids.css");
+@import url("./components/historico.css");   /* ← NOVO */
+@import url("./components/painel-contextual.css");
+@import url("./components/precos.css");
+@import url("./components/tags.css");
+/* Fundo personalizado — elemento global + UI da página de Configurações. */
+@import url("./components/fundo-personalizado.css");
+@import url("./layout/estrutura.css");
+@import url("./layout/footer.css");
+@import url("./layout/header.css");
+@import url("./layout/sidebar.css");
+
+/* ─── Fontes ──────────────────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap");
+
+@font-face {
+  font-family: "Dogica";
+  src: url("../fonts/dogica.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Game Paused";
+  src: url("../fonts/game-paused.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ─── Reset e base ───────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--cor-primaria) transparent;
+  scrollbar-width: thin;
+}
+a {
+text-decoration: none;
+}
+
+html::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--cor-primaria);
+  border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--cor-primaria-hover);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── Tokens de design ───────────────────────────────────────────────────── */
+:root {
+  --cor-fundo: #0d0d1f;
+  --cor-lateral: #1a1a2e;
+  --cor-primaria: #2e00e6;
+  --cor-primaria-hover: #4a1fff;
+  --cor-texto-destaque: #a5b4fc;
+  --cor-texto-destaque-hover: #c4b5fd;
+  --cor-texto-sobre-destaque: #000000;
+  --cor-texto-sobre-destaque-hover: #000000;
+  --cor-texto-sobre-fundo-claro: #111827;
+  --cor-texto-sobre-fundo-claro-hover: #1f2937;
+  --cor-link-fundo-claro: #3730a3;
+  --cor-link-fundo-claro-hover: #312e81;
+  --cor-texto: #ffffff;
+  --cor-texto-muted: rgba(255, 255, 255, 0.6);
+  --cor-hover: #2a2a4a;
+  --cor-tag: #1a1a4a;
+  --cor-dropdown: #12122a;
+  --cor-borda: rgba(255, 255, 255, 0.08);
+  --cor-borda-forte: rgba(255, 255, 255, 0.15);
+  --font-logo: "Dogica", sans-serif;
+  --font-titulo: "Chakra Petch", sans-serif;
+  --font-corpo: "Exo 2", sans-serif;
+  --fs-xs: 0.7rem;
+  --fs-sm: 0.8rem;
+  --fs-base: 0.9rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.2rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 2rem;
+  --fs-3xl: 2.5rem;
+  --sidebar-width: 200px;
+  --sidebar-collapsed: 60px;
+  --border-radius-sm: 8px;
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+  --border-radius-xl: 30px;
+  --transition-speed: 0.4s;
+  --transition-fast: 0.2s;
+  --animation-display: block;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 8px 25px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(46, 0, 230, 0.25);
+  --shadow-glow-hover: 0 0 35px rgba(46, 0, 230, 0.45);
+}
+
+body {
+  min-height: 100vh;
+  background: transparent !important;
+  color: var(--cor-texto);
+  font-family: var(--font-corpo);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tipografia comum usada por várias páginas. */
+.titulo-secao {
+  font-family: var(--font-titulo);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titulo-secao::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--cor-primaria), transparent);
+  opacity: 0.4;
+}
+
+/* Animações compartilhadas por páginas e componentes. */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Acessibilidade ─────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+body.sem-animacoes *,
+body.sem-animacoes *::before,
+body.sem-animacoes *::after {
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(0.8);
+  }
+}

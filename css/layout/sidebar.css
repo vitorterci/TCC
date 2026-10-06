@@ -1,0 +1,597 @@
+/* Estilos de layout extraídos de global.css — Game Search */
+
+.barra-lateral {
+  width: var(--sidebar-width);
+  background-color: var(--cor-lateral);
+  padding: 24px 12px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  border-right: 1px solid var(--cor-borda);
+  border-left: 3px solid var(--cor-primaria);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition:
+    width var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+    transform var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.sidebar-fechada .barra-lateral {
+  width: var(--sidebar-collapsed);
+}
+
+@media (min-width: 1025px) {
+  body.sidebar-fechada .barra-lateral .sidebar-titulo,
+  body.sidebar-fechada .barra-lateral .menu-navegacao span,
+  body.sidebar-fechada .barra-lateral .sidebar-logo span,
+  body.sidebar-fechada .barra-lateral .separador {
+    display: none;
+  }
+  .barra-lateral .menu-navegacao span,
+  .barra-lateral .sidebar-logo span,
+  .barra-lateral .sidebar-titulo {
+    transition: opacity var(--transition-fast) ease;
+  }
+  body.sidebar-fechada .barra-lateral .sidebar-logo {
+    padding: 8px 0;
+  }
+  body.sidebar-fechada .barra-lateral .sidebar-logo img {
+    width: 32px;
+    height: 32px;
+  }
+  body.sidebar-fechada .barra-lateral .menu-navegacao li a,
+  body.sidebar-fechada .barra-lateral .menu-navegacao li .botao-sair {
+    justify-content: center;
+    padding: 12px;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+  }
+  body.sidebar-fechada .barra-lateral .menu-navegacao li.ativo a {
+    border-bottom-color: var(--cor-primaria);
+  }
+}
+
+.barra-lateral::-webkit-scrollbar {
+  width: 3px;
+}
+
+.barra-lateral::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.barra-lateral::-webkit-scrollbar-thumb {
+  background: var(--cor-primaria);
+  border-radius: 2px;
+}
+/* Logo na sidebar */
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px 20px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--cor-borda);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sidebar-logo img {
+  width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(46, 0, 230, 0.5));
+  flex-shrink: 0;
+}
+
+.sidebar-logo span {
+  font-family: var(--font-titulo);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--cor-texto);
+  letter-spacing: 0.05em;
+}
+/* Seções da sidebar */
+
+.sidebar-secao {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-titulo {
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-destaque);
+  margin: 0;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar-titulo:: {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  background-color: var(--cor-primaria);
+  border-radius: 50%;
+}
+
+.menu-navegacao ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-navegacao li a {
+  text-decoration: none;
+  color: var(--cor-texto-muted);
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-speed) ease;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  border-left: 3px solid transparent;
+  position: relative;
+}
+
+.menu-navegacao li a i,
+.menu-navegacao li .botao-sair i {
+  font-size: 0.95rem;
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+  color: var(--cor-texto-muted);
+  transition: color var(--transition-speed) ease;
+}
+
+.menu-navegacao li .botao-sair {
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  color: #fca5a5;
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  transition: all var(--transition-speed) ease;
+}
+
+.menu-navegacao li a:hover,
+.menu-navegacao li .botao-sair:hover {
+  background-color: rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.15);
+  color: var(--cor-texto);
+  border-left-color: var(--cor-primaria);
+}
+
+.menu-navegacao li a:hover i {
+  color: var(--cor-texto-destaque);
+}
+
+.menu-navegacao li .botao-sair:hover {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #fecaca;
+  border-left-color: #ef4444;
+}
+
+.menu-navegacao li .botao-sair:hover i {
+  color: #ef4444;
+}
+
+.menu-navegacao li .botao-sair:focus-visible {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+.menu-navegacao li.ativo a {
+  background-color: rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.35);
+  color: var(--cor-texto);
+  border-left-color: var(--cor-primaria);
+  box-shadow: inset 0 0 12px rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.3);
+}
+
+.menu-navegacao li.ativo a i {
+  color: var(--cor-texto-destaque);
+}
+
+.separador {
+  height: 1px;
+  background-color: var(--cor-borda);
+  margin: 8px 4px;
+}
+
+.hamburger-btn {
+  display: flex;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2500;
+  background: var(--cor-lateral);
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all var(--transition-speed) ease;
+  align-items: center;
+  justify-content: center;
+}
+
+body:not(.sidebar-fechada) .hamburger-btn {
+  left: calc(var(--sidebar-width) + 16px);
+}
+
+body.sidebar-fechada .hamburger-btn {
+  left: calc(var(--sidebar-collapsed) + 16px);
+}
+
+@media (max-width: 1024px) {
+  body:not(.sidebar-fechada) .hamburger-btn {
+    left: 16px;
+  }
+}
+
+.hamburger-btn:hover {
+  background: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: var(--cor-texto-sobre-destaque);
+  box-shadow: var(--shadow-glow);
+}
+.drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--cor-fundo) 60%, transparent);
+  z-index: 1500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.drawer-overlay.ativo {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .barra-lateral {
+    width: 280px;
+    z-index: 3000;
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.4);
+  }
+  body.sidebar-fechada .barra-lateral {
+    transform: translateX(-100%);
+  }
+  body:not(.sidebar-fechada) .barra-lateral {
+    transform: translateX(0);
+  }
+  .conteudo-principal {
+    margin-left: 0 !important;
+    padding-top: 72px;
+  }
+  .hamburger-btn {
+    display: flex !important;
+  }
+  .barra-lateral .sidebar-logo {
+    padding-top: 20px;
+  }
+  .barra-lateral .menu-navegacao ul li a {
+    padding: 12px 20px;
+  }
+  .barra-lateral .menu-navegacao ul li a i {
+    width: 28px;
+    font-size: 1.1rem;
+  }
+  .barra-lateral .menu-navegacao ul li.ativo a {
+    background: var(--cor-primaria);
+    color: var(--cor-texto-sobre-destaque);
+    border-radius: 0 20px 20px 0;
+    margin-right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hamburger-btn {
+    top: 12px !important;
+    left: 12px !important;
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 1rem !important;
+  }
+  .barra-lateral {
+    width: 260px !important;
+  }
+  .conteudo-principal {
+    padding-top: 64px !important;
+  }
+}
+
+  .barra-lateral {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 4000;
+  }
+
+/* No mobile, o drawer também é uma camada independente do conteúdo. */
+@media (max-width: 1024px) {
+  .barra-lateral {
+    position: fixed;
+    z-index: 4000;
+  }
+
+  .drawer-overlay {
+    z-index: 3500;
+  }
+
+  .conteudo-principal {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.barra-lateral {
+    z-index: 4000;
+}
+
+
+/* Responsividade da sidebar */
+@media (max-width: 768px) {
+  .barra-lateral {
+    width: var(--sidebar-collapsed);
+    padding: 16px 8px;
+  }
+  .sidebar-logo img {
+    width: 32px;
+    height: 32px;
+  }
+  .menu-navegacao li a span {
+    display: none;
+  }
+  .menu-navegacao li a {
+    justify-content: center;
+    padding: 10px;
+  }
+  .menu-navegacao li.ativo a {
+    border-left: none;
+    border-bottom: 2px solid var(--cor-primaria);
+    padding: 10px;
+  }
+}
+
+/* ─── Rodapé da sidebar: botão de tema (Cristal Mágico / GIFs) ─────────────
+   Fundo totalmente transparente: sem bordas, sem sombra base, sem
+   aparência nativa do <button>. O glow aparece apenas no hover/focus. */
+
+.sidebar-rodape {
+  margin-top: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.botao-tema-cristal {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 96px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--transition-fast) ease,
+              filter var(--transition-fast) ease;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.botao-tema-cristal img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: -webkit-optimize-contrast;
+  /* Sem filtro base — sem "caixa" de sombra ao redor do GIF. */
+  filter: none;
+  transition: filter var(--transition-fast) ease,
+              transform var(--transition-fast) ease;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+  display: block;
+  background: transparent;
+}
+
+/* Glow/brilho somente no hover e no focus (feedback visual). */
+.botao-tema-cristal:hover img,
+.botao-tema-cristal:focus-visible img {
+  filter:
+    drop-shadow(0 0 6px rgba(46, 0, 230, 0.65))
+    drop-shadow(0 0 14px rgba(165, 180, 252, 0.55))
+    brightness(1.12);
+  transform: scale(1.04);
+}
+
+.botao-tema-cristal:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: -2px;
+  border-radius: var(--border-radius-sm);
+}
+
+.botao-tema-cristal.clicando img {
+  animation: cristalPulse 0.45s ease;
+}
+
+@keyframes cristalPulse {
+  0%   { transform: scale(1)    rotate(0deg);   filter: brightness(1.12); }
+  35%  { transform: scale(0.92) rotate(-4deg);  filter: brightness(1.45) drop-shadow(0 0 18px rgba(165,180,252,0.9)); }
+  70%  { transform: scale(1.06) rotate(3deg);   filter: brightness(1.25) drop-shadow(0 0 12px rgba(46,0,230,0.7)); }
+  100% { transform: scale(1)    rotate(0deg);   filter: brightness(1.12); }
+}
+
+/* Sidebar fechada (desktop): o rodapé ocupa toda a largura reduzida. */
+@media (min-width: 1025px) {
+  body.sidebar-fechada .barra-lateral .sidebar-rodape {
+    padding: 0;
+  }
+  body.sidebar-fechada .barra-lateral .botao-tema-cristal {
+    min-height: 80px;
+  }
+}
+
+/* Mobile: rodapé também ocupa toda a largura da sidebar. */
+@media (max-width: 1024px) {
+  .sidebar-rodape {
+    padding: 0;
+  }
+  .botao-tema-cristal {
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .botao-tema-cristal {
+    min-height: 88px;
+  }
+}
+
+/* ─── CONFLITO COM O SWITCH CLÁSSICO ───────────────────────────────────────
+ * sidebar.css define dimensões genéricas (56/44/64px) para qualquer
+ * .atalho-tema-global. O estilo clássico possui dimensões próprias em
+ * atalho-tema-classico.css (130/110/165px) e deve prevalecer.
+ * Esta exceção fica no final porque global.css importa sidebar.css por último.
+ * Não altera Pac-Man, Game Boy ou outros estilos.
+ */
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-padrao-classico {
+  width: var(--classico-largura);
+  height: var(--classico-altura);
+  min-width: 0;
+  max-width: var(--classico-largura);
+  flex: 0 0 auto;
+}
+
+@media (min-width: 1025px) {
+  body.sidebar-fechada .barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-padrao-classico {
+    width: var(--classico-largura);
+    height: var(--classico-altura);
+    min-width: var(--classico-largura);
+    max-width: var(--classico-largura);
+  }
+}
+
+/* ─── Botão Voltar (independente da sidebar) ────────────────────────────────
+ * Novo controle global posicionado logo abaixo do hamburger.
+ * Reaproveita a linguagem visual do .hamburger-btn (fundo, borda, cor,
+ * raio, tamanho, hover, foco) SEM alterar o hamburger existente.
+ * A posição horizontal acompanha exatamente as regras do hamburger em
+ * todos os estados (aberto/fechado) e breakpoints (desktop/tablet/mobile).
+ * A posição vertical fica logo abaixo do hamburger (16px + 44px + 8px).
+ */
+.back-btn {
+  display: flex;
+  position: fixed;
+  top: 68px; /* 16px (top do hamburger) + 44px (altura) + 8px (espaçamento) */
+  left: 16px;
+  z-index: 2500;
+  background: var(--cor-lateral);
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all var(--transition-speed) ease;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Acompanha exatamente o deslocamento horizontal do hamburger. */
+body:not(.sidebar-fechada) .back-btn {
+  left: calc(var(--sidebar-width) + 16px);
+}
+
+body.sidebar-fechada .back-btn {
+  left: calc(var(--sidebar-collapsed) + 16px);
+}
+
+@media (max-width: 1024px) {
+  body:not(.sidebar-fechada) .back-btn {
+    left: 16px;
+  }
+}
+
+.back-btn:hover {
+  background: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: var(--cor-texto-sobre-destaque);
+  box-shadow: var(--shadow-glow);
+}
+
+.back-btn:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .back-btn {
+    top: 58px !important; /* 12px + 38px + 8px */
+    left: 12px !important;
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 1rem !important;
+  }
+}

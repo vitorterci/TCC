@@ -1,0 +1,594 @@
+/* ─── CRISTAL MÁGICO: ATALHO GLOBAL DE TEMA ──────────────────────────────── */
+
+.atalho-tema-cristal {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  z-index: 1100;
+  width: 54px;
+  height: 62px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  isolation: isolate;
+  transition: transform 0.2s ease, filter 0.25s ease;
+}
+
+.atalho-tema-cristal:hover { transform: translateY(-2px) scale(1.05); filter: brightness(1.12); }
+.atalho-tema-cristal:active { transform: scale(0.96); }
+
+.cristal-magia {
+  position: absolute;
+  top: 7px;
+  left: 9px;
+  width: 36px;
+  height: 46px;
+  overflow: hidden;
+  clip-path: polygon(50% 0, 100% 25%, 86% 78%, 50% 100%, 14% 78%, 0 25%);
+  background: linear-gradient(145deg, #b8a7ff 0%, #5e42d4 42%, #0bc5df 100%);
+  box-shadow: 0 0 12px rgba(27, 205, 255, 0.75), 0 0 25px rgba(126, 73, 255, 0.5);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.cristal-magia::before {
+  position: absolute;
+  inset: 1px;
+  content: "";
+  clip-path: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.38), transparent 35%, rgba(0, 225, 255, 0.2));
+}
+
+.cristal-faceta { position: absolute; display: block; opacity: 0.75; transition: background 0.35s ease, opacity 0.35s ease; }
+.cristal-faceta--superior { top: 0; left: 50%; width: 18px; height: 21px; transform: translateX(-50%); clip-path: polygon(50% 0, 100% 100%, 0 100%); background: rgba(255, 255, 255, 0.42); }
+.cristal-faceta--esquerda { top: 22px; left: 0; width: 19px; height: 22px; clip-path: polygon(0 0, 100% 0, 100% 100%, 18% 70%); background: rgba(83, 226, 255, 0.44); }
+.cristal-faceta--direita { top: 22px; right: 0; width: 19px; height: 22px; clip-path: polygon(0 0, 100% 0, 82% 70%, 0 100%); background: rgba(142, 91, 255, 0.62); }
+.cristal-faceta--inferior { bottom: 0; left: 50%; width: 25px; height: 19px; transform: translateX(-50%); clip-path: polygon(0 0, 100% 0, 50% 100%); background: rgba(0, 238, 255, 0.48); }
+
+.cristal-brilho {
+  position: absolute;
+  top: 5px;
+  left: 9px;
+  width: 7px;
+  height: 17px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  filter: blur(1px);
+  transform: rotate(32deg);
+}
+
+.cristal-particulas,
+.cristal-particulas::before,
+.cristal-particulas::after {
+  position: absolute;
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #8df5ff;
+  box-shadow: 0 0 8px #8df5ff;
+  content: "";
+}
+
+.cristal-particulas { top: 11px; right: 2px; }
+.cristal-particulas::before { top: 35px; right: 39px; }
+.cristal-particulas::after { top: 40px; right: -1px; width: 2px; height: 2px; }
+
+html.tema-claro .cristal-magia,
+body.tema-claro .cristal-magia {
+  background: linear-gradient(145deg, #fff2a6 0%, #f2aa27 46%, #e56b16 100%);
+  box-shadow: 0 0 12px rgba(255, 196, 56, 0.8), 0 0 25px rgba(241, 122, 24, 0.48);
+}
+html.tema-claro .cristal-faceta--esquerda, body.tema-claro .cristal-faceta--esquerda { background: rgba(255, 246, 178, 0.7); }
+html.tema-claro .cristal-faceta--direita, body.tema-claro .cristal-faceta--direita { background: rgba(220, 98, 16, 0.58); }
+html.tema-claro .cristal-faceta--inferior, body.tema-claro .cristal-faceta--inferior { background: rgba(255, 188, 41, 0.62); }
+html.tema-claro .cristal-particulas, body.tema-claro .cristal-particulas,
+html.tema-claro .cristal-particulas::before, body.tema-claro .cristal-particulas::before,
+html.tema-claro .cristal-particulas::after, body.tema-claro .cristal-particulas::after {
+  background: #ffe28a;
+  box-shadow: 0 0 8px #ffb52e;
+}
+
+.cristal-ativando .atalho-tema-cristal-img { animation: cristal-rotacao 0.42s ease-in-out; }
+.cristal-ativando .cristal-particulas { animation: cristal-particulas 0.42s ease-out; }
+
+@keyframes cristal-rotacao { 50% { transform: rotate(10deg) scale(1.08); } }
+@keyframes cristal-particulas { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.9) translate(4px, -5px); } }
+
+@media (max-width: 600px) {
+  .atalho-tema-cristal { top: 9px; right: 9px; width: 46px; height: 54px; transform: scale(0.86); transform-origin: top right; }
+  .atalho-tema-cristal:hover { transform: scale(0.91); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atalho-tema-cristal,
+  .atalho-tema-cristal-img,
+  .cristal-magia,
+  .cristal-faceta,
+  .cristal-particulas { transition: none; animation: none !important; }
+}
+
+/* ─── ATALHO GLOBAL PERSONALIZÁVEL ───────────────────────────────────────── */
+.atalho-tema-global {
+  position: fixed;
+  top: auto; right: auto; bottom: auto; left: auto;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 62px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cor-texto);
+  cursor: pointer;
+  isolation: isolate;
+  transform: none;
+  transform-origin: center;
+  transition: transform 0.2s ease, filter 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.atalho-tema-global[data-posicao="superior-direito"] { top: 14px; right: 18px; }
+.atalho-tema-global[data-posicao="inferior-direito"] { right: 18px; bottom: 14px; }
+.atalho-tema-global[data-posicao="inferior-esquerdo"] { bottom: 14px; left: calc(var(--sidebar-width, 200px) + 14px); }
+.atalho-tema-global[data-posicao="barra-lateral-inferior"] { position: relative; inset: auto; flex: 0 0 auto; margin-top: auto; }
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"] { align-self: center; margin: auto 0 0; }
+body > .atalho-tema-global[data-posicao="barra-lateral-inferior"] { position: fixed; bottom: 14px; left: 14px; margin: 0; }
+.atalho-tema-global:hover { transform: translateY(-2px) scale(1.05); filter: brightness(1.1); }
+.atalho-tema-global:active { transform: scale(0.96); }
+.atalho-tema-global:focus-visible { outline: 2px solid var(--cor-primaria); outline-offset: 3px; border-radius: 12px; }
+
+.atalho-tema-global[data-tamanho="pequeno"] { width: 42px; height: 48px; }
+.atalho-tema-global[data-tamanho="medio"]   { width: 54px; height: 62px; }
+.atalho-tema-global[data-tamanho="grande"]  { width: 68px; height: 78px; }
+.atalho-tema-global[data-tamanho="pequeno"] .cristal-magia { transform: scale(0.78); transform-origin: top left; }
+.atalho-tema-global[data-tamanho="grande"]  .cristal-magia { transform: scale(1.22); transform-origin: top left; }
+.atalho-tema-cristal-img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+
+.atalho-tema-global:not(.atalho-tema-cristal) .cristal-particulas,
+.atalho-tema-global:not(.atalho-tema-cristal) .cristal-magia { display: none; }
+
+.atalho-tema-global.atalho-tema-estilo-circular {
+  width: 48px; height: 48px;
+  border: 1px solid rgba(148, 163, 184, 0.42);
+  border-radius: 50%;
+  background: var(--cor-card, #17172b);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.24);
+}
+.atalho-tema-global.atalho-tema-estilo-circular::before {
+  width: 23px; height: 23px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  content: "";
+}
+.atalho-tema-global.atalho-tema-estilo-circular::after {
+  position: absolute;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--cor-card, #17172b);
+  content: "";
+  transform: translate(5px, -5px);
+}
+.atalho-tema-global.atalho-tema-estilo-circular[data-tema-efetivo="claro"]::after { display: none; }
+
+.atalho-tema-global.atalho-tema-estilo-sol-lua {
+  width: 58px; height: 42px;
+  grid-auto-flow: column;
+  gap: 5px;
+  padding: 5px;
+  border: 1px solid var(--cor-borda-forte, rgba(255, 255, 255, 0.15));
+  border-radius: 999px;
+  background: var(--cor-card, #17172b);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+}
+.atalho-tema-sol-lua { display: flex; align-items: center; justify-content: space-around; width: 100%; font-size: 18px; line-height: 1; }
+.atalho-tema-sol { color: #f4b740; }
+.atalho-tema-lua { color: #a5b4fc; }
+
+.atalho-tema-global.atalho-tema-estilo-minimalista {
+  width: 46px; height: 46px;
+  border: 1px solid var(--cor-borda-forte, rgba(255, 255, 255, 0.15));
+  border-radius: 50%;
+  background: var(--cor-card, #17172b);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
+.atalho-tema-minimalista {
+  width: 19px; height: 19px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  box-shadow: inset -6px -2px 0 -2px currentColor;
+}
+
+.atalho-tema-global[data-tamanho="pequeno"].atalho-tema-estilo-circular,
+.atalho-tema-global[data-tamanho="pequeno"].atalho-tema-estilo-minimalista { width: 38px; height: 38px; }
+.atalho-tema-global[data-tamanho="grande"].atalho-tema-estilo-circular,
+.atalho-tema-global[data-tamanho="grande"].atalho-tema-estilo-minimalista { width: 60px; height: 60px; }
+.atalho-tema-global[data-tamanho="pequeno"].atalho-tema-estilo-sol-lua { width: 48px; height: 34px; }
+.atalho-tema-global[data-tamanho="grande"].atalho-tema-estilo-sol-lua { width: 70px; height: 50px; }
+
+/* ─── PADRONIZAÇÃO DOS ÍCONES DE IMAGEM (gif + imagem) ───────────────────── */
+/* ─── CRISTAL MÁGICO: ATALHO GLOBAL DE TEMA ──────────────────────────────── */
+
+.atalho-tema-cristal {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  z-index: 1100;
+  width: 54px;
+  height: 62px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  isolation: isolate;
+  transition: transform 0.2s ease, filter 0.25s ease;
+}
+
+.atalho-tema-cristal:hover { transform: translateY(-2px) scale(1.05); filter: brightness(1.12); }
+.atalho-tema-cristal:active { transform: scale(0.96); }
+
+.cristal-magia {
+  position: absolute;
+  top: 7px;
+  left: 9px;
+  width: 36px;
+  height: 46px;
+  overflow: hidden;
+  clip-path: polygon(50% 0, 100% 25%, 86% 78%, 50% 100%, 14% 78%, 0 25%);
+  background: linear-gradient(145deg, #b8a7ff 0%, #5e42d4 42%, #0bc5df 100%);
+  box-shadow: 0 0 12px rgba(27, 205, 255, 0.75), 0 0 25px rgba(126, 73, 255, 0.5);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.cristal-magia::before {
+  position: absolute;
+  inset: 1px;
+  content: "";
+  clip-path: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.38), transparent 35%, rgba(0, 225, 255, 0.2));
+}
+
+.cristal-faceta { position: absolute; display: block; opacity: 0.75; transition: background 0.35s ease, opacity 0.35s ease; }
+.cristal-faceta--superior { top: 0; left: 50%; width: 18px; height: 21px; transform: translateX(-50%); clip-path: polygon(50% 0, 100% 100%, 0 100%); background: rgba(255, 255, 255, 0.42); }
+.cristal-faceta--esquerda { top: 22px; left: 0; width: 19px; height: 22px; clip-path: polygon(0 0, 100% 0, 100% 100%, 18% 70%); background: rgba(83, 226, 255, 0.44); }
+.cristal-faceta--direita { top: 22px; right: 0; width: 19px; height: 22px; clip-path: polygon(0 0, 100% 0, 82% 70%, 0 100%); background: rgba(142, 91, 255, 0.62); }
+.cristal-faceta--inferior { bottom: 0; left: 50%; width: 25px; height: 19px; transform: translateX(-50%); clip-path: polygon(0 0, 100% 0, 50% 100%); background: rgba(0, 238, 255, 0.48); }
+
+.cristal-brilho {
+  position: absolute;
+  top: 5px;
+  left: 9px;
+  width: 7px;
+  height: 17px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  filter: blur(1px);
+  transform: rotate(32deg);
+}
+
+.cristal-particulas,
+.cristal-particulas::before,
+.cristal-particulas::after {
+  position: absolute;
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #8df5ff;
+  box-shadow: 0 0 8px #8df5ff;
+  content: "";
+}
+
+.cristal-particulas { top: 11px; right: 2px; }
+.cristal-particulas::before { top: 35px; right: 39px; }
+.cristal-particulas::after { top: 40px; right: -1px; width: 2px; height: 2px; }
+
+html.tema-claro .cristal-magia,
+body.tema-claro .cristal-magia {
+  background: linear-gradient(145deg, #fff2a6 0%, #f2aa27 46%, #e56b16 100%);
+  box-shadow: 0 0 12px rgba(255, 196, 56, 0.8), 0 0 25px rgba(241, 122, 24, 0.48);
+}
+html.tema-claro .cristal-faceta--esquerda, body.tema-claro .cristal-faceta--esquerda { background: rgba(255, 246, 178, 0.7); }
+html.tema-claro .cristal-faceta--direita, body.tema-claro .cristal-faceta--direita { background: rgba(220, 98, 16, 0.58); }
+html.tema-claro .cristal-faceta--inferior, body.tema-claro .cristal-faceta--inferior { background: rgba(255, 188, 41, 0.62); }
+html.tema-claro .cristal-particulas, body.tema-claro .cristal-particulas,
+html.tema-claro .cristal-particulas::before, body.tema-claro .cristal-particulas::before,
+html.tema-claro .cristal-particulas::after, body.tema-claro .cristal-particulas::after {
+  background: #ffe28a;
+  box-shadow: 0 0 8px #ffb52e;
+}
+
+.cristal-ativando .atalho-tema-cristal-img { animation: cristal-rotacao 0.42s ease-in-out; }
+.cristal-ativando .cristal-particulas { animation: cristal-particulas 0.42s ease-out; }
+
+@keyframes cristal-rotacao { 50% { transform: rotate(10deg) scale(1.08); } }
+@keyframes cristal-particulas { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.9) translate(4px, -5px); } }
+
+@media (max-width: 600px) {
+  .atalho-tema-cristal { top: 9px; right: 9px; width: 46px; height: 54px; transform: scale(0.86); transform-origin: top right; }
+  .atalho-tema-cristal:hover { transform: scale(0.91); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atalho-tema-cristal,
+  .atalho-tema-cristal-img,
+  .cristal-magia,
+  .cristal-faceta,
+  .cristal-particulas { transition: none; animation: none !important; }
+}
+
+/* ─── ATALHO GLOBAL PERSONALIZÁVEL ───────────────────────────────────────── */
+.atalho-tema-global {
+  position: fixed;
+  top: auto; right: auto; bottom: auto; left: auto;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 62px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cor-texto);
+  cursor: pointer;
+  isolation: isolate;
+  transform: none;
+  transform-origin: center;
+  transition: transform 0.2s ease, filter 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.atalho-tema-global[data-posicao="superior-direito"] { top: 14px; right: 18px; }
+.atalho-tema-global[data-posicao="inferior-direito"] { right: 18px; bottom: 14px; }
+.atalho-tema-global[data-posicao="inferior-esquerdo"] { bottom: 14px; left: calc(var(--sidebar-width, 200px) + 14px); }
+.atalho-tema-global[data-posicao="barra-lateral-inferior"] { position: relative; inset: auto; flex: 0 0 auto; margin-top: auto; }
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"] { align-self: center; margin: auto 0 0; }
+body > .atalho-tema-global[data-posicao="barra-lateral-inferior"] { position: fixed; bottom: 14px; left: 14px; margin: 0; }
+.atalho-tema-global:hover { transform: translateY(-2px) scale(1.05); filter: brightness(1.1); }
+.atalho-tema-global:active { transform: scale(0.96); }
+.atalho-tema-global:focus-visible { outline: 2px solid var(--cor-primaria); outline-offset: 3px; border-radius: 12px; }
+
+.atalho-tema-global[data-tamanho="pequeno"] { width: 42px; height: 48px; }
+.atalho-tema-global[data-tamanho="medio"]   { width: 54px; height: 62px; }
+.atalho-tema-global[data-tamanho="grande"]  { width: 68px; height: 78px; }
+.atalho-tema-global[data-tamanho="pequeno"] .cristal-magia { transform: scale(0.78); transform-origin: top left; }
+.atalho-tema-global[data-tamanho="grande"]  .cristal-magia { transform: scale(1.22); transform-origin: top left; }
+.atalho-tema-cristal-img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+
+.atalho-tema-global:not(.atalho-tema-cristal) .cristal-particulas,
+.atalho-tema-global:not(.atalho-tema-cristal) .cristal-magia { display: none; }
+
+.atalho-tema-global.atalho-tema-estilo-circular {
+  width: 48px; height: 48px;
+  border: 1px solid rgba(148, 163, 184, 0.42);
+  border-radius: 50%;
+  background: var(--cor-card, #17172b);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.24);
+}
+.atalho-tema-global.atalho-tema-estilo-circular::before {
+  width: 23px; height: 23px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  content: "";
+}
+.atalho-tema-global.atalho-tema-estilo-circular::after {
+  position: absolute;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--cor-card, #17172b);
+  content: "";
+  transform: translate(5px, -5px);
+}
+.atalho-tema-global.atalho-tema-estilo-circular[data-tema-efetivo="claro"]::after { display: none; }
+
+.atalho-tema-global.atalho-tema-estilo-sol-lua {
+  width: 58px; height: 42px;
+  grid-auto-flow: column;
+  gap: 5px;
+  padding: 5px;
+  border: 1px solid var(--cor-borda-forte, rgba(255, 255, 255, 0.15));
+  border-radius: 999px;
+  background: var(--cor-card, #17172b);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+}
+.atalho-tema-sol-lua { display: flex; align-items: center; justify-content: space-around; width: 100%; font-size: 18px; line-height: 1; }
+.atalho-tema-sol { color: #f4b740; }
+.atalho-tema-lua { color: #a5b4fc; }
+
+.atalho-tema-global.atalho-tema-estilo-minimalista {
+  width: 46px; height: 46px;
+  border: 1px solid var(--cor-borda-forte, rgba(255, 255, 255, 0.15));
+  border-radius: 50%;
+  background: var(--cor-card, #17172b);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
+.atalho-tema-minimalista {
+  width: 19px; height: 19px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  box-shadow: inset -6px -2px 0 -2px currentColor;
+}
+
+.atalho-tema-global[data-tamanho="pequeno"].atalho-tema-estilo-circular,
+.atalho-tema-global[data-tamanho="pequeno"].atalho-tema-estilo-minimalista { width: 38px; height: 38px; }
+.atalho-tema-global[data-tamanho="grande"].atalho-tema-estilo-circular,
+.atalho-tema-global[data-tamanho="grande"].atalho-tema-estilo-minimalista { width: 60px; height: 60px; }
+.atalho-tema-global[data-tamanho="pequeno"].atalho-tema-estilo-sol-lua { width: 48px; height: 34px; }
+.atalho-tema-global[data-tamanho="grande"].atalho-tema-estilo-sol-lua { width: 70px; height: 50px; }
+
+/* ─── PADRONIZAÇÃO DOS ÍCONES DE IMAGEM (gif + imagem) ───────────────────── */
+:root {
+  --atalho-icone-area: 44px;
+  --atalho-icone-area-sm: 34px;
+  --atalho-icone-area-lg: 56px;
+}
+
+.atalho-tema-global.atalho-tema-estilo-gif,
+.atalho-tema-global.atalho-tema-estilo-imagem {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.atalho-tema-gif,
+.atalho-tema-imagem {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width:  calc(var(--atalho-icone-area) * var(--atalho-icon-escala, 1));
+  max-height: calc(var(--atalho-icone-area) * var(--atalho-icon-escala, 1));
+  aspect-ratio: var(--atalho-icon-proporcao, 1 / 1);
+  object-fit: contain;
+  object-position: center;
+  transform: translate(var(--atalho-icon-ajuste-x, 0%), var(--atalho-icon-ajuste-y, 0%));
+  pointer-events: none;
+}
+
+.atalho-tema-global[data-tamanho="pequeno"].atalho-tema-estilo-gif,
+.atalho-tema-global[data-tamanho="pequeno"].atalho-tema-estilo-imagem { width: 48px; height: 48px; }
+.atalho-tema-global[data-tamanho="pequeno"] .atalho-tema-gif,
+.atalho-tema-global[data-tamanho="pequeno"] .atalho-tema-imagem {
+  max-width:  calc(var(--atalho-icone-area-sm) * var(--atalho-icon-escala, 1));
+  max-height: calc(var(--atalho-icone-area-sm) * var(--atalho-icon-escala, 1));
+}
+
+.atalho-tema-global[data-tamanho="grande"].atalho-tema-estilo-gif,
+.atalho-tema-global[data-tamanho="grande"].atalho-tema-estilo-imagem { width: 78px; height: 78px; }
+.atalho-tema-global[data-tamanho="grande"] .atalho-tema-gif,
+.atalho-tema-global[data-tamanho="grande"] .atalho-tema-imagem {
+  max-width:  calc(var(--atalho-icone-area-lg) * var(--atalho-icon-escala, 1));
+  max-height: calc(var(--atalho-icone-area-lg) * var(--atalho-icon-escala, 1));
+}
+
+/* ─── SIDEBAR: BASE CONSOLIDADA ──────────────────────────────────────────── */
+/*
+ * Bloco único com todas as regras da sidebar para o atalho.
+ * Antes havia várias repetições espalhadas pelo arquivo.
+ * Aqui ficam:
+ *   - posicionamento base;
+ *   - tamanhos pequeno/médio/grande;
+ *   - modelo clássico;
+ *   - área base dos gifs/imagens;
+ *   - e, no final, a regra EXCLUSIVA de largura total para Pac-Man e Game Boy.
+ */
+
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"] {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex: 0 0 auto;
+  margin: auto 0 0;
+  align-self: center;
+}
+
+/* Tamanho pequeno. */
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"][data-tamanho="pequeno"] {
+  width: 44px;
+  height: 44px;
+}
+
+/* Tamanho grande. */
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"][data-tamanho="grande"] {
+  width: 64px;
+  height: 64px;
+}
+
+/* Área base dos ícones de imagem/gif na sidebar. */
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"] .atalho-tema-gif,
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"] .atalho-tema-imagem {
+  --atalho-icone-area: 40px;
+}
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"][data-tamanho="pequeno"] .atalho-tema-gif,
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"][data-tamanho="pequeno"] .atalho-tema-imagem {
+  --atalho-icone-area: 32px;
+}
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"][data-tamanho="grande"] .atalho-tema-gif,
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"][data-tamanho="grande"] .atalho-tema-imagem {
+  --atalho-icone-area: 48px;
+}
+
+
+/* ─── SIDEBAR: PAC-MAN E GAME BOY OCUPAM TODA A LARGURA ─────────────────── */
+/*
+ * Regra EXCLUSIVA para:
+ *   - Pac-Man  → .atalho-tema-estilo-gif[data-arquivo="claro.gif"|"escuro.gif"]
+ *   - Game Boy → .atalho-tema-estilo-imagem[data-arquivo="gameboy.gif"]
+ *
+ * Somente dentro da .barra-lateral com posicao barra-lateral-inferior.
+ * Demais estilos NÃO são afetados.
+ *
+ * O botão ocupa 100% da largura útil da sidebar (descontando padding real).
+ * A imagem usa width:100% + height:auto + object-fit:contain,
+ * preservando a proporção original sem deformação.
+ */
+
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-gif[data-arquivo="claro.gif"],
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-gif[data-arquivo="escuro.gif"],
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-imagem[data-arquivo="gameboy.gif"] {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  display: block;
+  align-self: stretch;
+  place-items: unset;
+  overflow: visible;
+  transform: none;
+  filter: none;
+  margin: auto 0 0;
+}
+
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-gif[data-arquivo="claro.gif"] .atalho-tema-gif,
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-gif[data-arquivo="escuro.gif"] .atalho-tema-gif,
+.barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-imagem[data-arquivo="gameboy.gif"] .atalho-tema-imagem {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: none;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-gif[data-arquivo="claro.gif"],
+  .barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-gif[data-arquivo="escuro.gif"],
+  .barra-lateral > .atalho-tema-global[data-posicao="barra-lateral-inferior"].atalho-tema-estilo-imagem[data-arquivo="gameboy.gif"] {
+    padding: 6px 10px;
+  }
+}
+
+/* ─── FORA DA SIDEBAR ────────────────────────────────────────────────────── */
+@media (min-width: 1025px) {
+  body.sidebar-fechada .atalho-tema-global[data-posicao="inferior-esquerdo"] {
+    left: calc(var(--sidebar-collapsed, 60px) + 14px);
+  }
+}
+@media (max-width: 1024px) {
+  .atalho-tema-global[data-posicao="inferior-esquerdo"] { left: 12px; }
+  .atalho-tema-global[data-posicao="superior-direito"] { top: 14px; right: 12px; }
+  .atalho-tema-global[data-posicao="inferior-direito"] { right: 12px; }
+  body:not(.sidebar-fechada) .atalho-tema-global[data-posicao="inferior-esquerdo"] { left: 292px; }
+}
+@media (max-width: 768px) {
+  body:not(.sidebar-fechada) .atalho-tema-global[data-posicao="inferior-esquerdo"] { left: 72px; }
+}
+@media (max-width: 480px) {
+  body:not(.sidebar-fechada) .atalho-tema-global[data-posicao="inferior-esquerdo"] { left: 272px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atalho-tema-global { transition: none; animation: none !important; }
+}

@@ -1,0 +1,121 @@
+/* ── Painel Contextual do Jogo (Menu Lateral) ── */
+.painel-contextual {
+  position: fixed;
+  width: 320px;
+  background: color-mix(in srgb, var(--cor-card) 94%, var(--cor-fundo));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--cor-primaria);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    inset 0 0 15px rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.15);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  pointer-events: none;
+}
+
+.painel-contextual.visivel {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.painel-contextual__fechar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: color-mix(in srgb, var(--cor-texto) 8%, transparent);
+  border: none;
+  color: var(--cor-texto);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-speed) ease;
+}
+
+.painel-contextual__fechar:hover {
+  background: var(--cor-primaria);
+}
+
+.painel-contextual__categoria {
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--cor-texto-destaque);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.painel-contextual__titulo {
+  font-family: var(--font-titulo);
+  font-size: 1.2rem;
+  color: var(--cor-texto);
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.painel-contextual__descricao {
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.painel-contextual__informacoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+}
+
+.painel-contextual__informacoes div {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.painel-contextual__informacoes dt {
+  color: var(--cor-texto-muted);
+}
+
+.painel-contextual__informacoes dd {
+  color: var(--cor-texto);
+  font-weight: 600;
+  margin: 0;
+}
+
+.painel-contextual__acao {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Ajustes do tema claro */
+html.tema-claro .painel-contextual__descricao,
+body.tema-claro .painel-contextual__descricao {
+  color: var(--cor-texto-muted);
+}
+
+html.tema-claro .painel-contextual__informacoes div,
+body.tema-claro .painel-contextual__informacoes div {
+  border-bottom-color: var(--cor-borda);
+}
+
+html.tema-claro .painel-contextual__informacoes dt,
+body.tema-claro .painel-contextual__informacoes dt {
+  color: var(--cor-texto-muted);
+}

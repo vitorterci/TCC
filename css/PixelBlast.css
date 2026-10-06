@@ -1,0 +1,28 @@
+/* ── PixelBlast Background Effect ── */
+.pixel-blast,
+#pixel-blast,
+.pixel-blast-canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+  display: block !important;
+}
+
+.pixel-blast canvas,
+#pixel-blast canvas,
+.pixel-blast-canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Mantém o verde neon como detalhe sem dominar as superfícies claras. */
+html.tema-claro .pixel-blast-canvas,
+body.tema-claro .pixel-blast-canvas {
+  opacity: 1.42;
+}

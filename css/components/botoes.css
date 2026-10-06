@@ -1,0 +1,259 @@
+/* ─── Botões padrão ─── */
+.btn,
+button,
+a {
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-primario {
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-sobre-destaque);
+  border: none;
+  padding: 10px 28px;
+  border-radius: var(--border-radius-xl);
+  font-family: var(--font-corpo);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  cursor: pointer;
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-primario:hover {
+  background-color: var(--cor-primaria-hover);
+  color: var(--cor-texto-sobre-destaque-hover);
+  box-shadow: var(--shadow-glow-hover);
+  transform: translateY(-2px);
+}
+
+.btn-primario:active {
+  transform: translateY(0);
+}
+
+.btn-secundario {
+  background-color: var(--cor-tag);
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+  padding: 10px 28px;
+  border-radius: var(--border-radius-xl);
+  font-family: var(--font-corpo);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.btn-secundario:hover {
+  background-color: var(--cor-hover);
+  border-color: var(--cor-primaria);
+}
+
+/* ───────────────────────────────────────────────
+   Variante reutilizável: botão com animação de exclusão.
+   Em comentários, o contexto aplica refinamentos adicionais
+   em comentarios.css (.btn-acao.btn-excluir-animado).
+   ─────────────────────────────────────────────── */
+
+.btn-excluir-animado {
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius-xl);
+  background: var(--cor-tag);
+  color: var(--cor-texto-muted);
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    min-width var(--transition-speed) var(--ease),
+    width var(--transition-speed) var(--ease),
+    padding var(--transition-speed) var(--ease),
+    border-color var(--transition-speed) var(--ease),
+    background var(--transition-speed) var(--ease),
+    color var(--transition-speed) var(--ease),
+    box-shadow var(--transition-speed) var(--ease),
+    transform var(--transition-speed) var(--ease);
+}
+
+.btn-excluir-animado:hover:not(.is-busy) {
+  color: #fca5a5;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  box-shadow: 0 6px 14px rgba(239, 68, 68, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-excluir-animado:active:not(.is-busy) {
+  transform: translateY(0) scale(0.97);
+}
+
+.btn-excluir-animado:focus-visible {
+  outline: 2px solid #ef4444;
+  outline-offset: 3px;
+}
+
+.btn-excluir-animado .content {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap var(--transition-speed) var(--ease);
+}
+
+.btn-excluir-animado .label {
+  white-space: nowrap;
+  max-width: 90px;
+  overflow: hidden;
+  transition:
+    opacity 0.2s ease,
+    filter 0.2s ease,
+    transform 0.25s var(--ease),
+    max-width 0.3s var(--ease);
+}
+
+.btn-excluir-animado .trash {
+  position: relative;
+  width: 15px;
+  height: 18px;
+  flex: none;
+}
+
+.btn-excluir-animado .trash svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.btn-excluir-animado .trash .lid {
+  transform-origin: 2px 5px;
+  transition: transform 0.3s var(--ease-bounce);
+}
+
+.btn-excluir-animado:hover:not(.is-busy) .lid {
+  transform: rotate(-14deg) translateY(-1px);
+}
+
+.btn-excluir-animado .trash .body-fill {
+  fill: currentColor;
+  opacity: 0.15;
+}
+
+.btn-excluir-animado .paper {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 10px;
+  height: 13px;
+  margin-left: -5px;
+  border-radius: 2px;
+  background: linear-gradient(#f87171, #ef4444);
+  opacity: 0;
+  transform: translateY(-26px);
+  z-index: 1;
+  box-shadow: 0 0 8px #ef4444;
+  pointer-events: none;
+}
+
+.btn-excluir-animado .paper::before,
+.btn-excluir-animado .paper::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.8);
+}
+.btn-excluir-animado .paper::before { top: 4px; }
+.btn-excluir-animado .paper::after  { top: 7px; right: 4px; }
+
+.btn-excluir-animado .status {
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: #ef4444;
+  transform: scale(0);
+  opacity: 0;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 10px #ef4444;
+  transition:
+    transform 0.3s var(--ease-bounce),
+    opacity 0.2s ease;
+}
+
+.btn-excluir-animado .status svg {
+  width: 9px;
+  height: 9px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16;
+  stroke-dashoffset: 16;
+  transition: stroke-dashoffset 0.3s ease 0.05s;
+}
+
+/* Fases */
+.btn-excluir-animado.is-busy { cursor: default; transform: none; }
+.btn-excluir-animado.is-shrink {
+  min-width: 34px;
+  width: 34px;
+  padding: 0;
+}
+.btn-excluir-animado.is-shrink .label {
+  opacity: 0;
+  filter: blur(3px);
+  transform: translateX(5px);
+  max-width: 0;
+}
+.btn-excluir-animado.is-shrink .content { gap: 0; }
+
+.btn-excluir-animado.is-open .lid {
+  transform: rotate(-24deg) translate(-2px, -3px);
+}
+
+.btn-excluir-animado.is-drop .paper {
+  opacity: 1;
+  animation: gs-drop 1s cubic-bezier(0.5, 0, 0.75, 0.6) forwards;
+}
+
+@keyframes gs-drop {
+  0%   { transform: translateY(-26px); opacity: 1; }
+  70%  { transform: translateY(-3px);  opacity: 1; }
+  100% { transform: translateY(7px) scaleY(0.6); opacity: 0; }
+}
+
+.btn-excluir-animado.is-close .lid { transform: none; }
+.btn-excluir-animado.is-dot .status { transform: scale(1); opacity: 1; }
+.btn-excluir-animado.is-check .status svg { stroke-dashoffset: 0; }
+.btn-excluir-animado.is-out .status { transform: scale(0); opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-excluir-animado,
+  .btn-excluir-animado * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .btn-excluir-animado.is-drop .paper { animation: none; opacity: 0; }
+  .btn-excluir-animado.is-dot .status { transform: scale(1); opacity: 1; }
+  .btn-excluir-animado.is-check .status svg { stroke-dashoffset: 0; }
+}

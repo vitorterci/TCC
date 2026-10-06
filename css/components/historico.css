@@ -1,0 +1,256 @@
+/* ─── Histórico de jogos acessados recentemente ─────────────────────────────
+ * Painel compacto exibido no topo do conteúdo principal (<main>).
+ * Cards horizontais: capa 28×28 + título 11px + preço 10px + botão ×.
+ * Consome exclusivamente as variáveis de tema do projeto (dark/light).
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+.historico {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 20px;
+  padding: 10px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius);
+  background: var(--cor-card, var(--cor-lateral));
+  box-shadow: var(--shadow);
+}
+
+/* Cabeçalho com título + botão Limpar -------------------------------- */
+.historico-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.historico-titulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font: 700 var(--fs-xs) var(--font-titulo);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-texto);
+}
+
+.historico-titulo i {
+  color: var(--cor-texto-destaque);
+  font-size: 0.8rem;
+}
+
+.historico-limpar {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius-xl);
+  background: transparent;
+  color: var(--cor-texto-muted);
+  font: 600 var(--fs-xs) var(--font-corpo);
+  cursor: pointer;
+  transition: color var(--transition-fast) ease,
+              border-color var(--transition-fast) ease,
+              background var(--transition-fast) ease;
+}
+
+.historico-limpar:hover,
+.historico-limpar:focus-visible {
+  color: var(--cor-texto-destaque);
+  border-color: var(--cor-primaria);
+  background: rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.12);
+  outline: none;
+}
+
+.historico-limpar i {
+  font-size: 0.65rem;
+}
+
+/* Lista horizontal com scroll-x -------------------------------------- */
+.historico-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin: 0;
+  padding: 2px 2px 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cor-primaria) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.historico-lista::-webkit-scrollbar {
+  height: 5px;
+}
+
+.historico-lista::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.historico-lista::-webkit-scrollbar-thumb {
+  background: var(--cor-primaria);
+  border-radius: 4px;
+}
+
+/* Card compacto ------------------------------------------------------ */
+.historico-item {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  max-width: 220px;
+  padding: 4px 4px 4px 5px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius-sm);
+  background: var(--cor-lateral);
+  transition: border-color var(--transition-fast) ease,
+              background var(--transition-fast) ease;
+}
+
+.historico-item:hover,
+.historico-item:focus-within {
+  border-color: var(--cor-primaria);
+  background: rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.12);
+}
+
+.historico-item--ativo {
+  border-color: var(--cor-primaria);
+  box-shadow: var(--shadow-glow);
+  background: rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.16);
+}
+
+/* Link que envolve capa + textos ------------------------------------ */
+.historico-link {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--cor-texto);
+  text-decoration: none;
+  font: 600 var(--fs-xs) var(--font-corpo);
+}
+
+/* Capa 28x28 --------------------------------------------------------- */
+.historico-thumb-wrap {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--cor-borda);
+  background: var(--cor-fundo);
+  display: inline-flex;
+}
+
+.historico-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Info (título em cima, preço embaixo) ------------------------------ */
+.card-mini-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 140px;
+  line-height: 1.15;
+}
+
+.card-mini-titulo {
+  font: 600 11px var(--font-corpo);
+  color: var(--cor-texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-mini-preco {
+  font: 700 10px var(--font-corpo);
+  color: var(--cor-texto-destaque);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Botão × ------------------------------------------------------------ */
+.btn-fechar {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--cor-texto-muted);
+  font: 700 12px/1 var(--font-corpo);
+  cursor: pointer;
+  transition: color var(--transition-fast) ease,
+              background var(--transition-fast) ease;
+}
+
+.btn-fechar:hover,
+.btn-fechar:focus-visible {
+  color: var(--cor-texto-destaque);
+  background: rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.18);
+  outline: none;
+}
+
+/* Ajustes finos por tema -------------------------------------------- */
+html.tema-claro .historico,
+body.tema-claro .historico {
+  background: var(--cor-card);
+}
+
+html.tema-claro .historico-item,
+body.tema-claro .historico-item {
+  background: var(--cor-fundo);
+}
+
+html.tema-claro .historico-item:hover,
+body.tema-claro .historico-item:hover,
+html.tema-claro .historico-item:focus-within,
+body.tema-claro .historico-item:focus-within {
+  background: rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.1);
+}
+
+/* Responsividade: mantém horizontal em mobile ----------------------- */
+@media (max-width: 768px) {
+  .historico {
+    padding: 8px 10px;
+    margin-bottom: 16px;
+  }
+  .card-mini-info {
+    max-width: 110px;
+  }
+}
+
+@media (max-width: 480px) {
+  .historico-titulo span,
+  .historico-limpar span {
+    display: none;
+  }
+  .card-mini-info {
+    max-width: 96px;
+  }
+  .card-mini-titulo {
+    font-size: 10px;
+  }
+  .card-mini-preco {
+    font-size: 9px;
+  }
+}

@@ -1,0 +1,182 @@
+/* Card expandido extraído de global.css — Game Search */
+
+.card-jogo.open {
+  grid-column: span 1; /* Mantém o espaço original no grid */
+  z-index: 50; /* Garante que fique acima dos outros cards */
+  overflow: visible !important;/* Permite que o menu flutuante apareça fora do card */
+
+}
+/* ── Card Expandido (Overlay via Clone — não afeta o fluxo do grid) ──────
+   Estratégia: o card original NUNCA sai do grid e NUNCA muda de
+   tamanho/posição/gap. Ao expandir, criamos um CLONE fora do fluxo
+   (position: fixed, anexado ao <body>) posicionado inicialmente em
+   cima do card original via getBoundingClientRect(), e então
+   animamos esse clone até o tamanho expandido. O card original
+   apenas fica "invisível" (mantendo seu espaço no grid intacto)
+   enquanto o clone existe. Isso garante zero reflow no container. */
+/* Card original: mantém espaço reservado no grid, porém invisível */
+.card-jogo-clone {
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  z-index: 9999;
+  pointer-events: auto;
+  cursor: default;
+  will-change: top, left, width, height;
+  /* transição é setada via JS (FLIP) para garantir que o ponto de
+       partida seja exatamente a posição/tamanho originais antes de
+       animar para o estado expandido */
+}
+
+.card-jogo-clone:hover {
+  transform: none;
+}
+
+.card-jogo-clone.expandido-clone {
+  box-shadow:
+    0 20px 60px rgba(46, 0, 230, 0.5),
+    var(--shadow-glow-hover);
+  border-color: var(--cor-primaria);
+  border:10px;
+  border-width: 2px;
+  flex-direction: row;
+}
+
+.card-jogo-clone.expandido-clone .card-jogo-sidebar {
+  flex: 0 0 200px !important;
+  height: 100%;
+}
+
+.card-jogo-clone.expandido-clone .card-jogo-content {
+  opacity: 1;
+  width: 100%;
+  padding: 24px 28px;
+  background: rgba(13, 17, 32, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 2px solid var(--cor-primaria);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-jogo-clone.expandido-clone .card-jogo-titulo {
+  font-size: var(--fs-lg);
+  white-space: normal;
+}
+
+.card-jogo-clone.expandido-clone .card-jogo-descricao {
+  -webkit-line-clamp: 6;
+  font-size: var(--fs-sm);
+}
+
+.card-jogo-clone.expandido-clone .botao-detalhes {
+  margin-top: auto;
+  align-self: flex-start;
+}
+/* ── Overlay (fundo escurecido) do Card Expandido ── */
+
+.card-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.card-overlay.ativo {
+  opacity: 1;
+  pointer-events: auto;
+}
+.card-jogo.open .card-jogo-content {
+  display: flex;
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+/* Responsividade da expansão */
+@media (max-width: 768px) {
+  .card-jogo-clone.expandido-clone {
+    flex-direction: column;
+  }
+  .card-jogo-clone.expandido-clone .card-jogo-sidebar {
+    flex: 0 0 140px;
+    height: 140px;
+    width: 100%;
+  }
+  .card-jogo-clone.expandido-clone .card-jogo-content {
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-jogo-clone.expandido-clone .card-jogo-sidebar {
+    flex: 0 0 120px;
+    height: 120px;
+  }
+  .card-jogo-clone.expandido-clone .card-jogo-content {
+    padding: 12px 16px;
+  }
+}
+
+.menu-trigger {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: var(--cor-lateral);
+  color: var(--cor-texto);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.menu-trigger:hover {
+  transform: scale(1.1);
+  background: #1a2238;
+}
+
+.card-jogo.open .menu-trigger {
+  background: var(--cor-primaria);
+  color: var(--cor-texto-sobre-destaque);
+}
+
+/* ── Ajuste para abertura à esquerda quando no limite da tela ── */
+.card-jogo.open-left .card-jogo-content {
+  left: auto !important;
+  right: 100% !important;
+  border-radius: var(--border-radius) 0 0 var(--border-radius) !important;
+  border-left: 1px solid var(--cor-borda) !important;
+  border-right: none !important;
+  box-shadow: -10px 0 20px rgba(0, 0, 0, 0.3) !important;
+  transform: translateX(10px);
+}
+
+.card-jogo.open-left.open .card-jogo-content {
+  transform: translateX(0);
+}
+/* Tema claro */
+html.tema-claro .card-jogo-clone.expandido-clone .card-jogo-content,
+body.tema-claro .card-jogo-clone.expandido-clone .card-jogo-content,
+html.tema-claro .card-jogo-content,
+body.tema-claro .card-jogo-content {
+  background: var(--cor-dropdown);
+  border-color: var(--cor-borda-forte);
+  border-left-color: var(--cor-primaria);
+  box-shadow: var(--shadow-card);
+}

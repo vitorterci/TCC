@@ -1,0 +1,451 @@
+/* ───────────────────────────────────────────────
+   Lixeira Destrutiva — Game Search
+   Componente reutilizável para ações de exclusão
+   ─────────────────────────────────────────────── */
+
+.lixeira-destrutiva {
+  --lixeira-tamanho: 32px;
+  --lixeira-cor: var(--cor-texto-muted);
+  --lixeira-cor-hover: #f87171;
+  --lixeira-cor-ativo: #ef4444;
+  
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--lixeira-tamanho);
+  height: var(--lixeira-tamanho);
+  min-width: var(--lixeira-tamanho);
+  min-height: var(--lixeira-tamanho);
+  padding: 0;
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--lixeira-cor);
+  cursor: pointer;
+  overflow: visible;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+/* ── Estados de foco e hover ── */
+
+.lixeira-destrutiva:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+.lixeira-destrutiva:hover:not(:disabled) {
+  color: var(--lixeira-cor-hover);
+  border-color: color-mix(in srgb, var(--lixeira-cor-hover) 60%, var(--cor-borda));
+  background: color-mix(in srgb, var(--lixeira-cor-hover) 8%, transparent);
+}
+
+.lixeira-destrutiva:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.lixeira-destrutiva:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Estrutura interna da lixeira ── */
+
+.lixeira-destrutiva__corpo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transform-origin: center bottom;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Tampa da lixeira */
+.lixeira-destrutiva__tampa {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  width: 14px;
+  height: 3px;
+  border-radius: 1.5px;
+  background: currentColor;
+  transform: translateX(-50%);
+  transform-origin: center bottom;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    width 0.25s ease,
+    height 0.25s ease;
+}
+
+/* Alça da tampa */
+.lixeira-destrutiva__alca {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 6px;
+  height: 3px;
+  border: 1.5px solid currentColor;
+  border-bottom: none;
+  border-radius: 2px 2px 0 0;
+  transform: translateX(-50%);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Corpo principal (balde) */
+.lixeira-destrutiva__balde {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 12px;
+  height: 15px;
+  border: 1.5px solid currentColor;
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
+/* Linhas de "lixo" dentro do balde */
+.lixeira-destrutiva__lixo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--lixeira-cor-hover) 70%, transparent),
+    transparent
+  );
+  transition: height 0.3s ease;
+}
+
+/* ── Hover: tampa abre levemente ── */
+
+.lixeira-destrutiva:hover:not(:disabled) .lixeira-destrutiva__tampa {
+  transform: translateX(-50%) rotate(-18deg) translateY(-2px);
+}
+
+.lixeira-destrutiva:hover:not(:disabled) .lixeira-destrutiva__alca {
+  transform: translateX(-50%) rotate(-18deg) translateY(-2px);
+}
+
+.lixeira-destrutiva:hover:not(:disabled) .lixeira-destrutiva__corpo {
+  transform: translateY(1px) scale(1.05);
+}
+
+/* ── Estado de exclusão ── */
+
+.lixeira-destrutiva.is-deleting {
+  pointer-events: none;
+  color: var(--lixeira-cor-ativo);
+  border-color: var(--lixeira-cor-ativo);
+  background: color-mix(in srgb, var(--lixeira-cor-ativo) 12%, transparent);
+}
+
+.lixeira-destrutiva.is-deleting .lixeira-destrutiva__tampa {
+  transform: translateX(-50%) rotate(-35deg) translateY(-4px);
+  animation: lixeira-tampa-tremor 0.15s ease-in-out infinite;
+}
+
+.lixeira-destrutiva.is-deleting .lixeira-destrutiva__alca {
+  transform: translateX(-50%) rotate(-35deg) translateY(-4px);
+}
+
+.lixeira-destrutiva.is-deleting .lixeira-destrutiva__corpo {
+  animation: lixeira-tremor 0.08s ease-in-out infinite;
+}
+
+.lixeira-destrutiva.is-deleting .lixeira-destrutiva__lixo {
+  height: 100%;
+  animation: lixeira-engolir 0.6s ease-in forwards;
+}
+
+/* ── Animações ── */
+
+@keyframes lixeira-tremor {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-1.5px) rotate(-1deg); }
+  75% { transform: translateX(1.5px) rotate(1deg); }
+}
+
+@keyframes lixeira-tampa-tremor {
+  0%, 100% { transform: translateX(-50%) rotate(-35deg) translateY(-4px); }
+  50% { transform: translateX(-50%) rotate(-30deg) translateY(-5px); }
+}
+
+@keyframes lixeira-engolir {
+  0% { height: 0%; opacity: 1; }
+  60% { height: 100%; opacity: 1; }
+  100% { height: 100%; opacity: 0; }
+}
+
+/* ── Partículas de destruição ── */
+
+.lixeira-destrutiva__particula {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--lixeira-cor-ativo);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.lixeira-destrutiva.is-deleting .lixeira-destrutiva__particula {
+  animation: lixeira-particula 0.6s ease-out forwards;
+}
+
+@keyframes lixeira-particula {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--particula-x, 0), var(--particula-y, 0)) scale(0);
+  }
+}
+
+/* ── Glitch no botão ── */
+
+.lixeira-destrutiva.is-deleting::before,
+.lixeira-destrutiva.is-deleting::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.lixeira-destrutiva.is-deleting::before {
+  background: color-mix(in srgb, var(--lixeira-cor-ativo) 30%, transparent);
+  animation: lixeira-glitch-a 0.3s ease-out 0.25s;
+}
+
+.lixeira-destrutiva.is-deleting::after {
+  background: color-mix(in srgb, var(--cor-primaria) 25%, transparent);
+  animation: lixeira-glitch-b 0.3s ease-out 0.35s;
+}
+
+@keyframes lixeira-glitch-a {
+  0% { opacity: 0; transform: translate(0, 0); }
+  30% { opacity: 0.8; transform: translate(-3px, 1px); }
+  60% { opacity: 0.4; transform: translate(2px, -2px); }
+  100% { opacity: 0; transform: translate(0, 0); }
+}
+
+@keyframes lixeira-glitch-b {
+  0% { opacity: 0; transform: translate(0, 0); }
+  30% { opacity: 0.6; transform: translate(3px, -1px); }
+  60% { opacity: 0.3; transform: translate(-2px, 2px); }
+  100% { opacity: 0; transform: translate(0, 0); }
+}
+
+/* ── Elemento sendo destruído ── */
+
+.is-being-destroyed {
+  animation: destruir-conteudo 0.55s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+@keyframes destruir-conteudo {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    filter: blur(0);
+  }
+  25% {
+    opacity: 0.9;
+    transform: scale(0.98) translateX(-2px) skewX(-0.5deg);
+    filter: blur(0.3px);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.92) translateX(4px) skewX(1deg);
+    filter: blur(1px);
+  }
+  75% {
+    opacity: 0.25;
+    transform: scale(0.82) translateX(-3px) skewX(-1.5deg);
+    filter: blur(2.5px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7) translateX(10px) skewX(2deg);
+    filter: blur(6px);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-width: 0;
+  }
+}
+
+/* ── Variações de tamanho ── */
+
+.lixeira-destrutiva--sm {
+  --lixeira-tamanho: 26px;
+}
+
+.lixeira-destrutiva--sm .lixeira-destrutiva__tampa {
+  top: 2px;
+  width: 11px;
+  height: 2.5px;
+}
+
+.lixeira-destrutiva--sm .lixeira-destrutiva__alca {
+  width: 5px;
+  height: 2.5px;
+}
+
+.lixeira-destrutiva--sm .lixeira-destrutiva__balde {
+  top: 6px;
+  width: 10px;
+  height: 12px;
+}
+
+.lixeira-destrutiva--lg {
+  --lixeira-tamanho: 40px;
+}
+
+.lixeira-destrutiva--lg .lixeira-destrutiva__tampa {
+  top: 4px;
+  width: 18px;
+  height: 3.5px;
+}
+
+.lixeira-destrutiva--lg .lixeira-destrutiva__alca {
+  width: 8px;
+  height: 3.5px;
+}
+
+.lixeira-destrutiva--lg .lixeira-destrutiva__balde {
+  top: 10px;
+  width: 16px;
+  height: 19px;
+}
+
+/* ── Modo claro ── */
+
+@media (prefers-color-scheme: light) {
+  .lixeira-destrutiva {
+    --lixeira-cor: #6b7280;
+    --lixeira-cor-hover: #dc2626;
+    --lixeira-cor-ativo: #b91c1c;
+  }
+  
+  .lixeira-destrutiva:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--lixeira-cor-hover) 10%, transparent);
+  }
+  
+  .lixeira-destrutiva.is-deleting {
+    background: color-mix(in srgb, var(--lixeira-cor-ativo) 15%, transparent);
+  }
+}
+
+/* ── Redução de movimento ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .lixeira-destrutiva,
+  .lixeira-destrutiva *,
+  .lixeira-destrutiva *::before,
+  .lixeira-destrutiva *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .lixeira-destrutiva:hover:not(:disabled) .lixeira-destrutiva__tampa {
+    transform: translateX(-50%) rotate(-10deg) translateY(-1px);
+  }
+  
+  .lixeira-destrutiva.is-deleting .lixeira-destrutiva__corpo {
+    animation: none;
+  }
+  
+  .is-being-destroyed {
+    animation: destruir-conteudo-reduzido 0.2s ease-out forwards;
+  }
+}
+
+@keyframes destruir-conteudo-reduzido {
+  0% { opacity: 1; }
+  100% { opacity: 0; max-height: 0; padding: 0; margin: 0; border: 0; }
+}
+
+/* ── Responsividade ── */
+
+@media (max-width: 768px) {
+  .lixeira-destrutiva {
+    --lixeira-tamanho: 30px;
+  }
+}
+
+@media (max-width: 420px) {
+  .lixeira-destrutiva {
+    --lixeira-tamanho: 28px;
+  }
+}
+
+/* ── Integração com botões existentes ── */
+
+.btn-acao .lixeira-destrutiva__icone,
+.meu-jogo-remover .lixeira-destrutiva__icone {
+  display: none;
+}
+
+/* Quando a lixeira é usada dentro de um botão existente,
+   ela substitui o ícone mas mantém o comportamento do botão */
+.lixeira-destrutiva--inline {
+  width: auto;
+  min-width: auto;
+  height: auto;
+  min-height: auto;
+  padding: 4px 8px;
+  border: none;
+  background: transparent;
+  gap: 5px;
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.lixeira-destrutiva--inline .lixeira-destrutiva__corpo {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.lixeira-destrutiva--inline .lixeira-destrutiva__tampa {
+  top: 1px;
+  width: 9px;
+  height: 2px;
+}
+
+.lixeira-destrutiva--inline .lixeira-destrutiva__alca {
+  width: 4px;
+  height: 2px;
+}
+
+.lixeira-destrutiva--inline .lixeira-destrutiva__balde {
+  top: 5px;
+  width: 8px;
+  height: 9px;
+}
+
+.lixeira-destrutiva--inline .lixeira-destrutiva__texto {
+  white-space: nowrap;
+}

@@ -1,0 +1,157 @@
+/* ── Carrossel ── */
+.carousel-wrapper {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.carousel-track-container {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background: var(--cor-card);
+  box-shadow:
+    0 0 0 1px var(--cor-borda),
+    0 20px 50px rgba(0, 0, 0, 0.7),
+    var(--shadow-glow);
+}
+
+.carousel-track {
+  display: flex;
+  width: 100%;
+  will-change: transform;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--cor-fundo);
+}
+
+.carousel-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.carousel-caption {
+  background: linear-gradient(
+    to right,
+    rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.22),
+    rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.04)
+  );
+  color: var(--cor-texto-muted);
+  text-align: center;
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.carousel-indicator {
+  height: 3px;
+  width: 32px;
+  border-radius: 2px;
+  border: none;
+  background-color: var(--cor-borda-forte);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    width var(--transition-speed) ease,
+    background-color var(--transition-speed) ease;
+}
+
+.carousel-indicator.ativo {
+  width: 52px;
+  background-color: color-mix(in srgb, var(--cor-primaria) 25%, transparent);
+}
+
+.carousel-indicator.ativo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--cor-primaria);
+  animation: progressBar 5s linear forwards;
+}
+
+@keyframes progressBar {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ─── Correções pontuais do modo claro ── */
+html.tema-claro .carousel-track-container,
+body.tema-claro .carousel-track-container {
+  background: var(--cor-card);
+  box-shadow:
+    0 0 0 1px var(--cor-borda),
+    0 20px 50px rgba(44, 70, 115, 0.16),
+    var(--shadow-glow);
+}
+
+html.tema-claro .carousel-img-wrap,
+body.tema-claro .carousel-img-wrap {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at center, rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.08), transparent 58%),
+    linear-gradient(135deg, #eef1f7 0%, #ffffff 48%, #e9edf5 100%);
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
+}
+
+html.tema-claro .carousel-img-wrap::before,
+body.tema-claro .carousel-img-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 7%;
+  z-index: -1;
+  border-radius: calc(var(--border-radius) * 0.7);
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(46, 0, 230, 0.10);
+  box-shadow:
+    0 10px 28px rgba(15, 23, 42, 0.12),
+    0 0 24px rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.08);
+}
+
+html.tema-claro .carousel-img-wrap img,
+body.tema-claro .carousel-img-wrap img {
+  filter: drop-shadow(0 7px 12px rgba(15, 23, 42, 0.18));
+}
+
+html.tema-claro .carousel-caption,
+body.tema-claro .carousel-caption {
+  background: color-mix(in srgb, var(--cor-lateral) 92%, var(--cor-primaria));
+  color: var(--cor-texto);
+}
+
+html.tema-claro .carousel-indicator,
+body.tema-claro .carousel-indicator {
+  background-color: var(--cor-borda-forte);
+}

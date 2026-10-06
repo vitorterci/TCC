@@ -1,0 +1,71 @@
+/* ─── TOKENS DE TEMA ──────────────────────────────────────────────────────── */
+
+/* Tema escuro: padrão e fallback quando o JavaScript ainda não foi executado. */
+:root,
+html.tema-escuro {
+  --cor-fundo: #0d0d1f;
+  --cor-lateral: #1a1a2e;
+  --cor-card: #17172b;
+  --cor-texto: #ffffff;
+  --cor-texto-muted: rgba(255, 255, 255, 0.6);
+  --cor-texto-destaque: #a5b4fc;
+  --cor-texto-destaque-hover: #c4b5fd;
+  --cor-hover: #2a2a4a;
+  --cor-tag: #1a1a4a;
+  --cor-dropdown: #12122a;
+  --cor-borda: rgba(255, 255, 255, 0.08);
+  --cor-borda-forte: rgba(255, 255, 255, 0.15);
+  --cor-texto-sobre-fundo-claro: #111827;
+  --cor-texto-sobre-fundo-claro-hover: #1f2937;
+  --cor-link-fundo-claro: #3730a3;
+  --cor-link-fundo-claro-hover: #312e81;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Tema claro: aplicado exclusivamente no elemento raiz <html>. */
+html.tema-claro {
+  --cor-fundo: #f4f6fb;
+  --cor-lateral: #ffffff;
+  --cor-card: #ffffff;
+  --cor-texto: #1f2937;
+  --cor-texto-muted: #64748b;
+  --cor-texto-destaque: #3730a3;
+  --cor-texto-destaque-hover: #312e81;
+  --cor-hover: #e8ecf5;
+  --cor-tag: #eef2ff;
+  --cor-dropdown: #ffffff;
+  --cor-borda: rgba(15, 23, 42, 0.12);
+  --cor-borda-forte: rgba(15, 23, 42, 0.22);
+  --cor-texto-sobre-fundo-claro: #111827;
+  --cor-texto-sobre-fundo-claro-hover: #1f2937;
+  --cor-link-fundo-claro: #3730a3;
+  --cor-link-fundo-claro-hover: #312e81;
+  --shadow: 0 4px 15px rgba(15, 23, 42, 0.12);
+  --shadow-card: 0 8px 25px rgba(15, 23, 42, 0.14);
+}
+
+/* Tokens compartilhados pelos componentes refatorados. */
+:root {
+  --cor-primaria-rgb: 46, 0, 230;
+  --font-nav: var(--font-corpo);
+  --font-titulo-especial: var(--font-titulo);
+  --radius-full: 999px;
+  --radius-lg: var(--border-radius-lg);
+  --radius-md: var(--border-radius);
+  --shadow-md: var(--shadow-card);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+}
+
+html.tema-claro {
+  color-scheme: light;
+}
+
+html.tema-escuro {
+  color-scheme: dark;
+}

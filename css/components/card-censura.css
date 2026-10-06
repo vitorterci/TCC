@@ -1,0 +1,50 @@
+/* Censura de cards extraída e consolidada de global.css — Game Search */
+
+/* Overlay final consolidado: preserva gap/transição da primeira versão e a precedência da segunda. */
+.card-jogo {
+  position: relative !important;
+}
+
+.card-censura-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(10, 15, 30, 0.88) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px;
+  text-align: center !important;
+  padding: 16px !important;
+  border-radius: var(--border-radius, 12px) !important;
+  color: #fff !important;
+  border: 2px dashed rgba(239, 68, 68, 0.6) !important;
+  z-index: 1 !important;
+  transition: opacity 0.25s ease;
+}
+
+.card-censura-overlay i {
+  font-size: 1.8rem;
+  color: #ef4444;
+  margin-bottom: 8px;
+}
+
+.card-censura-titulo {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--font-titulo);
+  color: var(--cor-texto);
+  margin: 0 0 4px 0;
+}
+
+.card-censura-sub {
+  font-size: 0.75rem;
+  font-family: var(--font-corpo);
+  color: #94a3b8;
+  margin: 0;
+}

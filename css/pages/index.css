@@ -1,0 +1,72 @@
+/* Regras específicas desta página migradas do global.css. */
+
+/* ── Destaque Hero ── */
+
+.destaque {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 40px;
+}
+
+.logo-hero {
+  flex-shrink: 0;
+}
+
+.logo-principal {
+  width: 300px;
+  filter: drop-shadow(0 0 14px var(--cor-primaria));
+  opacity: 0.8;
+  transition:
+    transform var(--transition-speed) ease,
+    filter var(--transition-speed) ease;
+}
+
+.logo-principal:hover {
+  transform: scale(1.04);
+  filter: drop-shadow(0 0 22px var(--cor-primaria));
+  opacity: 1;
+}
+@media (max-width: 900px) {
+  .carousel-wrapper { display: none; }
+  .destaque { justify-content: center; }
+}
+
+@media (max-width: 768px) {
+  .destaque { flex-direction: column; text-align: center; }
+  .logo-principal { width: 200px; }
+}
+
+/* ─── DESTAQUE HERO ─────────────────────────────────────────────────────────── */
+
+.destaque {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 40px;
+}
+
+.logo-hero {
+  flex-shrink: 0;
+}
+
+.logo-principal {
+  width: 300px;
+  filter: drop-shadow(0 0 14px var(--cor-primaria));
+  opacity: 0.8;
+  transition:
+    transform var(--transition-speed) ease,
+    filter var(--transition-speed) ease;
+}
+
+.logo-principal:hover {
+  transform: scale(1.04);
+  filter: drop-shadow(0 0 22px var(--cor-primaria));
+  opacity: 1;
+}

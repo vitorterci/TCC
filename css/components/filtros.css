@@ -1,0 +1,296 @@
+/* Estilos de filtros extraídos de global.css — Game Search */
+
+/* ── Filtros ── */
+
+.secao-filtros {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  padding: 0 230px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 100;
+}
+
+.barra-filtro {
+  background-color: var(--cor-lateral);
+  padding: 10px 16px;
+  border-radius: var(--border-radius-xl);
+  display: flex;
+  gap: 35px;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--cor-borda);
+}
+
+.botao-filtro-principal {
+  background-color: var(--cor-tag);
+  color: var(--cor-texto);
+  border: 1px solid transparent;
+  padding: 8px 18px;
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  font-family: var(--font-corpo);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: all var(--transition-speed) ease;
+}
+
+.botao-filtro-principal:hover,
+.botao-filtro-principal.ativo {
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: var(--cor-texto-sobre-destaque);
+  box-shadow: var(--shadow-glow);
+}
+
+.menu-flutuante {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background-color: var(--cor-dropdown);
+  padding: 14px;
+  border-radius: var(--border-radius);
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  z-index: 300;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+  min-width: 440px;
+  border: 1px solid var(--cor-borda-forte);
+  animation: fadeIn 0.18s ease;
+}
+
+.menu-flutuante.show {
+  display: grid;
+}
+
+.opcao-filtro {
+  background-color: var(--cor-tag);
+  color: var(--cor-texto);
+  border: 1px solid transparent;
+  padding: 9px 12px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all var(--transition-fast) ease;
+}
+
+.opcao-filtro:hover,
+.opcao-filtro.selecionada {
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: var(--cor-texto-sobre-destaque);
+}
+
+/* ─── HEADER DOS MENUS FLUTUANTES COM BOTÃO RESET ──────────────────────────── */
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--cor-borda);
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.menu-titulo {
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-texto-muted);
+  opacity: 0.7;
+}
+
+.btn-reset-filtro {
+  background: none;
+  border: none;
+  color: var(--cor-texto-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-speed) ease;
+  font-size: var(--fs-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  opacity: 0.5;
+}
+
+.btn-reset-filtro:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.btn-reset-filtro:active {
+  transform: scale(0.9);
+}
+
+.btn-reset-filtro i {
+  font-size: 0.9rem;
+}
+/* ─── INDICADOR DE FILTRO ATIVO NOS BOTÕES PRINCIPAIS ──────────────────────── */
+
+.botao-filtro-principal {
+  position: relative;
+}
+
+.botao-filtro-principal.ativo::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+/* ─── MENU FLUTUANTE MELHORADO ──────────────────────────────────────────────── */
+
+.menu-flutuante {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background-color: var(--cor-dropdown);
+  padding: 14px;
+  border-radius: var(--border-radius);
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  z-index: 300;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+  min-width: 440px;
+  border: 1px solid var(--cor-borda-forte);
+  animation: fadeIn 0.18s ease;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.menu-flutuante.show {
+  display: grid;
+}
+
+.menu-flutuante::-webkit-scrollbar {
+  width: 3px;
+}
+
+.menu-flutuante::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu-flutuante::-webkit-scrollbar-thumb {
+  background: var(--cor-primaria);
+  border-radius: 2px;
+}
+
+.opcao-filtro {
+  background-color: var(--cor-tag);
+  color: var(--cor-texto);
+  border: 1px solid transparent;
+  padding: 9px 12px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all var(--transition-fast) ease;
+}
+
+.opcao-filtro:hover,
+.opcao-filtro.selecionada {
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: var(--cor-texto-sobre-destaque);
+}
+
+/* Responsividade dos filtros */
+@media (max-width: 768px) {
+  /* Responsividade dos filtros */
+  .barra-filtro {
+    flex-wrap: wrap;
+    padding: 8px 12px;
+    gap: 6px;
+  }
+  .botao-filtro-principal {
+    padding: 6px 12px;
+    font-size: 0.6rem;
+    gap: 4px;
+  }
+  .botao-filtro-principal i {
+    font-size: 0.7rem;
+  }
+  .menu-flutuante {
+    min-width: 200px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px;
+    max-height: 250px;
+  }
+  .menu-header {
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+  }
+  .menu-titulo {
+    font-size: 0.6rem;
+  }
+  .btn-reset-filtro {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+  .btn-reset-filtro i {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Responsividade dos filtros mobile */
+  .barra-filtro {
+    gap: 4px;
+  }
+  .botao-filtro-principal {
+    padding: 4px 10px;
+    font-size: 0.55rem;
+  }
+  .menu-flutuante {
+    min-width: 160px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    padding: 8px;
+  }
+  .opcao-filtro {
+    padding: 6px 8px;
+    font-size: 0.55rem;
+  }
+}
+
+/* Posicionamento e camada do menu de filtros */
+/* Os menus de filtro continuam fora do fluxo e sempre acima da grade. */
+.secao-filtros,
+.barra-filtro {
+  position: relative;
+}
+
+.menu-flutuante {
+  position: absolute;
+  z-index: 4100;
+}

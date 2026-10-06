@@ -1,0 +1,316 @@
+/* ─── Preços e Ofertas ─── */
+
+.secao-precos {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.secao-precos h3 {
+  font-family: var(--font-titulo);
+  font-size: var(--fs-lg);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lista-precos {
+  background: var(--cor-lateral);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  border: 1px solid var(--cor-borda);
+}
+
+.precos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--cor-borda);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.precos-total {
+  font-size: var(--fs-sm);
+  color: var(--cor-texto-muted);
+}
+
+.precos-menor {
+  font-size: var(--fs-sm);
+  color: #4ade80;
+}
+
+.precos-menor strong {
+  color: var(--cor-texto);
+}
+
+.precos-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.oferta-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--cor-dropdown);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--cor-borda);
+  transition: all var(--transition-speed) ease;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.oferta-item:hover {
+  border-color: var(--cor-primaria);
+  transform: translateX(4px);
+}
+
+.oferta-item.melhor-oferta {
+  border-color: #4ade80;
+  background: rgba(74, 222, 128, 0.08);
+}
+
+.oferta-plataforma {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.plataforma-nome {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+.melhor-tag {
+  background: #4ade80;
+  color: #000;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.oferta-preco {
+  font-family: var(--font-titulo);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--cor-texto-destaque);
+}
+
+.oferta-acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-comprar {
+  background: var(--cor-primaria);
+  color: var(--cor-texto-sobre-destaque);
+  border: none;
+  padding: 6px 16px;
+  border-radius: var(--border-radius-xl);
+  font-family: var(--font-corpo);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-comprar:hover {
+  background: var(--cor-primaria-hover);
+  transform: scale(1.05);
+}
+
+.btn-reportar {
+  background: none;
+  border: none;
+  color: var(--cor-texto-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-reportar:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.oferta-avaliacao {
+  font-size: var(--fs-xs);
+  color: #fbbf24;
+}
+
+.loading,
+.sem-ofertas,
+.erro-precos {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--cor-texto-muted);
+}
+
+.loading i,
+.sem-ofertas i,
+.erro-precos i {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 12px;
+  color: var(--cor-texto-destaque);
+}
+
+.btn-tentar {
+  background: var(--cor-primaria);
+  color: var(--cor-texto-sobre-destaque);
+  border: none;
+  padding: 8px 24px;
+  border-radius: var(--border-radius-xl);
+  cursor: pointer;
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.btn-tentar:hover {
+  background: var(--cor-primaria-hover);
+}
+
+@media (max-width: 768px) {
+  .oferta-item {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .oferta-plataforma {
+    justify-content: center;
+  }
+
+  .precos-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Comparador de preços: controles e metadados */
+.filtros-precos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  margin: 16px 0 8px;
+}
+
+.filtros-precos label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: var(--font-titulo);
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-muted);
+}
+
+.filtros-precos select {
+  min-width: 140px;
+  padding: 8px 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius-sm);
+  background: var(--cor-dropdown);
+  color: var(--cor-texto);
+  font-family: var(--font-corpo);
+}
+
+.atualizado-precos {
+  color: var(--cor-texto-muted);
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  margin: 8px 0 14px;
+}
+
+.oferta-meta {
+  color: var(--cor-texto-muted);
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  min-width: 100px;
+  text-align: center;
+}
+
+.oferta-fonte {
+  display: block;
+  flex-basis: 100%;
+  color: var(--cor-texto-muted);
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .filtros-precos {
+    align-items: stretch;
+  }
+
+  .filtros-precos label,
+  .filtros-precos select {
+    width: 100%;
+  }
+
+  .oferta-meta,
+  .oferta-fonte {
+    text-align: center;
+  }
+}
+
+/* Regras de contraste compartilhadas com a página de detalhes */
+html.tema-claro .secao-precos h3,
+body.tema-claro .secao-precos h3 {
+  color: var(--cor-texto);
+  text-shadow: none;
+}
+
+/* Classificação visual dos preços. */
+.info-preco {
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.info-preco.gratis {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.2);
+  background: rgba(74, 222, 128, 0.1);
+}
+
+.info-preco.gratis i { color: #4ade80; }
+
+.info-preco.baixo {
+  color: #60a5fa;
+  border-color: rgba(96, 165, 250, 0.2);
+  background: rgba(96, 165, 250, 0.1);
+}
+
+.info-preco.baixo i { color: #60a5fa; }
+
+.info-preco.medio {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.2);
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.info-preco.medio i { color: #fbbf24; }
+
+.info-preco.alto {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.2);
+  background: rgba(248, 113, 113, 0.1);
+}
+
+.info-preco.alto i { color: #f87171; }

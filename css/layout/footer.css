@@ -1,0 +1,336 @@
+/* Estilos de layout extraídos de global.css — Game Search */
+
+.site-footer {
+    width: 100%;
+    margin-top: 40px;
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--cor-fundo, #0d0d1f) 96%, transparent) 0%,
+        color-mix(in srgb, var(--cor-lateral, #1a1a2e) 92%, transparent) 100%
+    );
+    border-top: 2px solid var(--cor-primaria);
+    color: var(--cor-texto);
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Estrutura principal ─────────────────────────────────────────────── */
+
+.site-footer__inner {
+    width: min(1040px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 32px 0 24px;
+    display: grid;
+    grid-template-columns: 1.3fr 1.2fr 0.9fr auto;
+    align-items: start;
+    gap: 40px;
+}
+
+/* ── Marca ──────────────────────────────────────────────────────────── */
+
+.site-footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.site-footer__logo img {
+    width: 120px;
+    max-width: 100%;
+    display: block;
+}
+
+.site-footer__brand p {
+    max-width: 260px;
+    margin: 0;
+    color: var(--cor-texto-muted);
+    font-family: var(--font-corpo);
+    font-size: var(--fs-xs);
+    line-height: 1.55;
+}
+
+/* ── Colunas de links ───────────────────────────────────────────────── */
+
+.site-footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+.site-footer__heading {
+    margin: 0;
+    color: var(--cor-texto);
+    font-family: var(--font-titulo);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.site-footer__links {
+    display: grid;
+    gap: 4px 20px;
+}
+
+/* Navegação → 2 colunas */
+.site-footer__nav[aria-label="Navegação"] .site-footer__links {
+    grid-template-columns: 1fr 1fr;
+}
+
+.site-footer__links a {
+    color: var(--cor-texto-muted);
+    text-decoration: none;
+    font-family: var(--font-corpo);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+    width: fit-content;
+    transition:
+        color var(--transition-fast) ease,
+        transform var(--transition-fast) ease;
+}
+
+.site-footer__links a:hover {
+    color: var(--cor-primaria);
+    transform: translateX(3px);
+}
+
+/* Estado ativo (link da página atual) */
+.site-footer__links a.ativo {
+    color: var(--cor-primaria);
+    font-weight: 700;
+    position: relative;
+}
+
+.site-footer__links a.ativo::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--cor-primaria);
+    transform: translateY(-50%);
+    box-shadow: 0 0 8px var(--cor-primaria);
+}
+
+/* ── Ferramentas + Voltar ao topo ───────────────────────────────────── */
+
+.site-footer__tools {
+    position: relative;
+    align-self: start;
+    justify-self: end;
+}
+
+.site-footer__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.site-footer__tools-toggle,
+.site-footer__top {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid color-mix(in srgb, var(--cor-primaria) 45%, transparent);
+    border-radius: var(--border-radius-sm);
+    background: color-mix(in srgb, var(--cor-primaria) 8%, transparent);
+    color: var(--cor-texto);
+    font-family: var(--font-corpo);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition:
+        color var(--transition-fast) ease,
+        background var(--transition-fast) ease,
+        border-color var(--transition-fast) ease,
+        box-shadow var(--transition-fast) ease,
+        transform var(--transition-fast) ease;
+}
+
+.site-footer__tools-toggle:hover,
+.site-footer__top:hover {
+    color: var(--cor-texto);
+    background: color-mix(in srgb, var(--cor-primaria) 18%, transparent);
+    border-color: var(--cor-primaria);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+}
+
+.site-footer__tools-toggle:active,
+.site-footer__top:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.site-footer__tools-arrow {
+    font-size: 0.95rem;
+    line-height: 1;
+    color: var(--cor-primaria);
+    transition: transform var(--transition-fast) ease;
+}
+
+.site-footer__tools-toggle[aria-expanded="true"] .site-footer__tools-arrow {
+    transform: rotate(180deg);
+}
+
+.site-footer__top-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    background: color-mix(in srgb, var(--cor-primaria) 18%, transparent);
+    color: var(--cor-primaria);
+    font-size: 0.9rem;
+    line-height: 1;
+    transition:
+        background var(--transition-fast) ease,
+        color var(--transition-fast) ease,
+        transform var(--transition-fast) ease;
+}
+
+.site-footer__top:hover .site-footer__top-icon {
+    background: var(--cor-primaria);
+    color: var(--cor-texto-sobre-destaque);
+    transform: translateY(-2px);
+}
+
+/* ── Painel do menu Ferramentas — abre DENTRO do footer ─────────────── */
+
+.site-footer__tools-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: auto;
+    width: 360px;
+    padding: 14px 16px;
+    border: 1px solid var(--cor-borda-forte);
+    border-radius: var(--border-radius);
+    background: var(--cor-dropdown);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+    z-index: 60;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition:
+        opacity var(--transition-fast) ease,
+        transform var(--transition-fast) ease;
+}
+
+.site-footer__tools-panel.aberto {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.site-footer__tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 14px;
+}
+
+.site-footer__tools-grid a {
+    padding: 5px 0;
+    color: var(--cor-texto-muted);
+    text-decoration: none;
+    font-family: var(--font-corpo);
+    font-size: var(--fs-xs);
+    width: fit-content;
+    transition:
+        color var(--transition-fast) ease,
+        transform var(--transition-fast) ease;
+}
+
+.site-footer__tools-grid a:hover {
+    color: var(--cor-primaria);
+    transform: translateX(2px);
+}
+
+/* ── Copyright — separação clara ────────────────────────────────────── */
+
+.site-footer__bottom {
+    width: min(1040px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 14px 0 18px;
+    border-top: 1px solid color-mix(in srgb, var(--cor-primaria) 22%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--cor-texto-muted);
+    font-family: var(--font-corpo);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+}
+
+/* ── Tema claro ─────────────────────────────────────────────────────── */
+
+.tema-claro .site-footer {
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--cor-fundo) 98%, transparent) 0%,
+        color-mix(in srgb, var(--cor-lateral) 94%, transparent) 100%
+    );
+    border-top-color: var(--cor-primaria);
+}
+
+@media (max-width: 960px) {
+    .site-footer__inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+    }
+
+    .site-footer__tools {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+}
+
+@media (max-width: 600px) {
+    .site-footer {
+        margin-top: 28px;
+    }
+
+    .site-footer__inner,
+    .site-footer__bottom {
+        width: min(100% - 28px, 1040px);
+    }
+
+    .site-footer__inner {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding: 24px 0 20px;
+    }
+
+    .site-footer__brand p {
+        max-width: 100%;
+    }
+
+    .site-footer__nav[aria-label="Navegação"] .site-footer__links {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer__tools-panel {
+        left: 0;
+        right: auto;
+        width: min(360px, calc(100vw - 28px));
+    }
+
+    .site-footer__tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .site-footer__bottom {
+        padding: 12px 0 16px;
+    }
+}
+

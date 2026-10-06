@@ -1,0 +1,82 @@
+/* ─── FEEDBACK SPECIFIC STYLES ─────────────────────────────────────────────── */
+
+.secao-feedback {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.feedback-intro {
+    text-align: center;
+    margin-bottom: var(--space-2);
+}
+
+.feedback-intro h1 {
+    font-family: var(--font-titulo-especial);
+    font-size: var(--fs-2xl);
+    margin-bottom: var(--space-1);
+}
+
+.form-group {
+    margin-bottom: var(--space-2);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group label {
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    font-family: var(--font-nav);
+}
+
+.stars-rating {
+    display: flex;
+    gap: 8px;
+    font-size: 1.2rem;
+    color: #f5c542;
+    margin-top: 4px;
+}
+
+.problem-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.tag-problema {
+    background-color: var(--cor-tag);
+    border: 1px solid var(--cor-borda);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: var(--fs-xs);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.tag-problema:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-sobre-destaque);
+}
+
+.suggestions-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.suggestions-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--fs-sm);
+    color: var(--cor-texto-muted);
+}
+
+.suggestions-list li i {
+    color: var(--cor-texto-destaque);
+}

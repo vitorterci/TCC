@@ -1,0 +1,89 @@
+/* Tags e status de cards extraídos de global.css — Game Search */
+
+.link-tag {
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.link-tag:hover,
+.link-tag:focus {
+  background: rgba(var(--cor-primaria-rgb, 46, 0, 230), 0.25);
+  border-color: var(--cor-primaria);
+  color: var(--cor-texto);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.info-tag {
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: #ffffff; /* Contraste máximo para legibilidade */
+  background: color-mix(in srgb, var(--cor-texto) 10%, transparent);
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--cor-borda);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.info-tag i {
+  font-size: 0.75rem;
+  color: var(--cor-texto-destaque);
+  opacity: 1;
+}
+
+.info-status {
+  background: rgba(46, 0, 230, 0.15);
+  border-color: rgba(46, 0, 230, 0.2);
+}
+
+.status-disponivel {
+  color: #4ade80;
+}
+
+.status-disponivel i {
+  color: #4ade80;
+}
+
+.status-em-breve {
+  color: #facc15;
+}
+
+.status-em-breve i {
+  color: #facc15;
+}
+/* Responsividade das tags */
+@media (max-width: 768px) {
+  .info-tag {
+    font-size: 0.6rem;
+    padding: 1px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-tag {
+    font-size: 0.55rem;
+    padding: 1px 6px;
+  }
+}
+
+/* Tema claro */
+html.tema-claro .info-tag,
+body.tema-claro .info-tag {
+  color: var(--cor-texto);
+  background: var(--cor-tag);
+  border-color: var(--cor-borda);
+  text-shadow: none;
+}
+html.tema-claro .tag-meta,
+body.tema-claro .tag-meta {
+  color: var(--cor-texto);
+  background-color: var(--cor-tag);
+  border-color: var(--cor-borda);
+  text-shadow: none;
+}

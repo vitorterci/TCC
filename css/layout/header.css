@@ -1,0 +1,25 @@
+/* Estilos de layout extraídos de global.css — Game Search */
+
+/* ─── BARRA SUPERIOR / HEADER ───────────────────────────────────────────────── */
+
+.barra-superior {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 12px 0;
+  -webkit-backdrop-filter: blur(12px);
+  animation: fadeInDown 0.8s ease-out;
+}
+
+
+@media (max-width: 480px) {
+  .barra-superior {
+    margin-bottom: 24px;
+  }
+}

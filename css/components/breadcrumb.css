@@ -1,0 +1,31 @@
+/* ── Breadcrumb ── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-corpo);
+  font-size: var(--fs-xs);
+  color: var(--cor-texto-muted);
+  letter-spacing: 0.06em;
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 4px;
+}
+
+.breadcrumb a {
+  color: var(--cor-texto-muted);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--cor-texto-destaque);
+}
+
+.breadcrumb i {
+  font-size: 0.6rem;
+}
+
+.breadcrumb span {
+  color: var(--cor-texto);
+}
