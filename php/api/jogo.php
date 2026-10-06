@@ -123,10 +123,12 @@ function listarJogos(mysqli $conexao)
             data_atualizacao,
             (
                 SELECT MIN(p.preco)
-                FROM precos p
+                FROM precos_cache_itad p
                 WHERE p.jogo_id = jogos.id
-                  AND p.disponibilidade = 'disponivel'
+                  AND p.disponivel = 1
+                  AND p.moeda = 'BRL'
                   AND p.preco > 0
+                  AND p.cache_atualizado_em >= DATE_SUB(NOW(), INTERVAL 3600 SECOND)
             ) AS preco
         FROM jogos
         ORDER BY id DESC

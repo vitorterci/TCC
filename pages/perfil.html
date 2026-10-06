@@ -1581,21 +1581,21 @@
                     <button
                       type="button"
                       class="preferencia-chip"
-                      data-valor="SteamFake"
+                      data-valor="Steam"
                     >
-                      SteamFake</button
+                      Steam</button
                     ><button
                       type="button"
                       class="preferencia-chip"
-                      data-valor="EpicFake"
+                      data-valor="Epic Games"
                     >
-                      EpicFake</button
+                      Epic Games</button
                     ><button
                       type="button"
                       class="preferencia-chip"
-                      data-valor="GOGFake"
+                      data-valor="GOG"
                     >
-                      GOGFake
+                      GOG
                     </button>
                   </div>
                   <input id="preferenciaLojas" type="hidden" value="" />
@@ -1891,10 +1891,13 @@
           renderizarMeusJogos(Array.isArray(dados.jogos) ? dados.jogos : []);
         }
 
-        function moedaLista(valor) {
+        function moedaLista(valor, moeda = "BRL") {
+          const codigo = /^[A-Z]{3}$/.test(String(moeda || "").toUpperCase())
+            ? String(moeda).toUpperCase()
+            : "BRL";
           return Number(valor || 0).toLocaleString("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: codigo,
           });
         }
 
@@ -1905,11 +1908,7 @@
               { cache: "no-store" },
             );
             const dados = await resposta.json();
-            const ofertas = Array.isArray(dados.precos)
-              ? dados.precos.filter((oferta) => Number(oferta.preco) > 0)
-              : [];
-            ofertas.sort((a, b) => Number(a.preco) - Number(b.preco));
-            return ofertas[0] || null;
+            return dados?.melhor_oferta || null;
           } catch (erro) {
             return null;
           }
@@ -1941,7 +1940,7 @@
                   : String(jogo.desconto_minimo);
               const link = oferta?.url || "#";
               const dadosOferta = oferta
-                ? `<div class="meu-jogo-oferta"><span class="minha-lista-preco-label">Menor preço</span><strong class="minha-lista-preco">${moedaLista(oferta.preco)}</strong><span class="minha-lista-loja">${escaparHTML(oferta.loja || "Loja")}</span>${Number(oferta.desconto || 0) > 0 ? `<span class="minha-lista-desconto">${Number(oferta.desconto)}% OFF</span>` : ""}${Number(oferta.preco_antigo || 0) > Number(oferta.preco || 0) ? `<span class="minha-lista-preco-anterior">antes ${moedaLista(oferta.preco_antigo)}</span>` : ""}</div><a class="btn-comprar" href="${escaparHTML(link)}" target="_blank" rel="noopener noreferrer">Ver oferta <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>`
+                ? `<div class="meu-jogo-oferta"><span class="minha-lista-preco-label">Menor preço</span><strong class="minha-lista-preco">${moedaLista(oferta.preco, oferta.moeda)}</strong><span class="minha-lista-loja">${escaparHTML(oferta.loja_nome || oferta.loja || "Loja")}</span>${Number(oferta.desconto || 0) > 0 ? `<span class="minha-lista-desconto">${Number(oferta.desconto)}% OFF</span>` : ""}${Number(oferta.preco_antigo || 0) > Number(oferta.preco || 0) ? `<span class="minha-lista-preco-anterior">antes ${moedaLista(oferta.preco_antigo, oferta.moeda)}</span>` : ""}</div><a class="btn-comprar" href="${escaparHTML(link)}" target="_blank" rel="noopener noreferrer">Ver oferta <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>`
                 : '<div class="meu-jogo-oferta"><span class="minha-lista-sem-oferta">Nenhuma oferta disponível no momento.</span></div>';
               return `<article class="meu-jogo-card minha-lista-card" data-jogo-id="${Number(jogo.jogo_id)}">
                 <img src="${escaparHTML(imagem)}" alt="Capa de ${escaparHTML(jogo.nome)}" onerror="this.onerror=null;this.src='../img/naoencontrada.png';">

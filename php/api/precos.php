@@ -1,43 +1,5 @@
 <?php
 
-/**
- * API DE PREÇOS - GAMESEARCH
- *
- * Fluxo oficial (QA-005):
- *
- * slug
- *   ↓
- * catálogo simulado (_tcc_catalogo.php)
- *   ↓
- * SteamFake / GOGFake / EpicFake
- *   ↓
- * normalização das ofertas
- *   ↓
- * menor preço primeiro
- *   ↓
- * JSON
- *
- * Estrutura real utilizada:
- *
- * catálogo simulado (via _tcc_catalogo.php):
- * - id
- * - slug
- * - nome
- * - descricao
- * - img
- * - categoria
- * - plataforma
- * - genero
- * - etaria
- * - ano
- * - status
- * - preco_atual
- * - preco_original
- * - desconto
- * - disponivel
- * - disponibilidade
- */
-
 declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
@@ -45,663 +7,507 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-/*
-|--------------------------------------------------------------------------
-| OPTIONS / CORS
-|--------------------------------------------------------------------------
-*/
-
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'OPTIONS') {
+    http_response_code(204);
     exit;
 }
 
-/*
-|--------------------------------------------------------------------------
-| CONFIGURAÇÃO
-|--------------------------------------------------------------------------
-*/
-
-try {
-    require_once __DIR__ . '/../config.php';
-    require_once __DIR__ . '/../../simulados/_tcc_catalogo.php';
-} catch (Throwable $e) {
-    responder([
-        'success' => false,
-        'sucesso' => false,
-        'error' => 'Erro ao carregar a configuração do banco de dados.',
-        'precos' => []
-    ], 500);
-}
-
-/*
-|--------------------------------------------------------------------------
-| CONEXÃO (apenas validação de ambiente)
-|--------------------------------------------------------------------------
-|
-| A conexão MySQL não é mais usada como fonte de ofertas.
-| Mantida apenas para validação de ambiente e compatibilidade.
-|
-*/
-
-$con = null;
-
-if (isset($conexao) && $conexao instanceof mysqli) {
-    $con = $conexao;
-} elseif (isset($conn) && $conn instanceof mysqli) {
-    $con = $conn;
-} elseif (isset($mysqli) && $mysqli instanceof mysqli) {
-    $con = $mysqli;
-}
-
-/*
-|--------------------------------------------------------------------------
-| FUNÇÃO DE RESPOSTA
-|--------------------------------------------------------------------------
-*/
-
-function responder(array $dados, int $status = 200): void
+function precosResponder(array $dados, int $status = 200): void
 {
     http_response_code($status);
-
-    echo json_encode(
-        $dados,
-        JSON_UNESCAPED_UNICODE |
-            JSON_UNESCAPED_SLASHES |
-            JSON_PRETTY_PRINT
-    );
-
+    echo json_encode($dados, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     exit;
 }
 
-/*
-|--------------------------------------------------------------------------
-| FUNÇÕES AUXILIARES
-|--------------------------------------------------------------------------
-*/
-
-function valorGet(string $chave): string
+function precosFalha(string $mensagem, int $status = 503): void
 {
-    if (!isset($_GET[$chave])) {
-        return '';
-    }
-
-    return trim((string) $_GET[$chave]);
+    precosResponder([
+        'success' => false,
+        'sucesso' => false,
+        'precos' => [],
+        'total' => 0,
+        'menor_preco' => null,
+        'menorPreco' => null,
+        'melhor_oferta' => null,
+        'precos_simulados' => false,
+        'origem' => 'api_real',
+        'error' => $mensagem
+    ], $status);
 }
 
-function normalizarPreco($valor): float
+function precosLog(string $mensagem, array $contexto = []): void
 {
-    if ($valor === null || $valor === '') {
-        return 0.0;
+    $diretorio = __DIR__ . '/../logs';
+    if (!is_dir($diretorio)) {
+        @mkdir($diretorio, 0755, true);
     }
-
-    return round((float) $valor, 2);
+    $linha = '[' . date('Y-m-d H:i:s') . '] [ITAD] ' . $mensagem;
+    if ($contexto !== []) {
+        $linha .= ' ' . json_encode($contexto, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+    @file_put_contents($diretorio . '/precos_itad_' . date('Y-m-d') . '.log', $linha . PHP_EOL, FILE_APPEND);
 }
 
-function normalizarDesconto($valor): float
+function precosParametro(string $nome): string
 {
-    if ($valor === null || $valor === '') {
-        return 0.0;
-    }
-
-    return round((float) $valor, 2);
+    return trim((string)($_GET[$nome] ?? ''));
 }
 
-/*
-|--------------------------------------------------------------------------
-| OBTER JOGO DO CATÁLOGO SIMULADO
-|--------------------------------------------------------------------------
-|
-| Substitui as antigas obterJogoPorSlug(), obterJogoPorId() e
-| obterJogoPorNome() que consultavam a tabela `jogos` do banco.
-|
-| Agora o jogo é localizado diretamente no catálogo simulado.
-|
-*/
-
-function obterJogoDoCatalogo(string $slug): ?array
+function precosColunasJogos(mysqli $conexao): array
 {
-    $lojas = [
-        'SteamFake' => '/tcc/simulados/steamfake/produto.php?slug=',
-        'GOGFake' => '/tcc/simulados/gogfake/detalhes.php?slug=',
-        'EpicFake' => '/tcc/simulados/epicfake/jogo.php?slug=',
-    ];
+    $colunas = [];
+    $resultado = $conexao->query('SHOW COLUMNS FROM `jogos`');
+    if ($resultado) {
+        while ($linha = $resultado->fetch_assoc()) {
+            $colunas[(string)$linha['Field']] = true;
+        }
+        $resultado->free();
+    }
+    return $colunas;
+}
 
-    foreach ($lojas as $loja => $caminho) {
-        $jogos = tcc_catalogo_buscar($loja, ['slug' => $slug, 'ofertas' => true]);
-        $jogo = $jogos[0] ?? null;
+function precosSelecionarColuna(array $colunas, string $preferida, string $alternativa, string $alias, string $fallback): string
+{
+    if (isset($colunas[$preferida])) {
+        return '`' . $preferida . '` AS `' . $alias . '`';
+    }
+    if ($alternativa !== '' && isset($colunas[$alternativa])) {
+        return '`' . $alternativa . '` AS `' . $alias . '`';
+    }
+    return $fallback . ' AS `' . $alias . '`';
+}
 
-        if ($jogo) {
-            return $jogo;
+function precosBuscarJogo(mysqli $conexao, string $id, string $slug, string $nome): ?array
+{
+    $colunas = precosColunasJogos($conexao);
+    foreach (['id', 'slug', 'nome'] as $obrigatoria) {
+        if (!isset($colunas[$obrigatoria])) {
+            precosLog('Coluna obrigatória ausente na tabela jogos', ['coluna' => $obrigatoria]);
+            return null;
         }
     }
 
-    return null;
-}
-
-/*
-|--------------------------------------------------------------------------
-| OBTER JOGO DO CATÁLOGO POR ID
-|--------------------------------------------------------------------------
-|
-| Compatibilidade com parâmetro ?id=.
-| Percorre todas as lojas simuladas e procura pelo ID.
-|
-*/
-
-function obterJogoDoCatalogoPorId(int $id): ?array
-{
-    $lojas = [
-        'SteamFake',
-        'GOGFake',
-        'EpicFake',
+    $campos = [
+        '`id`', '`slug`', '`nome`',
+        precosSelecionarColuna($colunas, 'descricao', '', 'descricao', "''"),
+        precosSelecionarColuna($colunas, 'img', 'imagem', 'img', "''"),
+        precosSelecionarColuna($colunas, 'categoria', '', 'categoria', "''"),
+        precosSelecionarColuna($colunas, 'plataforma', '', 'plataforma', "'PC'"),
+        precosSelecionarColuna($colunas, 'genero', '', 'genero', "''"),
+        precosSelecionarColuna($colunas, 'etaria', 'classificacao', 'etaria', "''"),
+        precosSelecionarColuna($colunas, 'ano', '', 'ano', "''"),
+        precosSelecionarColuna($colunas, 'status', '', 'status', "'ativo'")
     ];
 
-    foreach ($lojas as $loja) {
-        $jogos = tcc_catalogo_buscar($loja, ['ofertas' => true]);
+    if ($id !== '') {
+        if (!ctype_digit($id) || (int)$id < 1) {
+            return null;
+        }
+        $condicao = '`id` = ?';
+        $tipo = 'i';
+        $valor = (int)$id;
+    } elseif ($slug !== '') {
+        $condicao = '`slug` = ?';
+        $tipo = 's';
+        $valor = $slug;
+    } else {
+        $condicao = '`nome` = ?';
+        $tipo = 's';
+        $valor = $nome;
+    }
 
-        foreach ($jogos as $jogo) {
-            if ((int) ($jogo['id'] ?? 0) === $id) {
-                return $jogo;
+    if (isset($colunas['status'])) {
+        $condicao .= " AND `status` = 'ativo'";
+    } elseif (isset($colunas['disponivel'])) {
+        $condicao .= ' AND `disponivel` = 1';
+    }
+
+    $sql = 'SELECT ' . implode(', ', $campos) . ' FROM `jogos` WHERE ' . $condicao . ' LIMIT 1';
+    $stmt = $conexao->prepare($sql);
+    if (!$stmt) {
+        precosLog('Falha ao preparar consulta do jogo', ['erro' => $conexao->error]);
+        return null;
+    }
+    $stmt->bind_param($tipo, $valor);
+    if (!$stmt->execute()) {
+        precosLog('Falha ao executar consulta do jogo', ['erro' => $stmt->error]);
+        $stmt->close();
+        return null;
+    }
+    $resultado = $stmt->get_result();
+    $jogo = $resultado ? $resultado->fetch_assoc() : null;
+    $stmt->close();
+    return $jogo ?: null;
+}
+
+function precosItadRequisicao(string $caminho, string $apiKey, string $metodo = 'GET', array $query = [], ?array $corpo = null): array
+{
+    if (!function_exists('curl_init')) {
+        return ['ok' => false, 'status' => 0, 'dados' => null, 'erro' => 'Extensão cURL indisponível.'];
+    }
+
+    $url = 'https://api.isthereanydeal.com' . $caminho;
+    if ($query !== []) {
+        $url .= '?' . http_build_query($query, '', '&', PHP_QUERY_RFC3986);
+    }
+    $cabecalhos = ['Accept: application/json', 'key: ' . $apiKey];
+    if ($corpo !== null) {
+        $cabecalhos[] = 'Content-Type: application/json';
+    }
+
+    $curl = curl_init($url);
+    curl_setopt_array($curl, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => $cabecalhos,
+        CURLOPT_CUSTOMREQUEST => $metodo,
+        CURLOPT_CONNECTTIMEOUT => 5,
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_FOLLOWLOCATION => false,
+        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_SSL_VERIFYHOST => 2
+    ]);
+    if ($corpo !== null) {
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($corpo, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    $resposta = curl_exec($curl);
+    $erroCurl = curl_error($curl);
+    $status = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
+
+    if ($resposta === false) {
+        return ['ok' => false, 'status' => $status, 'dados' => null, 'erro' => $erroCurl ?: 'Falha de rede.'];
+    }
+    $dados = json_decode($resposta, true);
+    if ($status < 200 || $status >= 300 || !is_array($dados)) {
+        return ['ok' => false, 'status' => $status, 'dados' => null, 'erro' => 'Resposta HTTP ou JSON inválido.'];
+    }
+    return ['ok' => true, 'status' => $status, 'dados' => $dados, 'erro' => null];
+}
+
+function precosBuscarMapeamento(mysqli $conexao, int $jogoId): ?array
+{
+    $stmt = $conexao->prepare('SELECT external_id, external_slug, precos_atualizados_em FROM jogo_provedores WHERE jogo_id = ? AND provedor = \'isthereanydeal\' LIMIT 1');
+    if (!$stmt) {
+        precosLog('Falha ao preparar leitura do mapeamento', ['erro' => $conexao->error]);
+        return null;
+    }
+    $stmt->bind_param('i', $jogoId);
+    if (!$stmt->execute()) {
+        precosLog('Falha ao executar leitura do mapeamento', ['erro' => $stmt->error]);
+        $stmt->close();
+        return null;
+    }
+    $resultado = $stmt->get_result();
+    $mapa = $resultado ? $resultado->fetch_assoc() : null;
+    $stmt->close();
+    return $mapa ?: null;
+}
+
+function precosSalvarMapeamento(mysqli $conexao, int $jogoId, ?string $externalId, ?string $externalSlug, bool $precosConsultados): void
+{
+    $dataAtualizada = $precosConsultados ? date('Y-m-d H:i:s') : null;
+    $stmt = $conexao->prepare(
+        'INSERT INTO jogo_provedores (jogo_id, provedor, external_id, external_slug, precos_atualizados_em) VALUES (?, \'isthereanydeal\', ?, ?, ?) '
+        . 'ON DUPLICATE KEY UPDATE external_id = VALUES(external_id), external_slug = VALUES(external_slug), '
+        . 'precos_atualizados_em = COALESCE(VALUES(precos_atualizados_em), precos_atualizados_em)'
+    );
+    if (!$stmt) {
+        precosLog('Falha ao preparar gravação do mapeamento', ['erro' => $conexao->error]);
+        return;
+    }
+    $stmt->bind_param('isss', $jogoId, $externalId, $externalSlug, $dataAtualizada);
+    if (!$stmt->execute()) {
+        precosLog('Falha ao gravar mapeamento', ['erro' => $stmt->error]);
+    }
+    $stmt->close();
+}
+
+function precosNormalizarOfertas(array $respostaItad, int $jogoId): array
+{
+    $itens = $respostaItad['deals'] ?? [];
+    if (!is_array($itens)) {
+        return [];
+    }
+    $ofertas = [];
+    foreach ($itens as $deal) {
+        if (!is_array($deal)) {
+            continue;
+        }
+        $preco = $deal['price']['amount'] ?? null;
+        $moeda = strtoupper((string)($deal['price']['currency'] ?? ''));
+        $loja = trim((string)($deal['shop']['name'] ?? ''));
+        $url = trim((string)($deal['url'] ?? ''));
+        if (!is_numeric($preco) || !is_finite((float)$preco) || (float)$preco <= 0 || !preg_match('/^[A-Z]{3}$/', $moeda) || $loja === '') {
+            continue;
+        }
+        $partesUrl = parse_url($url);
+        if (!$partesUrl || !in_array(strtolower((string)($partesUrl['scheme'] ?? '')), ['https', 'http'], true) || empty($partesUrl['host'])) {
+            continue;
+        }
+
+        $precoAntigo = $deal['regular']['amount'] ?? null;
+        if (!is_numeric($precoAntigo) || (float)$precoAntigo < (float)$preco) {
+            $precoAntigo = null;
+        } else {
+            $precoAntigo = round((float)$precoAntigo, 2);
+        }
+        $desconto = isset($deal['cut']) && is_numeric($deal['cut'])
+            ? max(0, min(100, round((float)$deal['cut'], 2)))
+            : (($precoAntigo !== null && $precoAntigo > 0) ? round((1 - (float)$preco / $precoAntigo) * 100, 2) : 0.0);
+        $plataformas = [];
+        foreach (($deal['platforms'] ?? []) as $plataforma) {
+            if (is_array($plataforma) && !empty($plataforma['name'])) {
+                $plataformas[] = trim((string)$plataforma['name']);
             }
         }
-    }
-
-    return null;
-}
-
-/*
-|--------------------------------------------------------------------------
-| OBTER JOGO DO CATÁLOGO POR NOME
-|--------------------------------------------------------------------------
-|
-| Compatibilidade com parâmetro ?jogo=.
-| Percorre todas as lojas simuladas e procura pelo nome (case-insensitive).
-|
-*/
-
-function obterJogoDoCatalogoPorNome(string $nome): ?array
-{
-    $lojas = [
-        'SteamFake',
-        'GOGFake',
-        'EpicFake',
-    ];
-
-    $nomeNormalizado = mb_strtolower($nome, 'UTF-8');
-
-    foreach ($lojas as $loja) {
-        $jogos = tcc_catalogo_buscar($loja, ['ofertas' => true]);
-
-        foreach ($jogos as $jogo) {
-            $nomeJogo = mb_strtolower((string) ($jogo['nome'] ?? ''), 'UTF-8');
-
-            if ($nomeJogo === $nomeNormalizado) {
-                return $jogo;
+        $timestamp = date('Y-m-d H:i:s');
+        if (!empty($deal['timestamp'])) {
+            try {
+                $timestamp = (new DateTimeImmutable((string)$deal['timestamp']))->format('Y-m-d H:i:s');
+            } catch (Throwable $e) {
+                // Mantém a data local quando o provedor envia timestamp inválido.
             }
         }
-    }
-
-    return null;
-}
-
-/*
-|--------------------------------------------------------------------------
-| BUSCAR PREÇOS DO JOGO (CATÁLOGO SIMULADO)
-|--------------------------------------------------------------------------
-|
-| Usa exclusivamente o catálogo simulado via _tcc_catalogo.php.
-| Não consulta mais a tabela `precos` do banco.
-|
-*/
-
-function obterPrecosDoJogo(string $slug): array
-{
-    $precos = [];
-
-    $lojas = [
-        'SteamFake' => '/tcc/simulados/steamfake/produto.php?slug=',
-        'GOGFake' => '/tcc/simulados/gogfake/detalhes.php?slug=',
-        'EpicFake' => '/tcc/simulados/epicfake/jogo.php?slug=',
-    ];
-
-    foreach ($lojas as $loja => $caminho) {
-        $jogos = tcc_catalogo_buscar($loja, ['slug' => $slug, 'ofertas' => true]);
-        $jogo = $jogos[0] ?? null;
-        if (!$jogo) continue;
-
-        $precoAtual = normalizarPreco($jogo['preco_atual'] ?? null);
-        $precoOriginal = normalizarPreco($jogo['preco_original'] ?? $precoAtual);
-        $disponivel = ($jogo['disponivel'] ?? true) !== false
-            && ($jogo['disponibilidade'] ?? 'disponivel') === 'disponivel';
-        if (!$disponivel || $precoAtual <= 0 || !is_finite($precoAtual)) continue;
-
-        $precos[] = [
-            'id' => (int)$jogo['id'],
-            'jogo_id' => (int)$jogo['id'],
-            'slug' => (string)$jogo['slug'],
+        $ofertas[] = [
+            'jogo_id' => $jogoId,
+            'loja_id' => (int)($deal['shop']['id'] ?? 0),
             'loja' => $loja,
-            'plataforma' => (string)($jogo['plataforma'] ?: 'PC'),
-            'preco' => $precoAtual,
-            'preco_antigo' => $precoOriginal,
-            'moeda' => 'BRL',
-            'url' => $caminho . rawurlencode($jogo['slug']),
+            'loja_nome' => $loja,
+            'plataforma' => $plataformas ? implode(', ', array_unique($plataformas)) : 'PC',
+            'preco' => round((float)$preco, 2),
+            'preco_antigo' => $precoAntigo,
+            'desconto' => $desconto,
+            'moeda' => $moeda,
             'disponibilidade' => 'disponivel',
             'disponivel' => true,
-            'desconto' => (int)$jogo['desconto'],
-            'data_atualizacao' => date('Y-m-d H:i:s')
+            'url' => $url,
+            'url_oferta' => $url,
+            'data_atualizacao' => $timestamp,
+            'cache_atualizado_em' => date('Y-m-d H:i:s'),
+            'origem' => 'api_real',
+            'external_id' => (string)($deal['id'] ?? '')
         ];
     }
+    return $ofertas;
+}
 
-    usort($precos, static function (array $a, array $b): int {
-        return $a['preco'] <=> $b['preco'] ?: strcmp($a['loja'], $b['loja']);
+function precosCarregarCache(mysqli $conexao, int $jogoId, string $limite): array
+{
+    $stmt = $conexao->prepare(
+        'SELECT id, jogo_id, loja_id, loja, plataforma, preco, preco_antigo, desconto, moeda, disponibilidade, disponivel, url, url_oferta, data_atualizacao, cache_atualizado_em, external_id '
+        . 'FROM precos_cache_itad WHERE jogo_id = ? AND cache_atualizado_em >= ? AND disponivel = 1 AND preco > 0 '
+        . 'ORDER BY CASE WHEN moeda = \'BRL\' THEN 0 ELSE 1 END, moeda ASC, preco ASC, loja ASC'
+    );
+    if (!$stmt) {
+        precosLog('Falha ao preparar leitura do cache', ['erro' => $conexao->error]);
+        return [];
+    }
+    $stmt->bind_param('is', $jogoId, $limite);
+    if (!$stmt->execute()) {
+        precosLog('Falha ao executar leitura do cache', ['erro' => $stmt->error]);
+        $stmt->close();
+        return [];
+    }
+    $resultado = $stmt->get_result();
+    $ofertas = [];
+    if ($resultado) {
+        while ($linha = $resultado->fetch_assoc()) {
+            $linha['preco'] = (float)$linha['preco'];
+            $linha['preco_antigo'] = $linha['preco_antigo'] !== null ? (float)$linha['preco_antigo'] : null;
+            $linha['desconto'] = (float)$linha['desconto'];
+            $linha['disponivel'] = (bool)$linha['disponivel'];
+            $linha['origem'] = 'api_real';
+            $ofertas[] = $linha;
+        }
+    }
+    $stmt->close();
+    return $ofertas;
+}
+
+function precosSalvarCache(mysqli $conexao, int $jogoId, array $ofertas): bool
+{
+    if (!$conexao->begin_transaction()) {
+        precosLog('Não foi possível iniciar transação de cache', ['erro' => $conexao->error]);
+        return false;
+    }
+    $apagar = $conexao->prepare('DELETE FROM precos_cache_itad WHERE jogo_id = ?');
+    if (!$apagar) {
+        $conexao->rollback();
+        precosLog('Falha ao preparar substituição de cache', ['erro' => $conexao->error]);
+        return false;
+    }
+    $apagar->bind_param('i', $jogoId);
+    if (!$apagar->execute()) {
+        precosLog('Falha ao apagar cache anterior', ['erro' => $apagar->error]);
+        $apagar->close();
+        $conexao->rollback();
+        return false;
+    }
+    $apagar->close();
+
+    $stmt = $conexao->prepare(
+        'INSERT INTO precos_cache_itad (jogo_id, loja_id, loja, plataforma, preco, preco_antigo, desconto, moeda, disponibilidade, disponivel, url, url_oferta, data_atualizacao, cache_atualizado_em, external_id) '
+        . 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?)'
+    );
+    if (!$stmt) {
+        $conexao->rollback();
+        precosLog('Falha ao preparar gravação de ofertas', ['erro' => $conexao->error]);
+        return false;
+    }
+    foreach ($ofertas as $oferta) {
+        $lojaId = (int)$oferta['loja_id'];
+        $loja = (string)$oferta['loja'];
+        $plataforma = (string)$oferta['plataforma'];
+        $preco = (float)$oferta['preco'];
+        $precoAntigo = $oferta['preco_antigo'] !== null ? (float)$oferta['preco_antigo'] : null;
+        $desconto = (float)$oferta['desconto'];
+        $moeda = (string)$oferta['moeda'];
+        $disponibilidade = (string)$oferta['disponibilidade'];
+        $url = (string)$oferta['url'];
+        $urlOferta = (string)$oferta['url_oferta'];
+        $dataAtualizacao = (string)$oferta['data_atualizacao'];
+        $cacheAtualizadoEm = (string)$oferta['cache_atualizado_em'];
+        $externalId = (string)$oferta['external_id'];
+        $stmt->bind_param('iissdsdsssssss', $jogoId, $lojaId, $loja, $plataforma, $preco, $precoAntigo, $desconto, $moeda, $disponibilidade, $url, $urlOferta, $dataAtualizacao, $cacheAtualizadoEm, $externalId);
+        if (!$stmt->execute()) {
+            precosLog('Falha ao salvar oferta em cache', ['erro' => $stmt->error, 'loja' => $loja]);
+            $stmt->close();
+            $conexao->rollback();
+            return false;
+        }
+    }
+    $stmt->close();
+    if (!$conexao->commit()) {
+        $conexao->rollback();
+        precosLog('Falha ao confirmar atualização do cache', ['erro' => $conexao->error]);
+        return false;
+    }
+    return true;
+}
+
+function precosMontarResposta(array $jogo, array $ofertas, bool $cache, ?string $atualizadoEm = null): array
+{
+    $ofertas = array_values(array_filter($ofertas, static function (array $oferta): bool {
+        return !empty($oferta['disponivel']) && isset($oferta['preco']) && is_numeric($oferta['preco']) && (float)$oferta['preco'] > 0;
+    }));
+    usort($ofertas, static function (array $a, array $b): int {
+        $aBrl = ($a['moeda'] ?? '') === 'BRL' ? 0 : 1;
+        $bBrl = ($b['moeda'] ?? '') === 'BRL' ? 0 : 1;
+        if ($aBrl !== $bBrl) return $aBrl <=> $bBrl;
+        if (($a['moeda'] ?? '') !== ($b['moeda'] ?? '')) return strcmp((string)$a['moeda'], (string)$b['moeda']);
+        return ((float)$a['preco'] <=> (float)$b['preco']) ?: strcmp((string)($a['loja'] ?? ''), (string)($b['loja'] ?? ''));
     });
 
-    return $precos;
-}
-
-/*
-|--------------------------------------------------------------------------
-| MENOR PREÇO
-|--------------------------------------------------------------------------
-*/
-
-function obterMenorPreco(array $precos): ?float
-{
-    if (empty($precos)) {
-        return null;
-    }
-
-    $menor = null;
-
-    foreach ($precos as $item) {
-
-        if (
-            !isset($item['preco']) ||
-            !is_numeric($item['preco'])
-        ) {
-            continue;
-        }
-
-        $preco = (float) $item['preco'];
-
-        if ($preco <= 0) {
-            continue;
-        }
-
-        if ($menor === null || $preco < $menor) {
-            $menor = $preco;
-        }
-    }
-
-    return $menor !== null
-        ? round($menor, 2)
-        : null;
-}
-
-/*
-|--------------------------------------------------------------------------
-| LOJA DO MENOR PREÇO
-|--------------------------------------------------------------------------
-*/
-
-function obterOfertaMaisBarata(array $precos): ?array
-{
-    if (empty($precos)) {
-        return null;
-    }
-
-    $menor = null;
-
-    foreach ($precos as $item) {
-
-        if (
-            !isset($item['preco']) ||
-            !is_numeric($item['preco'])
-        ) {
-            continue;
-        }
-
-        $preco = (float) $item['preco'];
-
-        if ($preco <= 0) {
-            continue;
-        }
-
-        if (
-            $menor === null ||
-            $preco < (float) $menor['preco']
-        ) {
-            $menor = $item;
-        }
-    }
-
-    return $menor;
-}
-
-/*
-|--------------------------------------------------------------------------
-| ESTATÍSTICAS
-|--------------------------------------------------------------------------
-*/
-
-function obterEstatisticas(array $precos): array
-{
-    if (empty($precos)) {
-        return [
-            'quantidade_ofertas' => 0,
-            'quantidade_lojas' => 0,
-            'menor_preco' => null,
-            'maior_preco' => null,
-            'media_preco' => null
-        ];
-    }
-
-    $valores = [];
-    $lojas = [];
-
-    foreach ($precos as $item) {
-
-        if (
-            isset($item['preco']) &&
-            is_numeric($item['preco'])
-        ) {
-            $preco = (float) $item['preco'];
-
-            if ($preco > 0) {
-                $valores[] = $preco;
-            }
-        }
-
-        if (!empty($item['loja'])) {
-            $lojas[] = $item['loja'];
-        }
-    }
-
-    $lojas = array_values(array_unique($lojas));
-
-    if (empty($valores)) {
-        return [
-            'quantidade_ofertas' => count($precos),
-            'quantidade_lojas' => count($lojas),
-            'menor_preco' => null,
-            'maior_preco' => null,
-            'media_preco' => null
-        ];
-    }
-
-    return [
-        'quantidade_ofertas' => count($precos),
-        'quantidade_lojas' => count($lojas),
-        'menor_preco' => round(min($valores), 2),
-        'maior_preco' => round(max($valores), 2),
-        'media_preco' => round(
-            array_sum($valores) / count($valores),
-            2
-        )
+    $moedas = array_values(array_unique(array_map(static fn(array $oferta): string => (string)$oferta['moeda'], $ofertas)));
+    $brl = array_values(array_filter($ofertas, static fn(array $oferta): bool => ($oferta['moeda'] ?? '') === 'BRL'));
+    $grupoComparavel = $brl !== [] ? $brl : (count($moedas) === 1 ? $ofertas : []);
+    $melhor = $grupoComparavel[0] ?? null;
+    $jogoResposta = [
+        'id' => (int)$jogo['id'],
+        'slug' => (string)$jogo['slug'],
+        'nome' => (string)$jogo['nome'],
+        'descricao' => (string)($jogo['descricao'] ?? ''),
+        'img' => (string)($jogo['img'] ?? ''),
+        'categoria' => (string)($jogo['categoria'] ?? ''),
+        'plataforma' => (string)($jogo['plataforma'] ?? 'PC'),
+        'genero' => (string)($jogo['genero'] ?? ''),
+        'etaria' => (string)($jogo['etaria'] ?? ''),
+        'ano' => (string)($jogo['ano'] ?? ''),
+        'status' => (string)($jogo['status'] ?? 'ativo')
     ];
-}
-
-/*
-|--------------------------------------------------------------------------
-| RESPOSTA PRINCIPAL
-|--------------------------------------------------------------------------
-*/
-
-function montarResposta(array $jogo, array $precos): array
-{
-    $menorPreco = obterMenorPreco($precos);
-    $melhorOferta = obterOfertaMaisBarata($precos);
-    $estatisticas = obterEstatisticas($precos);
-
     return [
         'success' => true,
         'sucesso' => true,
-
-        'jogo' => [
-            'id' => (int) ($jogo['id'] ?? 0),
-            'slug' => (string) ($jogo['slug'] ?? ''),
-            'nome' => (string) ($jogo['nome'] ?? ''),
-            'descricao' => (string) ($jogo['descricao'] ?? ''),
-            'img' => (string) ($jogo['img'] ?? ''),
-            'categoria' => (string) ($jogo['categoria'] ?? ''),
-            'plataforma' => (string) ($jogo['plataforma'] ?? 'PC'),
-            'genero' => (string) ($jogo['genero'] ?? ''),
-            'etaria' => (string) ($jogo['etaria'] ?? ''),
-            'ano' => (string) ($jogo['ano'] ?? ''),
-            'status' => (string) ($jogo['status'] ?? 'ativo')
-        ],
-
-        /*
-         * Menor preço geral.
-         */
-        'menor_preco' => $menorPreco,
-
-        /*
-         * Compatibilidade com possíveis códigos
-         * do frontend que usam "menorPreco".
-         */
-        'menorPreco' => $menorPreco,
-
-        /*
-         * Loja que possui o menor preço.
-         */
-        'melhor_oferta' => $melhorOferta,
-
-        /*
-         * Lista completa ordenada pelo menor preço.
-         */
-        'precos' => $precos,
-
-        /*
-         * Quantidade de ofertas.
-         */
-        'total' => count($precos),
-        'precos_simulados' => true,
-
-        /*
-         * Estatísticas.
-         */
-        'estatisticas' => $estatisticas
+        'jogo' => $jogoResposta,
+        'precos' => $ofertas,
+        'total' => count($ofertas),
+        'menor_preco' => $melhor['preco'] ?? null,
+        'menorPreco' => $melhor['preco'] ?? null,
+        'moeda' => $melhor['moeda'] ?? null,
+        'melhor_oferta' => $melhor,
+        'precos_simulados' => false,
+        'origem' => 'api_real',
+        'cache' => $cache,
+        'atualizado_em' => $atualizadoEm ?: ($ofertas[0]['data_atualizacao'] ?? null),
+        'mensagem' => $ofertas === [] ? 'Nenhuma oferta disponível no momento.' : null
     ];
 }
 
-/*
-|--------------------------------------------------------------------------
-| ENTRADA
-|--------------------------------------------------------------------------
-*/
-
-$acao = strtolower(valorGet('acao')) ?: 'buscar';
-
-$id = valorGet('id');
-$slug = valorGet('slug');
-$nome = valorGet('jogo');
-
-/*
-|--------------------------------------------------------------------------
-| AÇÃO PADRÃO
-|--------------------------------------------------------------------------
-|
-| Se não informar "acao", assumimos buscar.
-|
-*/
-
-if ($acao === '') {
-    $acao = 'buscar';
+try {
+    require_once __DIR__ . '/../config.php';
+} catch (Throwable $erro) {
+    precosLog('Falha ao carregar configuração do banco', ['erro' => $erro->getMessage()]);
+    precosFalha('Serviço de preços temporariamente indisponível.');
 }
 
-/*
-|--------------------------------------------------------------------------
-| VALIDAR AÇÃO
-|--------------------------------------------------------------------------
-*/
-
-$acoesPermitidas = [
-    'buscar',
-    'listar',
-    'precos'
-];
-
-if (!in_array($acao, $acoesPermitidas, true)) {
-
-    responder([
-        'success' => false,
-        'sucesso' => false,
-        'error' => 'Ação inválida.',
-        'acao' => $acao,
-        'acoes_permitidas' => $acoesPermitidas,
-        'precos' => []
-    ], 400);
+if (!isset($conexao) || !($conexao instanceof mysqli) || $conexao->connect_errno) {
+    precosFalha('Serviço de preços temporariamente indisponível.');
 }
 
-/*
-|--------------------------------------------------------------------------
-| VALIDAR PARÂMETRO
-|--------------------------------------------------------------------------
-|
-| Prioridade:
-|
-| 1. slug
-| 2. id
-| 3. jogo
-|
-*/
-
-if ($slug === '' && $id === '' && $nome === '') {
-
-    responder([
-        'success' => false,
-        'sucesso' => false,
-        'error' => 'Informe o slug do jogo.',
-        'exemplo' => 'precos.php?acao=buscar&slug=elden-ring',
-        'precos' => []
-    ], 400);
+$id = precosParametro('id');
+$slug = precosParametro('slug');
+$nome = precosParametro('jogo');
+if ($id === '' && $slug === '' && $nome === '') {
+    precosFalha('Informe o slug, id ou nome do jogo.', 400);
 }
-
-/*
-|--------------------------------------------------------------------------
-| LOCALIZAR JOGO NO CATÁLOGO SIMULADO
-|--------------------------------------------------------------------------
-*/
-
-$jogo = null;
-
-/*
- * SLUG = fluxo oficial
- */
-if ($slug !== '') {
-
-    $jogo = obterJogoDoCatalogo($slug);
-}
-
-/*
- * ID = compatibilidade
- */ elseif ($id !== '') {
-
-    if (!ctype_digit($id)) {
-
-        responder([
-            'success' => false,
-            'sucesso' => false,
-            'error' => 'ID do jogo inválido.',
-            'precos' => []
-        ], 400);
-    }
-
-    $jogo = obterJogoDoCatalogoPorId((int) $id);
-}
-
-/*
- * NOME = compatibilidade
- */ elseif ($nome !== '') {
-
-    $jogo = obterJogoDoCatalogoPorNome($nome);
-}
-
-/*
-|--------------------------------------------------------------------------
-| JOGO NÃO ENCONTRADO
-|--------------------------------------------------------------------------
-*/
-
+$jogo = precosBuscarJogo($conexao, $id, $slug, $nome);
 if (!$jogo) {
-
-    responder([
-        'success' => false,
-        'sucesso' => false,
-        'error' => 'Jogo não encontrado.',
-        'slug_consultado' => $slug !== '' ? $slug : null,
-        'id_consultado' => $id !== '' ? $id : null,
-        'nome_consultado' => $nome !== '' ? $nome : null,
-        'precos' => []
-    ], 404);
+    precosFalha('Jogo não encontrado.', 404);
 }
 
-/*
-|--------------------------------------------------------------------------
-| VERIFICAR STATUS
-|--------------------------------------------------------------------------
-|
-| No catálogo simulado, o status é derivado de "disponivel".
-|
-*/
+$ttl = getenv('ITAD_CACHE_TTL');
+$ttl = ($ttl !== false && ctype_digit((string)$ttl)) ? max(60, min(86400, (int)$ttl)) : 3600;
+$forcar = filter_var($_GET['forcar'] ?? false, FILTER_VALIDATE_BOOLEAN);
+$agora = date('Y-m-d H:i:s');
+$limite = date('Y-m-d H:i:s', time() - $ttl);
+$jogoId = (int)$jogo['id'];
+$mapa = precosBuscarMapeamento($conexao, $jogoId);
+$externalId = $mapa['external_id'] ?? null;
 
-if (
-    isset($jogo['disponivel']) &&
-    $jogo['disponivel'] === false
-) {
-
-    responder([
-        'success' => false,
-        'sucesso' => false,
-        'error' => 'Este jogo está inativo.',
-        'jogo' => [
-            'id' => (int) ($jogo['id'] ?? 0),
-            'slug' => (string) ($jogo['slug'] ?? ''),
-            'nome' => (string) ($jogo['nome'] ?? '')
-        ],
-        'precos' => []
-    ], 404);
+if (!$forcar && $mapa && !empty($mapa['precos_atualizados_em']) && $mapa['precos_atualizados_em'] >= $limite) {
+    $cache = precosCarregarCache($conexao, $jogoId, $limite);
+    precosResponder(precosMontarResposta($jogo, $cache, true, (string)$mapa['precos_atualizados_em']));
 }
 
-/*
-|--------------------------------------------------------------------------
-| BUSCAR PREÇOS
-|--------------------------------------------------------------------------
-*/
-
-$precos = obterPrecosDoJogo(
-    (string) ($jogo['slug'] ?? $slug)
-);
-
-/*
-|--------------------------------------------------------------------------
-| RETORNAR RESULTADO
-|--------------------------------------------------------------------------
-*/
-
-$resposta = montarResposta(
-    $jogo,
-    $precos
-);
-
-/*
-|--------------------------------------------------------------------------
-| MENSAGEM QUANDO NÃO HÁ PREÇOS
-|--------------------------------------------------------------------------
-*/
-
-if (empty($precos)) {
-
-    $resposta['mensagem'] =
-        'Jogo encontrado, mas não existem ofertas disponíveis cadastradas para este jogo.';
+$apiKey = trim((string)getenv('ITAD_API_KEY'));
+if ($apiKey === '') {
+    precosLog('ITAD_API_KEY não configurada', ['jogo' => $jogo['slug']]);
+    precosFalha('Serviço de preços temporariamente indisponível. Configure ITAD_API_KEY no ambiente do PHP.');
 }
 
-/*
-|--------------------------------------------------------------------------
-| RESPOSTA FINAL
-|--------------------------------------------------------------------------
-*/
+if (!$externalId) {
+    $lookup = precosItadRequisicao('/games/lookup/v1', $apiKey, 'GET', ['title' => (string)$jogo['nome']]);
+    if (!$lookup['ok']) {
+        precosLog('Falha na busca/matching do jogo', ['jogo' => $jogo['slug'], 'http_status' => $lookup['status'], 'erro' => $lookup['erro']]);
+        precosFalha('Serviço de preços temporariamente indisponível.');
+    }
+    $jogoExterno = $lookup['dados']['game'] ?? null;
+    if (empty($lookup['dados']['found']) || !is_array($jogoExterno) || empty($jogoExterno['id'])) {
+        precosSalvarMapeamento($conexao, $jogoId, null, null, true);
+        precosResponder(precosMontarResposta($jogo, [], false, $agora));
+    }
+    $externalId = (string)$jogoExterno['id'];
+    precosSalvarMapeamento($conexao, $jogoId, $externalId, isset($jogoExterno['slug']) ? (string)$jogoExterno['slug'] : null, false);
+    $mapa = ['external_id' => $externalId, 'external_slug' => $jogoExterno['slug'] ?? null];
+}
 
-responder($resposta, 200);
+$precosResposta = precosItadRequisicao('/games/prices/v3', $apiKey, 'POST', ['country' => 'BR'], [$externalId]);
+if (!$precosResposta['ok']) {
+    precosLog('Falha na consulta de preços', ['jogo' => $jogo['slug'], 'external_id' => $externalId, 'http_status' => $precosResposta['status'], 'erro' => $precosResposta['erro']]);
+    precosFalha('Serviço de preços temporariamente indisponível.');
+}
+
+$registroJogo = null;
+foreach ($precosResposta['dados'] as $item) {
+    if (is_array($item) && (string)($item['id'] ?? '') === $externalId) {
+        $registroJogo = $item;
+        break;
+    }
+}
+$ofertas = precosNormalizarOfertas($registroJogo ?? [], $jogoId);
+if (!precosSalvarCache($conexao, $jogoId, $ofertas)) {
+    precosFalha('Serviço de preços temporariamente indisponível.');
+}
+precosSalvarMapeamento($conexao, $jogoId, $externalId, isset($mapa['external_slug']) ? (string)$mapa['external_slug'] : null, true);
+precosResponder(precosMontarResposta($jogo, $ofertas, false, $agora));

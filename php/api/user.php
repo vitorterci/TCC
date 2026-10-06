@@ -150,6 +150,11 @@ function obterPreferencias($conexao, $usuarioId) {
         $preferencias['plataformas_interesse'] = normalizarInteresses($preferencias['plataformas_interesse']);
         $preferencias['generos_interesse'] = normalizarInteresses($preferencias['generos_interesse']);
         $preferencias['lojas_interesse'] = normalizarInteresses($preferencias['lojas_interesse']);
+        $lojasLegadas = ['SteamFake' => 'Steam', 'GOGFake' => 'GOG', 'EpicFake' => 'Epic Games'];
+        $preferencias['lojas_interesse'] = array_values(array_unique(array_map(
+            static fn(string $loja): string => $lojasLegadas[$loja] ?? $loja,
+            $preferencias['lojas_interesse']
+        )));
     }
     return $preferencias;
 }
@@ -229,9 +234,9 @@ function obterRecomendacoes($conexao, $usuarioId) {
     $preferencias = obterPreferencias($conexao, $usuarioId);
     $resultado = $conexao->query("SELECT j.id, j.slug, j.nome, j.img, j.plataforma, j.genero,
         uj.jogo_id AS possui_jogo,
-        (SELECT p.preco FROM precos p WHERE p.jogo_id = j.id AND p.disponibilidade = 'disponivel' AND p.preco > 0 ORDER BY p.preco ASC LIMIT 1) AS preco,
-        (SELECT p.desconto FROM precos p WHERE p.jogo_id = j.id AND p.disponibilidade = 'disponivel' AND p.preco > 0 ORDER BY p.preco ASC LIMIT 1) AS desconto,
-        (SELECT p.loja FROM precos p WHERE p.jogo_id = j.id AND p.disponibilidade = 'disponivel' AND p.preco > 0 ORDER BY p.preco ASC LIMIT 1) AS loja
+        (SELECT p.preco FROM precos_cache_itad p WHERE p.jogo_id = j.id AND p.disponivel = 1 AND p.moeda = 'BRL' AND p.preco > 0 AND p.cache_atualizado_em >= DATE_SUB(NOW(), INTERVAL 3600 SECOND) ORDER BY p.preco ASC LIMIT 1) AS preco,
+        (SELECT p.desconto FROM precos_cache_itad p WHERE p.jogo_id = j.id AND p.disponivel = 1 AND p.moeda = 'BRL' AND p.preco > 0 AND p.cache_atualizado_em >= DATE_SUB(NOW(), INTERVAL 3600 SECOND) ORDER BY p.preco ASC LIMIT 1) AS desconto,
+        (SELECT p.loja FROM precos_cache_itad p WHERE p.jogo_id = j.id AND p.disponivel = 1 AND p.moeda = 'BRL' AND p.preco > 0 AND p.cache_atualizado_em >= DATE_SUB(NOW(), INTERVAL 3600 SECOND) ORDER BY p.preco ASC LIMIT 1) AS loja
         FROM jogos j LEFT JOIN usuario_jogos uj ON uj.jogo_id = j.id AND uj.usuario_id = " . (int)$usuarioId . " WHERE j.status = 'ativo' ORDER BY j.nome ASC");
     if (!$resultado) responder(['success' => false, 'message' => 'Não foi possível gerar recomendações.'], 500);
     $listaIds = [];

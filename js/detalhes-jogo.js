@@ -176,15 +176,18 @@
     if (!lista) return;
 
     const ofertas = window.obterOfertasComparadas(dados);
-    const menorPreco = ofertas.length ? ofertas[0].preco : null;
+    const melhorOferta = dados.melhor_oferta && typeof dados.melhor_oferta === 'object'
+        ? dados.melhor_oferta
+        : null;
+    const menorPreco = melhorOferta ? Number(melhorOferta.preco) : null;
 
     /* Atualiza o registro do histórico com o menor preço já calculado.
        Reaproveita o mesmo fluxo de ofertas — nenhuma consulta nova.
        O dedupe do Historico.adicionar() evita duplicar o item. */
     if (jogoAtual && window.Historico && typeof window.Historico.adicionar === 'function') {
-        const precoFormatado = menorPreco != null && typeof window.formatarMoeda === 'function'
-            ? window.formatarMoeda(menorPreco)
-            : 'Grátis';
+        const precoFormatado = menorPreco != null && Number.isFinite(menorPreco) && typeof window.formatarMoeda === 'function'
+            ? window.formatarMoeda(menorPreco, melhorOferta.moeda)
+            : 'Preço indisponível';
         window.Historico.adicionar({
             id: jogoAtual.id,
             slug: jogoAtual.slug,
@@ -195,9 +198,9 @@
     }
 
         if (contador) contador.textContent = `${ofertas.length} ${ofertas.length === 1 ? 'oferta' : 'ofertas'}`;
-        if (atualizado) atualizado.textContent = dados.precos_simulados
-            ? 'Preços simulados das lojas parceiras'
-            : 'Última atualização: dados locais';
+        if (atualizado) atualizado.textContent = dados.atualizado_em
+            ? `Ofertas reais atualizadas em ${dados.atualizado_em}${dados.cache ? ' (cache)' : ''}`
+            : 'Ofertas fornecidas pela IsThereAnyDeal';
 
         if (!ofertas.length) {
             lista.innerHTML = `<div class="loading"><p>${escapeHtml(dados.mensagem || 'Nenhuma oferta encontrada para este jogo.')}</p></div>`;
@@ -205,32 +208,36 @@
         }
 
         lista.innerHTML = ofertas.map((oferta, indice) => {
-            const melhor = menorPreco !== null && indice === 0 && oferta.preco === menorPreco;
+            const melhor = melhorOferta !== null
+                && ((melhorOferta.id != null && String(oferta.id) === String(melhorOferta.id))
+                    || (melhorOferta.id == null && indice === 0));
             const precoAtual = oferta.preco;
             const precoOriginal = oferta.precoOriginal;
             const desconto = oferta.desconto;
             const icone = escapeHtml(oferta.icone || 'fas fa-store');
             const cor = escapeHtml(oferta.cor || '#4ade80');
-            const rotasSimulados = {
-                SteamFake: '/tcc/simulados/steamfake/produto.php?slug=',
-                GOGFake: '/tcc/simulados/gogfake/detalhes.php?slug=',
-                EpicFake: '/tcc/simulados/epicfake/jogo.php?slug='
-            };
-            const slugOferta = oferta.slug || dados.jogo?.slug || '';
-            const urlSimulado = rotasSimulados[oferta.loja];
-            const url = escapeHtml(urlSimulado && slugOferta
-                ? `${urlSimulado}${encodeURIComponent(slugOferta)}`
-                : (oferta.url_jogo || oferta.url || '#'));
+            const urlOriginal = String(oferta.url_oferta || oferta.url || '').trim();
+            let urlValida = false;
+            try {
+                const urlAnalisada = new URL(urlOriginal);
+                urlValida = ['https:', 'http:'].includes(urlAnalisada.protocol);
+            } catch (erro) {
+                urlValida = false;
+            }
+            const url = urlValida ? escapeHtml(urlOriginal) : '';
+            const acaoOferta = url
+                ? `<a class="btn-comprar" href="${url}" target="_blank" rel="noopener noreferrer">Comprar <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>`
+                : '<span class="btn-comprar" aria-disabled="true">Link indisponível</span>';
             return `<article class="oferta-item${melhor ? ' melhor-oferta' : ''}">
                 <div class="oferta-plataforma">
                     <span class="plataforma-icone" style="background:${cor}"><i class="${icone}" aria-hidden="true"></i></span>
-                    <div><strong class="plataforma-nome">${escapeHtml(oferta.loja || 'Loja')}</strong>${melhor ? '<span class="melhor-tag">Melhor preço</span>' : ''}</div>
+                    <div><strong class="plataforma-nome">${escapeHtml(oferta.loja_nome || oferta.loja || 'Loja')}</strong>${melhor ? '<span class="melhor-tag">Melhor preço</span>' : ''}</div>
                 </div>
-                <div class="oferta-preco-antigo">${precoOriginal > precoAtual ? window.formatarMoeda(precoOriginal) : '—'}</div>
-                <div class="oferta-preco-atual">${window.formatarMoeda(precoAtual)}</div>
+                <div class="oferta-preco-antigo">${precoOriginal !== null && precoOriginal > precoAtual ? window.formatarMoeda(precoOriginal, oferta.moeda) : '—'}</div>
+                <div class="oferta-preco-atual">${window.formatarMoeda(precoAtual, oferta.moeda)}</div>
                 <div class="oferta-desconto">${desconto > 0 ? `<span class="desconto-tag">-${desconto}%</span>` : '—'}</div>
-                <div class="oferta-detalhes"><span>${escapeHtml(oferta.plataforma || 'PC')} <b aria-hidden="true">•</b> ${oferta.disponivel ? 'Disponível' : 'Indisponível'}</span></div>
-                <div class="oferta-acoes"><a class="btn-comprar" href="${url}" target="_blank" rel="noopener noreferrer">Ver oferta <i class="fas fa-external-link-alt" aria-hidden="true"></i></a></div>
+                <div class="oferta-detalhes"><span>${escapeHtml(oferta.plataforma || 'PC')} <b aria-hidden="true">•</b> ${oferta.disponivel ? 'Disponível' : 'Indisponível'} <b aria-hidden="true">•</b> ${escapeHtml(oferta.data_atualizacao || '')}</span></div>
+                <div class="oferta-acoes">${acaoOferta}</div>
             </article>`;
         }).join('');
     };

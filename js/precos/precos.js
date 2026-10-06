@@ -13,32 +13,49 @@
         return Number.isFinite(numero) && numero >= 0 ? numero : null;
     }
 
-    function formatarPrecoComparado(valor) {
-        const preco = normalizarPreco(valor);
-        return preco === null
-            ? 'Preço indisponível'
-            : `R$ ${preco.toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            })}`;
+    function normalizarMoeda(moeda) {
+        const codigo = String(moeda || 'BRL').trim().toUpperCase();
+        return /^[A-Z]{3}$/.test(codigo) ? codigo : 'BRL';
     }
 
-    function formatarMoeda(valor) {
-        return Number(valor || 0).toLocaleString('pt-BR', {
-            style: 'currency', currency: 'BRL'
-        });
+    function formatarMoeda(valor, moeda = 'BRL') {
+        const preco = normalizarPreco(valor);
+        if (preco === null) return 'Preço indisponível';
+        const codigo = normalizarMoeda(moeda);
+        try {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: codigo
+            }).format(preco);
+        } catch (erro) {
+            return `${preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${codigo}`;
+        }
+    }
+
+    function formatarPrecoComparado(valor, moeda = 'BRL') {
+        const preco = normalizarPreco(valor);
+        return preco === null ? 'Preço indisponível' : formatarMoeda(preco, moeda);
     }
 
     function obterSlug(jogo) {
         return String(jogo?.slug || '').trim();
     }
 
-    function obterMenorPreco(dados) {
-        const menorPreco = dados?.menor_preco ?? dados?.menorPreco;
-        if (menorPreco && typeof menorPreco === 'object') {
-            return normalizarPreco(menorPreco.preco ?? menorPreco.valor);
+    function extrairMenorOferta(dados) {
+        const melhorOferta = dados?.melhor_oferta;
+        if (melhorOferta && typeof melhorOferta === 'object') {
+            const valor = normalizarPreco(melhorOferta.preco ?? melhorOferta.preco_atual);
+            return valor !== null && valor > 0
+                ? { valor, moeda: normalizarMoeda(melhorOferta.moeda ?? dados.moeda) }
+                : null;
         }
-        return normalizarPreco(menorPreco);
+
+        const menorPreco = dados?.menor_preco ?? dados?.menorPreco;
+        const valor = menorPreco && typeof menorPreco === 'object'
+            ? normalizarPreco(menorPreco.preco ?? menorPreco.valor)
+            : normalizarPreco(menorPreco);
+        if (valor === null || valor <= 0) return null;
+        return { valor, moeda: normalizarMoeda(dados?.moeda) };
     }
 
     async function buscarMenorPreco(jogo, endpoint) {
@@ -48,7 +65,6 @@
         if (precosPorSlug.has(slug)) {
             return precosPorSlug.get(slug);
         }
-
         if (requisicoesPorSlug.has(slug)) {
             return requisicoesPorSlug.get(slug);
         }
@@ -58,15 +74,15 @@
                 if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
                 return resposta.json();
             })
-            .then(obterMenorPreco)
+            .then(extrairMenorOferta)
             .catch(erro => {
                 console.error(`Erro ao carregar preço de ${slug}:`, erro);
                 return null;
             })
-            .then(preco => {
-                precosPorSlug.set(slug, preco);
+            .then(oferta => {
+                precosPorSlug.set(slug, oferta);
                 requisicoesPorSlug.delete(slug);
-                return preco;
+                return oferta;
             });
 
         requisicoesPorSlug.set(slug, requisicao);
@@ -79,22 +95,23 @@
             const slug = obterSlug(jogo);
             if (slug) jogosUnicos.set(slug, jogo);
         });
-
         await Promise.all([...jogosUnicos.values()].map(jogo => buscarMenorPreco(jogo, endpoint)));
     }
 
     function obterPrecoComparado(jogo) {
-        const preco = precosPorSlug.get(obterSlug(jogo));
+        const oferta = precosPorSlug.get(obterSlug(jogo));
+        const valor = oferta?.valor ?? null;
         return {
-            valor: preco,
-            classe: preco === null || preco === undefined
+            valor,
+            moeda: oferta?.moeda || null,
+            classe: valor === null
                 ? 'indisponivel'
-                : preco <= 50
+                : valor <= 50
                     ? 'baixo'
-                    : preco <= 150
+                    : valor <= 150
                         ? 'medio'
                         : 'alto',
-            texto: formatarPrecoComparado(preco)
+            texto: formatarPrecoComparado(valor, oferta?.moeda || 'BRL')
         };
     }
 
@@ -103,12 +120,19 @@
             .filter(oferta => oferta.disponivel !== false && oferta.disponibilidade !== 'indisponivel')
             .map(oferta => ({
                 ...oferta,
-                preco: normalizarPreco(oferta.preco ?? oferta.preco_atual) ?? 0,
-                precoOriginal: normalizarPreco(oferta.preco_original ?? oferta.preco_antigo) ?? 0,
+                preco: normalizarPreco(oferta.preco ?? oferta.preco_atual),
+                precoOriginal: normalizarPreco(oferta.preco_original ?? oferta.preco_antigo),
+                moeda: normalizarMoeda(oferta.moeda),
                 desconto: normalizarPreco(oferta.desconto ?? oferta.desconto_percentual) ?? 0
             }))
-            .filter(oferta => oferta.preco > 0)
-            .sort((a, b) => a.preco - b.preco || String(a.loja || '').localeCompare(String(b.loja || '')));
+            .filter(oferta => oferta.preco !== null && oferta.preco > 0)
+            .sort((a, b) => {
+                const prioridadeA = a.moeda === 'BRL' ? 0 : 1;
+                const prioridadeB = b.moeda === 'BRL' ? 0 : 1;
+                if (prioridadeA !== prioridadeB) return prioridadeA - prioridadeB;
+                if (a.moeda !== b.moeda) return a.moeda.localeCompare(b.moeda);
+                return a.preco - b.preco || String(a.loja || '').localeCompare(String(b.loja || ''));
+            });
     }
 
     window.normalizarPreco = normalizarPreco;
