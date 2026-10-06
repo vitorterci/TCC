@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base-path" content="../" />
+    <title>Game Search — Feedback</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* ── Estilos Específicos da Página Feedback ── */
+
+      .secao-feedback {
+        width: 100%;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        animation: fadeInUp 0.45s ease both;
+      }
+      /* Breadcrumb */
+
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-corpo);
+        font-size: var(--fs-xs);
+        color: var(--cor-texto-muted);
+        letter-spacing: 0.06em;
+        margin-bottom: 4px;
+      }
+
+      .breadcrumb a {
+        color: var(--cor-texto-muted);
+        text-decoration: none;
+        transition: color var(--transition-speed) ease;
+      }
+
+      .breadcrumb a:hover {
+        color: var(--cor-texto-destaque);
+      }
+
+      .breadcrumb i {
+        font-size: 0.6rem;
+      }
+
+      .breadcrumb span {
+        color: var(--cor-texto);
+      }
+
+      .feedback-intro {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .feedback-intro h1 {
+        font-family: var(--font-titulo);
+        font-size: var(--fs-2xl);
+        margin-bottom: 12px;
+        color: var(--cor-texto);
+        text-shadow: 0 0 15px var(--cor-primaria);
+      }
+
+      .card-feedback {
+        background-color: var(--cor-lateral);
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--border-radius);
+        padding: 28px;
+        box-shadow: var(--shadow-card);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .card-feedback:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-glow);
+        border-color: var(--cor-primaria);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-group label {
+        font-weight: 600;
+        font-size: var(--fs-sm);
+        color: var(--cor-texto);
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        background-color: var(--cor-dropdown);
+        border: 1px solid var(--cor-borda-forte);
+        border-radius: var(--border-radius-sm);
+        padding: 12px 16px;
+        color: var(--cor-texto);
+        font-family: var(--font-corpo);
+        font-size: var(--fs-sm);
+        outline: none;
+        transition: border-color var(--transition-speed) ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--cor-primaria);
+      }
+
+      .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .stars-rating {
+        display: flex;
+        gap: 8px;
+        font-size: 1.2rem;
+        color: #f5c542;
+        margin-top: 4px;
+      }
+
+      .problem-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .tag-problema {
+        background-color: var(--cor-tag);
+        border: 1px solid var(--cor-borda);
+        padding: 6px 14px;
+        border-radius: var(--border-radius-xl);
+        font-size: var(--fs-xs);
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+      }
+
+      .tag-problema:hover {
+        background-color: var(--cor-primaria);
+        border-color: var(--cor-primaria);
+        color: var(--cor-texto-sobre-destaque);
+      }
+
+      .suggestions-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .suggestions-list li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: var(--fs-sm);
+        color: var(--cor-texto-muted);
+      }
+
+      .suggestions-list li i {
+        color: var(--cor-texto-destaque);
+        font-size: 0.8rem;
+      }
+    </style>
+    <link rel="stylesheet" href="../css/PixelBlast.css" />
+  </head>
+
+  <body>
+    <div class="layout-principal">
+      <!-- Sidebar -->
+      <aside class="barra-lateral" id="sidebarDrawer">
+        <div class="sidebar-logo">
+          <a href="../index.html" aria-label="Ir para a página inicial">
+            <img src="../img/logo2.png" alt="Game Search"
+          /></a>
+        </div>
+
+        <!-- Navegacao Principal -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Navegacao Principal</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="../index.html"
+                  ><i class="fas fa-home"></i><span>Inicio</span></a
+                >
+              </li>
+                 <li>
+                <a href="Apresentação.html"
+                                 ><i class="fas fa-layer-group"></i><span>Apresentação</span></a
+
+               
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Informacoes -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Informacoes</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="sobre.html"
+                  ><i class="fas fa-users"></i><span>Sobre nos</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Usuario -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Usuario</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="login.html"
+                  ><i class="fas fa-sign-in-alt"></i><span>Entrar</span></a
+                >
+              </li>
+              <li>
+                <a href="perfil.html"
+                  ><i class="fas fa-user"></i><span>Perfil</span></a
+                >
+              </li>
+              <li>
+                <a href="configuracao.html"
+                  ><i class="fas fa-cog"></i><span>Configuracoes</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Suporte -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Suporte</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="feedback.html"
+                  ><i class="fas fa-envelope"></i><span>Feedback</span></a
+                >
+              </li>
+              <li>
+                <a href="ajuda.html"
+                  ><i class="fas fa-question-circle"></i><span>Ajuda</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Overlay para mobile -->
+      <div class="drawer-overlay" id="drawerOverlay"></div>
+
+      <!-- Conteúdo -->
+      <main class="conteudo-principal">
+        <header class="barra-superior">
+          <div class="container-busca">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              placeholder="BUSCAR"
+              class="campo-busca"
+              autocomplete="off"
+            />
+          </div>
+        </header>
+
+        <section class="secao-feedback">
+          <!-- Breadcrumb -->
+          <nav class="breadcrumb" aria-label="Navegação">
+            <a href="../index.html"><i class="fas fa-home"></i> Início</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Feedback</span>
+          </nav>
+
+          <div class="feedback-intro">
+            <h1>Sua Opinião Importa</h1>
+            <p>
+              Ajude-nos a melhorar o Game Search compartilhando suas sugestões
+              ou relatando problemas.
+            </p>
+          </div>
+
+          <div class="grid-2col">
+            <!-- Formulário -->
+            <div class="card-feedback">
+              <h2 class="titulo-secao">
+                <i class="fas fa-pen-fancy"></i> <span>Enviar Feedback</span>
+              </h2>
+              <form
+                id="formulario-feedback"
+                action="../php/feedback.php"
+                method="POST"
+              >
+                <div class="form-group">
+                  <label for="nome">Nome (opcional)</label>
+                  <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Seu nome"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email">E-mail (opcional)</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Seu e-mail"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="tipo">Tipo de Feedback</label>
+                  <select id="tipo" name="tipo">
+                    <option value="sugestao">Sugestão</option>
+                    <option value="duvida">Dúvida</option>
+                    <option value="elogio">Elogio</option>
+                    <option value="reclamacao">Reclamação</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="mensagem">Mensagem</label>
+                  <textarea
+                    id="mensagem"
+                    name="mensagem"
+                    placeholder="Descreva seu feedback em detalhes"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Avaliação Geral</label>
+                  <div class="stars-rating">
+                    <i class="fas fa-star" data-rating="1"></i>
+                    <i class="fas fa-star" data-rating="2"></i>
+                    <i class="fas fa-star" data-rating="3"></i>
+                    <i class="fas fa-star" data-rating="4"></i>
+                    <i class="fas fa-star" data-rating="5"></i>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  id="btn-enviar-feedback"
+                  class="btn-primario"
+                  style="width: 100%; margin-top: 10px"
+                >
+                  <i class="fas fa-paper-plane"></i>
+                  <span>Enviar Feedback</span>
+                </button>
+              </form>
+              <div
+                id="mensagem-feedback"
+                style="
+                  display: none;
+                  margin-top: 15px;
+                  padding: 12px;
+                  border-radius: 6px;
+                  text-align: center;
+                  font-size: var(--fs-sm);
+                "
+              ></div>
+            </div>
+
+            <!-- Informações Adicionais -->
+            <div style="display: flex; flex-direction: column; gap: 24px">
+              <div class="card-feedback">
+                <h2 class="titulo-secao">
+                  <i class="fas fa-bug"></i> <span>Relatar Problema</span>
+                </h2>
+                <p
+                  style="
+                    font-size: var(--fs-xs);
+                    color: var(--cor-texto-muted);
+                    margin-bottom: 15px;
+                  "
+                >
+                  Selecione o tipo de problema encontrado:
+                </p>
+                <div class="problem-tags">
+                  <span class="tag-problema">Preço incorreto</span>
+                  <span class="tag-problema">Link quebrado</span>
+                  <span class="tag-problema">Loja não encontrada</span>
+                  <span class="tag-problema">Lentidão no site</span>
+                  <span class="tag-problema">Erro visual</span>
+                </div>
+              </div>
+
+              <div class="card-feedback">
+                <h2 class="titulo-secao">
+                  <i class="fas fa-lightbulb"></i>
+                  <span>Sugestões Populares</span>
+                </h2>
+                <ul class="suggestions-list">
+                  <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Alerta de queda de preço por e-mail</span>
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Comparação de edições (Deluxe/Gold)</span>
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Integração com biblioteca da Steam</span>
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Histórico de preços em gráfico</span>
+                  </li>
+                  <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Filtro por região de loja</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Botão Hambúrguer para Mobile -->
+    <button
+      class="hamburger-btn"
+      id="hamburgerBtn"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/navegacao/sidebar.js"></script>
+    <script src="../js/navegacao/navegacao.js"></script>
+    <script src="../js/feedback.js"></script>
+    <!-- PixelBlast Background Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../js/PixelBlast.js"></script>
+   
+  </body>
+</html>

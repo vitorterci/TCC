@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base-path" content="../" />
+    <title>Game Search — Sobre Nós</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/pages/sobre.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* ── Estilos Específicos da Página Sobre ── */
+
+      .hero-sobre {
+        width: 100%;
+        max-width: 1000px;
+        padding: 60px 40px;
+        /* Mistura a primária com o fundo para preservar contraste no herói. */
+        background: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--cor-primaria) 35%, var(--cor-fundo)),
+          var(--cor-fundo)
+        );
+        border-radius: var(--border-radius);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 40px;
+        box-shadow: var(--shadow-glow);
+      }
+
+      .hero-sobre h1 {
+        font-family: var(--font-titulo);
+        font-size: var(--fs-3xl);
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-sobre p {
+        font-size: var(--fs-lg);
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .missao-card h2 {
+        font-family: var(--font-titulo);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .timeline {
+        position: relative;
+        padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .timeline-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background: var(--cor-lateral);
+        padding: 16px 24px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--cor-borda);
+        transition:
+          transform var(--transition-speed) ease,
+          border-color var(--transition-speed) ease,
+          box-shadow var(--transition-speed) ease,
+          background-color var(--transition-speed) ease;
+      }
+
+      .timeline-item:hover {
+        transform: translateY(-3px);
+        border-color: var(--cor-primaria);
+        background-color: color-mix(
+          in srgb,
+          var(--cor-lateral) 88%,
+          var(--cor-primaria)
+        );
+        box-shadow: var(--shadow-glow);
+      }
+
+      .timeline-item .year {
+        font-family: var(--font-titulo);
+        font-weight: 700;
+        color: var(--cor-texto-destaque);
+        font-size: var(--fs-lg);
+        min-width: 60px;
+      }
+
+      .feature-card {
+        background: var(--cor-lateral);
+        padding: 24px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--cor-borda);
+        text-align: center;
+        transition: transform var(--transition-speed) ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--cor-primaria);
+      }
+
+      .feature-card i {
+        font-size: 2rem;
+        color: var(--cor-texto-destaque);
+        margin-bottom: 16px;
+      }
+
+      .team-card {
+        background: var(--cor-lateral);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--cor-borda);
+        padding: 24px;
+        text-align: center;
+        transition: all var(--transition-speed) ease;
+      }
+
+      .team-card:hover {
+        border-color: var(--cor-primaria);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .team-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 16px;
+        border: 3px solid var(--cor-primaria);
+      }
+
+      .team-card h4 {
+        font-family: var(--font-titulo);
+        margin-bottom: 4px;
+      }
+
+      .team-card .role {
+        color: var(--cor-texto-destaque);
+        font-size: var(--fs-xs);
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .tech-card {
+        background: var(--cor-tag);
+        padding: 20px;
+        border-radius: var(--border-radius);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .tech-card i {
+        font-size: 2.5rem;
+        color: var(--cor-texto-destaque);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        width: 100%;
+      }
+
+      .stat-item {
+        background: var(--cor-lateral);
+        padding: 30px;
+        border-radius: var(--border-radius);
+        text-align: center;
+        border: 1px solid var(--cor-borda);
+      }
+
+      .stat-item .number {
+        font-family: var(--font-titulo);
+        font-size: var(--fs-3xl);
+        color: var(--cor-texto-destaque);
+        font-weight: 900;
+        margin-bottom: 8px;
+      }
+
+      @media (max-width: 768px) {
+        .hero-sobre {
+          padding: 40px 20px;
+        }
+        .hero-sobre h1 {
+          font-size: var(--fs-2xl);
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="../css/PixelBlast.css" />
+  </head>
+
+  <body>
+    <div class="layout-principal">
+      <!-- Sidebar -->
+      <aside class="barra-lateral" id="sidebarDrawer">
+        <div class="sidebar-logo">
+          <a href="../index.html" aria-label="Ir para a página inicial">
+            <img src="../img/logo2.png" alt="Game Search"
+          /></a>
+        </div>
+
+        <!-- Navegação Principal -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Navegação Principal</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="../index.html"
+                  ><i class="fas fa-home"></i><span>Início</span></a
+                >
+              </li>
+                   <li>
+                <a href="Apresentação.html"
+                                 ><i class="fas fa-layer-group"></i><span>Apresentação</span></a
+
+               
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Informações -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Informações</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li class="ativo">
+                <a href="sobre.html"
+                  ><i class="fas fa-users"></i><span>Sobre nós</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Usuário -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Usuário</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="login.html"
+                  ><i class="fas fa-sign-in-alt"></i><span>Entrar</span></a
+                >
+              </li>
+              <li>
+                <a href="perfil.html"
+                  ><i class="fas fa-user"></i><span>Perfil</span></a
+                >
+              </li>
+              <li>
+                <a href="configuracao.html"
+                  ><i class="fas fa-cog"></i><span>Configurações</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Suporte -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Suporte</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="feedback.html"
+                  ><i class="fas fa-envelope"></i><span>Feedback</span></a
+                >
+              </li>
+              <li>
+                <a href="ajuda.html"
+                  ><i class="fas fa-question-circle"></i><span>Ajuda</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Overlay para mobile -->
+      <div class="drawer-overlay" id="drawerOverlay"></div>
+
+      <!-- Conteúdo -->
+      <main class="conteudo-principal">
+        <header class="barra-superior">
+          <div class="container-busca">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              placeholder="BUSCAR"
+              class="campo-busca"
+              autocomplete="off"
+            />
+          </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Navegação">
+          <a href="../index.html"><i class="fas fa-home"></i> Início</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Sobre Nós</span>
+        </nav>
+<br>
+        <!-- Hero -->
+        <section class="hero-sobre">
+          <h1>SOBRE O GAME SEARCH</h1>
+          <p>
+            A plataforma criada para ajudar jogadores a encontrar os melhores
+            preços, promoções e oportunidades do mercado gamer.
+          </p>
+        </section>
+
+        <!-- Missão -->
+        <section class="section-spacer">
+          <div class="glass-card missao-card">
+            <h2>
+              <i
+                class="fas fa-bullseye"
+                style="color: var(--cor-texto-destaque)"
+              ></i>
+              <span>Nossa Missão</span>
+            </h2>
+            <p>
+              O Game Search foi criado para centralizar preços de jogos em
+              diversas plataformas e facilitar a vida dos jogadores. Unimos
+              tecnologia, design e dados para que você nunca perca uma oferta.
+            </p>
+          </div>
+        </section>
+
+        <!-- História -->
+     
+        <!-- Por que criamos -->
+        <section class="section-spacer">
+          <h2 class="titulo-secao">Por que criamos o Game Search</h2>
+          <div class="grid-2col">
+            <div class="feature-card">
+              <i class="fas fa-coins"></i>
+              <h4>Economia Real</h4>
+              <p>Encontre sempre o menor preço entre diversas lojas.</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-bolt"></i>
+              <h4>Comparação Rápida</h4>
+              <p>Consulte várias plataformas em poucos segundos.</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-chart-line"></i>
+              <h4>Histórico de Preços</h4>
+              <p>Acompanhe a evolução dos valores ao longo do tempo.</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-bell"></i>
+              <h4>Alertas Inteligentes</h4>
+              <p>
+                Receba notificações quando seu jogo favorito entrar em promoção.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Equipe -->
+        <section class="section-spacer">
+          <h2 class="titulo-secao">Equipe de Desenvolvimento</h2>
+          <div class="grid-4col">
+            <div class="team-card">
+              <img src="../img/andrey.gif" alt="Andrey" />
+              <h4>Andrey</h4>
+              <div class="role">Front-End</div>
+              <p>Especialista em interfaces e experiência do usuário.</p>
+            </div>
+            <div class="team-card">
+              <img src="../img/vitor.gif" alt="Vitor" />
+              <h4>Vitor</h4>
+              <div class="role">UX/UI Design</div>
+              <p>Focado em design de interação e prototipagem.</p>
+            </div>
+            <div class="team-card">
+              <img src="../img/paulo.gif" alt="Paulo" />
+              <h4>Paulo</h4>
+              <div class="role">Back-End</div>
+              <p>Responsável pela integração de dados e performance.</p>
+            </div>
+            <div class="team-card">
+              <img src="../img/gnomo.gif" alt="Gnomo" />
+              <h4>Gnomo</h4>
+              <div class="role">Full-Stack</div>
+              <p>Responsável pela arquitetura e gestão do projeto.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tecnologias -->
+        <section class="section-spacer">
+          <h2 class="titulo-secao">Tecnologias Utilizadas</h2>
+          <div class="grid-3col">
+            <div class="tech-card">
+              <i class="fab fa-html5"></i>
+              <h4>HTML5</h4>
+            </div>
+            <div class="tech-card">
+              <i class="fab fa-css3-alt"></i>
+              <h4>CSS3</h4>
+            </div>
+            <div class="tech-card">
+              <i class="fab fa-js"></i>
+              <h4>JavaScript</h4>
+            </div>
+            <div class="tech-card">
+              <i class="fab fa-node-js"></i>
+              <h4>Node.js</h4>
+            </div>
+            <div class="tech-card">
+              <i class="fas fa-database"></i>
+              <h4>MySQL</h4>
+            </div>
+            <div class="tech-card">
+              <i class="fas fa-plug"></i>
+              <h4>APIs</h4>
+            </div>
+          </div>
+        </section>
+
+        <!-- Estatísticas -->
+       
+      </main>
+    </div>
+
+    <!-- Botão Hambúrguer para Mobile -->
+    <button
+      class="hamburger-btn"
+      id="hamburgerBtn"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/navegacao/sidebar.js"></script>
+    <script src="../js/navegacao/navegacao.js"></script>
+    <!-- PixelBlast Background Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../js/PixelBlast.js"></script>
+   
+  </body>
+</html>

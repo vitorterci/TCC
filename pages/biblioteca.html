@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Search — Biblioteca</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/pages/biblioteca.css" />
+    <link rel="stylesheet" href="../css/PixelBlast.css" />
+    <link rel="stylesheet" href="../css/components/filtros.css" />
+   <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Estilos específicos para a página de biblioteca */
+      .secao-biblioteca {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .cabecalho-pagina {
+        margin-bottom: 30px;
+        border-bottom: 1px solid var(--cor-borda);
+        padding-bottom: 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .cabecalho-pagina__titulo {
+        font-family: var(--font-titulo);
+        font-size: var(--fs-xl);
+        color: var(--cor-texto-destaque);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 10px;
+        text-shadow: 0 0 15px rgba(var(--cor-primaria-rgb), 0.5);
+      }
+
+      .cabecalho-pagina__descricao {
+        font-family: var(--font-corpo);
+        color: var(--cor-texto);
+        font-size: var(--fs-sm);
+        max-width: 600px;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+
+      /* Ajustes na grade para a biblioteca - MANTENDO ORIGINAL */
+      .grade-jogos {
+        max-width: 1200px;
+      }
+
+      /* ─── ESTILOS DE PAGINAÇÃO APRIMORADOS ─────────────────────────────────── */
+
+      .catalogo-paginacao {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 24px !important;
+        margin: 50px auto !important;
+        padding: 20px !important;
+        background: var(--cor-lateral) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border-radius: 16px !important;
+        border: 1px solid var(--cor-borda) !important;
+        box-shadow: var(--shadow-card) !important;
+        width: fit-content !important;
+      }
+
+      .catalogo-paginacao button {
+        background: var(--cor-tag) !important;
+        color: var(--cor-texto) !important;
+        border: 1px solid var(--cor-borda-forte) !important;
+        padding: 12px 28px !important;
+        border-radius: 12px !important;
+        cursor: pointer !important;
+        font-family: var(--font-titulo) !important;
+        font-weight: 700 !important;
+        font-size: 13px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1.5px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        outline: none !important;
+      }
+
+      .catalogo-paginacao button:not(:disabled):hover {
+        background: var(--cor-primaria) !important;
+        border-color: var(--cor-primaria) !important;
+        transform: translateY(-3px) !important;
+        box-shadow: var(--shadow-glow) !important;
+        color: var(--cor-texto-sobre-destaque) !important;
+      }
+
+      .catalogo-paginacao button:disabled {
+        opacity: 0.58 !important;
+        cursor: not-allowed !important;
+        background: var(--cor-hover) !important;
+        border-color: var(--cor-borda) !important;
+      }
+
+      #infoPagina {
+        font-family: var(--font-titulo) !important;
+        font-size: 12px !important;
+        color: var(--cor-texto-destaque) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 2px !important;
+        font-weight: 800 !important;
+        background: var(--cor-tag) !important;
+        padding: 10px 20px !important;
+        border-radius: 8px !important;
+        border: 1px solid var(--cor-borda) !important;
+        min-width: 140px !important;
+        text-align: center !important;
+      }
+
+      .catalogo-contador {
+        text-align: center !important;
+        margin-top: 15px !important;
+        font-family: var(--font-corpo) !important;
+        font-size: 11px !important;
+        color: var(--cor-texto-muted) !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+      }
+
+      @media (max-width: 600px) {
+        .catalogo-paginacao {
+          flex-direction: column !important;
+          width: 90% !important;
+          gap: 15px !important;
+        }
+        .catalogo-paginacao button {
+          width: 100% !important;
+          justify-content: center !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="layout-principal">
+      <!-- Barra Lateral -->
+      <aside class="barra-lateral" id="sidebarDrawer">
+        <div class="sidebar-logo">
+          <a href="../index.html" aria-label="Ir para a página inicial">
+            <img src="../img/logo2.png" alt="Game Search"
+          /></a>
+        </div>
+
+        <!-- Navegação Principal -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Navegação Principal</h3>
+       <nav class="menu-navegacao" aria-label="Navegação principal">
+            <ul>
+              <li>
+                <a href="../index.html"
+                  ><i class="fas fa-home" aria-hidden="true"></i
+                  ><span>Início</span></a
+                >
+              </li>
+                <li>
+                <a href="Apresentação.html"
+                                                ><i class="fas fa-layer-group"></i><span>Apresentação</span></a
+
+                >
+              </li>
+
+              <li>
+                <a href="biblioteca.html"
+                  ><i class="fas fa-book" aria-hidden="true"></i
+                  ><span>Biblioteca</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Informações -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Informações</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="sobre.html"
+                  ><i class="fas fa-users"></i><span>Sobre nós</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Usuário -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Usuário</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="login.html"
+                  ><i class="fas fa-sign-in-alt"></i><span>Entrar</span></a
+                >
+              </li>
+              <li>
+                <a href="perfil.html"
+                  ><i class="fas fa-user"></i><span>Perfil</span></a
+                >
+              </li>
+              <li>
+                <a href="configuracao.html"
+                  ><i class="fas fa-cog"></i><span>Configurações</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Suporte -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Suporte</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="feedback.html"
+                  ><i class="fas fa-envelope"></i><span>Feedback</span></a
+                >
+              </li>
+              <li>
+                <a href="ajuda.html"
+                  ><i class="fas fa-question-circle"></i><span>Ajuda</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Overlay para fechar o drawer -->
+      <div class="drawer-overlay" id="drawerOverlay"></div>
+
+      <!-- Conteúdo Principal -->
+      <main class="conteudo-principal">
+        <header class="barra-superior">
+          <div class="container-busca">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              placeholder="BUSCAR NA BIBLIOTECA"
+              class="campo-busca"
+              autocomplete="off"
+            />
+          </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Navegação">
+          <a href="../index.html"><i class="fas fa-home"></i> Início</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Biblioteca</span>
+        </nav>
+
+        <section class="secao-biblioteca">
+          <header class="cabecalho-pagina">
+            <h1 class="cabecalho-pagina__titulo">Biblioteca de Jogos</h1>
+            <p class="cabecalho-pagina__descricao">
+              Explore nossa coleção completa de títulos e encontre sua próxima
+              aventura.
+            </p>
+          </header>
+
+          <!-- Filtros -->
+          <section class="secao-filtros" aria-label="Filtros de jogos">
+            <div class="barra-filtro">
+              <button
+                class="botao-filtro-principal"
+                data-menu="menu-plataforma"
+                aria-haspopup="true"
+              >
+                <i class="fas fa-gamepad"></i> plataforma
+              </button>
+              <button
+                class="botao-filtro-principal"
+                data-menu="menu-genero"
+                aria-haspopup="true"
+              >
+                <i class="fas fa-ghost"></i> gênero
+              </button>
+              <button
+                class="botao-filtro-principal"
+                data-menu="menu-etaria"
+                aria-haspopup="true"
+              >
+                <i class="fas fa-users"></i> classificação
+              </button>
+              <button
+                class="botao-filtro-principal"
+                data-menu="menu-ano"
+                aria-haspopup="true"
+              >
+                <i class="fas fa-calendar-alt"></i> ano
+              </button>
+              <button
+                class="botao-filtro-principal"
+                data-menu="menu-preco"
+                aria-haspopup="true"
+              >
+                <i class="fas fa-dollar-sign"></i> preço
+              </button>
+
+              <div id="menu-plataforma" class="menu-flutuante" role="menu">
+                <button class="opcao-filtro selecionada" data-filtro="todos">
+                  todos
+                </button>
+                <button class="opcao-filtro" data-filtro="pc">PC</button>
+                <button class="opcao-filtro" data-filtro="ps5">
+                  PlayStation 5
+                </button>
+                <button class="opcao-filtro" data-filtro="xbox">Xbox</button>
+                <button class="opcao-filtro" data-filtro="mobile">
+                  Mobile
+                </button>
+                <button class="opcao-filtro" data-filtro="switch">
+                  Switch
+                </button>
+              </div>
+
+              <div id="menu-genero" class="menu-flutuante" role="menu">
+                <button class="opcao-filtro selecionada" data-filtro="todos">
+                  todos
+                </button>
+                <button class="opcao-filtro" data-filtro="Action Adventure">
+                  Ação e aventura
+                </button>
+                <button class="opcao-filtro" data-filtro="Action RPG">
+                  RPG de ação
+                </button>
+                <button class="opcao-filtro" data-filtro="Co-op Adventure">
+                  Aventura cooperativa
+                </button>
+                <button class="opcao-filtro" data-filtro="CRPG">
+                  RPG de computador
+                </button>
+                <button class="opcao-filtro" data-filtro="JRPG">
+                  RPG japonês
+                </button>
+                <button class="opcao-filtro" data-filtro="Metroidvania">
+                  Metroidvania
+                </button>
+                <button class="opcao-filtro" data-filtro="Platformer">
+                  Jogo de plataforma
+                </button>
+                <button class="opcao-filtro" data-filtro="Roguelike">
+                  Roguelike
+                </button>
+                <button class="opcao-filtro" data-filtro="Run and Gun">
+                  Atire e corra
+                </button>
+                <button class="opcao-filtro" data-filtro="Sandbox">
+                  Mundo aberto
+                </button>
+                <button class="opcao-filtro" data-filtro="Simulation">
+                  Simulação
+                </button>
+                <button class="opcao-filtro" data-filtro="Survival Horror">
+                  Terror e sobrevivência
+                </button>
+              </div>
+
+              <div id="menu-etaria" class="menu-flutuante" role="menu">
+                <button class="opcao-filtro selecionada" data-filtro="todos">
+                  todos
+                </button>
+                <button class="opcao-filtro" data-filtro="L">Livre</button>
+                <button class="opcao-filtro" data-filtro="10">10+</button>
+                <button class="opcao-filtro" data-filtro="12">12+</button>
+                <button class="opcao-filtro" data-filtro="14">14+</button>
+                <button class="opcao-filtro" data-filtro="16">16+</button>
+                <button class="opcao-filtro" data-filtro="18">18+</button>
+              </div>
+
+              <div id="menu-ano" class="menu-flutuante" role="menu">
+                <button class="opcao-filtro selecionada" data-filtro="todos">
+                  todos
+                </button>
+                <button class="opcao-filtro" data-filtro="2024">2024</button>
+                <button class="opcao-filtro" data-filtro="2023">2023</button>
+                <button class="opcao-filtro" data-filtro="2022">2022</button>
+                <button class="opcao-filtro" data-filtro="2021">2021</button>
+                <button class="opcao-filtro" data-filtro="2020">2020</button>
+              </div>
+
+              <div id="menu-preco" class="menu-flutuante" role="menu">
+                <button class="opcao-filtro selecionada" data-filtro="todos">
+                  todos
+                </button>
+                <button class="opcao-filtro" data-filtro="gratis">
+                  Gratuito
+                </button>
+                <button class="opcao-filtro" data-filtro="baixo">
+                  Até R$ 50
+                </button>
+                <button class="opcao-filtro" data-filtro="medio">
+                  R$ 50 - R$ 150
+                </button>
+                <button class="opcao-filtro" data-filtro="alto">
+                  Acima de R$ 150
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Grade de Jogos -->
+          <section
+            class="grade-jogos"
+            id="gradeJogosBiblioteca"
+            aria-label="Jogos disponíveis"
+          >
+            <!-- Renderizado via biblioteca.js -->
+          </section>
+
+          <div class="catalogo-contador" id="catalogoContador"></div>
+
+          <!-- Paginação -->
+          <div class="catalogo-paginacao" id="catalogoPaginacao">
+            <button id="btnPaginaAnterior" disabled>
+              <i class="fas fa-chevron-left"></i> Anterior
+            </button>
+            <span id="infoPagina">Página 1 de 1</span>
+            <button id="btnPaginaProxima" disabled>
+              Próxima <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Overlay do Card Expandido -->
+    <div class="card-overlay" id="cardOverlay"></div>
+
+    <!-- Botão Hambúrguer -->
+    <button
+      class="hamburger-btn"
+      id="hamburgerBtn"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/navegacao/sidebar.js"></script>
+    <script src="../js/navegacao/navegacao.js"></script>
+    <script src="../js/filtros/filtros.js"></script>
+    <script src="../js/jogos/cards.js"></script>
+    <script src="../js/jogos/cards-expansiveis.js"></script>
+    <script src="../js/pages/biblioteca.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../js/PixelBlast.js"></script>
+  
+  </body>
+</html>

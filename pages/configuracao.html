@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base-path" content="../" />
+    <title>Game Search — Configurações</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/PixelBlast.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/pages/configuracao.css" />
+  </head>
+
+  <body>
+    <div class="layout-principal">
+      <!-- Sidebar -->
+      <aside class="barra-lateral" id="sidebarDrawer">
+        <div class="sidebar-logo">
+          <a href="../index.html" aria-label="Ir para a página inicial">
+            <img src="../img/logo2.png" alt="Game Search"
+          /></a>
+        </div>
+
+        <!-- Navegação Principal -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Navegação Principal</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="../index.html"
+                  ><i class="fas fa-home"></i><span>Início</span></a
+                >
+              </li>
+              <li>
+                <a href="Apresentação.html"
+                  ><i class="fas fa-layer-group"></i
+                  ><span>Apresentação</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Informações -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Informações</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="sobre.html"
+                  ><i class="fas fa-users"></i><span>Sobre nós</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Usuário -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Usuário</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="login.html"
+                  ><i class="fas fa-sign-in-alt"></i><span>Entrar</span></a
+                >
+              </li>
+              <li>
+                <a href="perfil.html"
+                  ><i class="fas fa-user"></i><span>Perfil</span></a
+                >
+              </li>
+              <li class="ativo">
+                <a href="configuracao.html"
+                  ><i class="fas fa-cog"></i><span>Configurações</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Suporte -->
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Suporte</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="feedback.html"
+                  ><i class="fas fa-envelope"></i><span>Feedback</span></a
+                >
+              </li>
+              <li>
+                <a href="ajuda.html"
+                  ><i class="fas fa-question-circle"></i><span>Ajuda</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Overlay para mobile -->
+      <div class="drawer-overlay" id="drawerOverlay"></div>
+
+      <!-- Conteúdo -->
+      <main class="conteudo-principal">
+        <header class="barra-superior">
+          <div class="container-busca">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              placeholder="BUSCAR"
+              class="campo-busca"
+              autocomplete="off"
+            />
+          </div>
+        </header>
+
+        <nav class="breadcrumb" aria-label="Navegação">
+          <a href="../index.html"><i class="fas fa-home"></i> Início</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Configurações</span>
+        </nav>
+        <br />
+
+        <section class="secao-config">
+          <h1 class="titulo-secao">
+            <i class="fas fa-cog"></i> <span>Configurações</span>
+          </h1>
+          <div class="barra-salvar">
+            <button class="btn-primario btn-salvar" id="btn-salvar">
+              <span class="spinner-salvar"></span>
+              <i class="fas fa-save icone-salvar"></i>
+              <span>Salvar alterações</span>
+            </button>
+          </div>
+
+          <!-- Painel Não Logado (Condicional) -->
+          <div
+            class="painel-config"
+            id="painel-nao-logado"
+            style="display: none"
+          >
+            <div class="painel-header">
+              <i class="fas fa-lock"></i>
+              <h2>Acesso Restrito à Conta</h2>
+            </div>
+            <div
+              class="painel-corpo"
+              style="
+                padding: 32px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+              "
+            >
+              <p
+                style="
+                  font-size: 1.1rem;
+                  color: var(--cor-texto);
+                  font-family: var(--font-corpo);
+                "
+              >
+                "Entre ou registre-se para acessar mais configurações."
+              </p>
+              <div style="display: flex; gap: 16px; margin-top: 8px">
+                <a
+                  href="login.html"
+                  class="btn-primario"
+                  style="
+                    padding: 10px 24px;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                  "
+                  ><i class="fas fa-sign-in-alt"></i> Entrar</a
+                >
+                <a
+                  href="login.html"
+                  class="btn-secundario"
+                  style="
+                    padding: 10px 24px;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    background: var(--cor-borda);
+                    color: var(--cor-texto);
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                  "
+                  ><i class="fas fa-user-plus"></i> Registrar</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Conta -->
+          <div class="painel-config" id="painel-conta">
+            <div class="painel-header">
+              <i class="fas fa-user-circle"></i>
+              <h2>Conta</h2>
+            </div>
+            <div class="painel-corpo">
+              <!-- Avatar -->
+              <div class="opcao-config">
+                <div class="opcao-texto">
+                  <span class="opcao-titulo">Foto de perfil</span>
+                  <span class="opcao-descricao"
+                    >JPG, PNG, GIF ou WEBP, com até 5 MB</span
+                  >
+                </div>
+                <div class="avatar-container">
+                  <img
+                    src="../img/logo.png"
+                    alt="Foto de perfil"
+                    class="avatar-grande"
+                    id="fotoPerfil"
+                  />
+                  <div class="avatar-actions">
+                    <input
+                      type="file"
+                      id="fotoPerfilInput"
+                      accept="image/jpeg,image/png,image/gif,image/webp"
+                      hidden
+                    />
+                    <button type="button" class="btn-editar" id="btnFotoPerfil">
+                      <i class="fas fa-camera"></i> Escolher foto
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Nome -->
+              <div class="opcao-config" data-campo="nome">
+                <div class="opcao-texto">
+                  <span class="opcao-titulo">Nome completo</span>
+                  <span class="opcao-descricao" id="nome-descricao"
+                    >Carregando...</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="campo-edicao"
+                  id="nome-edicao"
+                  value=""
+                  placeholder="Seu nome completo"
+                />
+                <div class="opcao-valor" id="nome-valor">---</div>
+                <button class="btn-editar" data-campo="nome">
+                  <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn-cancelar-edicao" data-campo="nome">
+                  <i class="fas fa-times"></i>
+                </button>
+                <button class="btn-salvar-edicao" data-campo="nome">
+                  <i class="fas fa-check"></i>
+                </button>
+              </div>
+
+              <!-- Usuário -->
+              <div class="opcao-config" data-campo="usuario">
+                <div class="opcao-texto">
+                  <span class="opcao-titulo">Nome de usuário</span>
+                  <span class="opcao-descricao" id="usuario-descricao"
+                    >Carregando...</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="campo-edicao"
+                  id="usuario-edicao"
+                  value=""
+                  placeholder="Seu nome de usuário"
+                />
+                <div class="opcao-valor" id="usuario-valor">---</div>
+                <button class="btn-editar" data-campo="usuario">
+                  <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn-cancelar-edicao" data-campo="usuario">
+                  <i class="fas fa-times"></i>
+                </button>
+                <button class="btn-salvar-edicao" data-campo="usuario">
+                  <i class="fas fa-check"></i>
+                </button>
+              </div>
+
+              <!-- E-mail -->
+              <div class="opcao-config" data-campo="email">
+                <div class="opcao-texto">
+                  <span class="opcao-titulo">E-mail</span>
+                  <span class="opcao-descricao" id="email-descricao"
+                    >Carregando...</span
+                  >
+                </div>
+                <input
+                  type="email"
+                  class="campo-edicao"
+                  id="email-edicao"
+                  value=""
+                  placeholder="seu@email.com"
+                />
+                <div class="opcao-valor" id="email-valor">---</div>
+                <button class="btn-editar" data-campo="email">
+                  <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn-cancelar-edicao" data-campo="email">
+                  <i class="fas fa-times"></i>
+                </button>
+                <button class="btn-salvar-edicao" data-campo="email">
+                  <i class="fas fa-check"></i>
+                </button>
+              </div>
+
+              <!-- Data de cadastro -->
+              <div class="opcao-config">
+                <div class="opcao-texto">
+                  <span class="opcao-titulo">Data de cadastro</span>
+                  <span class="opcao-descricao" id="data-cadastro"
+                    >Carregando...</span
+                  >
+                </div>
+                <span class="opcao-valor" id="data-cadastro-valor">---</span>
+              </div>
+
+              <!-- Função de acesso -->
+              <div class="opcao-config">
+                <div class="opcao-texto">
+                  <span class="opcao-titulo">Perfil de acesso</span>
+                  <span class="opcao-descricao" id="role-descricao"
+                    >Carregando...</span
+                  >
+                </div>
+                <span class="opcao-valor" id="role-valor">---</span>
+              </div>
+
+              <!-- Senha -->
+              <div class="opcao-config" data-campo="senha">
+                <div class="opcao-texto">
+                  <span class="opcao-titulo">Senha</span>
+                  <span class="opcao-descricao" id="senha-descricao"
+                    >••••••••</span
+                  >
+                </div>
+                <button
+                  class="btn-editar"
+                  data-campo="senha"
+                  id="btn-alterar-senha"
+                >
+                  <i class="fas fa-key"></i> Alterar senha
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aparência -->
+          <div class="painel-config aparencia-painel">
+            <div class="painel-header">
+              <i class="fas fa-palette"></i>
+              <h2>Aparência</h2>
+            </div>
+            <div class="painel-corpo">
+              <div class="aparencia-cor-config">
+                <div class="aparencia-cor-layout">
+                  <div class="aparencia-cor-contexto">
+                    <div class="aparencia-bloco-heading">
+                      <span class="aparencia-bloco-icon"
+                        ><i class="fas fa-wand-magic-sparkles"></i
+                      ></span>
+                      <div>
+                        <span class="opcao-titulo">Cor de destaque</span>
+                        <span class="opcao-descricao"
+                          >Personaliza botões, links e indicadores ativos</span
+                        >
+                      </div>
+                    </div>
+
+                    <div
+                      class="aparencia-preview"
+                      aria-label="Prévia dos elementos afetados pela cor de destaque"
+                    >
+                      <div class="aparencia-preview-heading">
+                        <span class="aparencia-preview-kicker"
+                          >Prévia no sistema</span
+                        >
+                        <span class="aparencia-preview-status"
+                          ><span></span>Aplicada em tempo real</span
+                        >
+                      </div>
+                      <div class="aparencia-preview-content">
+                        <div class="aparencia-preview-row">
+                          <button class="aparencia-preview-botao" type="button">
+                            Botão primário
+                          </button>
+                          <span class="aparencia-preview-link"
+                            >Link ativo
+                            <i class="fas fa-arrow-up-right-from-square"></i
+                          ></span>
+                        </div>
+                        <div class="aparencia-preview-indicador">
+                          <span
+                            class="aparencia-preview-indicador-ponto"
+                          ></span>
+                          <span>Indicador ativo</span>
+                          <span
+                            class="aparencia-preview-indicador-linha"
+                          ></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Seletor de Cores Inline na Seção de Aparência -->
+                  <div class="aparencia-cor-controle">
+                    <div class="aparencia-controle-label">
+                      <span>Escolha uma cor</span>
+                      <span id="previewHexLabel">#2e00e6</span>
+                    </div>
+                    <div class="circulo-cromatico-inline" id="seletorCores">
+                      <!-- Coluna 1: Controles, Preview e Redefinir -->
+                      <div class="circulo-cromatico__coluna-controles">
+                        <div class="circulo-cromatico__controles">
+                          <div class="circulo-cromatico__grupo-slider">
+                            <label
+                              >Saturação <span id="valorSat">100%</span></label
+                            >
+                            <input
+                              type="range"
+                              id="rangeSat"
+                              min="0"
+                              max="100"
+                              value="100"
+                              aria-label="Saturação da cor"
+                            />
+                          </div>
+                          <div class="circulo-cromatico__grupo-slider">
+                            <label
+                              >Luminosidade
+                              <span id="valorLum">50%</span></label
+                            >
+                            <input
+                              type="range"
+                              id="rangeLum"
+                              min="0"
+                              max="100"
+                              value="50"
+                              aria-label="Luminosidade da cor"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="circulo-cromatico__preview-container">
+                          <div class="circulo-cromatico__preview">
+                            <span
+                              class="circulo-cromatico__amostra"
+                              id="previewAmostra"
+                              style="background: #2e00e6"
+                            ></span>
+                            <span
+                              class="circulo-cromatico__codigo-hex"
+                              id="previewHex"
+                              >#2e00e6</span
+                            >
+                          </div>
+                          <button
+                            class="circulo-cromatico__botao-reset"
+                            id="btnResetCor"
+                            type="button"
+                            title="Resetar para cor padrão"
+                          >
+                            <i class="fas fa-undo-alt"></i> Redefinir
+                          </button>
+                        </div>
+                      </div>
+
+                      <!-- Coluna 2: Círculo Cromático -->
+                      <div class="circulo-cromatico__coluna-circulo">
+                        <div
+                          class="circulo-cromatico__wrapper"
+                          id="circuloCor"
+                          role="slider"
+                          aria-label="Círculo cromático para selecionar tonalidade e saturação"
+                          tabindex="0"
+                          title="Clique ou arraste para selecionar a cor"
+                        >
+                          <div
+                            class="circulo-cromatico__saturacao-overlay"
+                          ></div>
+                          <div
+                            class="circulo-cromatico__luminosidade-overlay"
+                          ></div>
+                          <div
+                            class="circulo-cromatico__cursor"
+                            id="cursorCor"
+                          ></div>
+                        </div>
+                      </div>
+
+                      <!-- Coluna 3: Cores Padrão Vertical -->
+                      <div class="circulo-cromatico__coluna-paleta">
+                        <span class="circulo-cromatico__paleta-titulo"
+                          >Cores Padrão</span
+                        >
+                        <div class="circulo-cromatico__cores-grid">
+                          <button
+                            class="circulo-cromatico__cor-preset"
+                            data-cor="#2e00e6"
+                            style="background: #2e00e6"
+                            title="Azul Royal"
+                          ></button>
+                          <button
+                            class="circulo-cromatico__cor-preset"
+                            data-cor="#ec4899"
+                            style="background: #ec4899"
+                            title="Rosa"
+                          ></button>
+                          <button
+                            class="circulo-cromatico__cor-preset"
+                            data-cor="#ef4444"
+                            style="background: #ef4444"
+                            title="Vermelho"
+                          ></button>
+                          <button
+                            class="circulo-cromatico__cor-preset"
+                            data-cor="#f59e0b"
+                            style="background: #f59e0b"
+                            title="Laranja"
+                          ></button>
+                          <button
+                            class="circulo-cromatico__cor-preset"
+                            data-cor="#10b981"
+                            style="background: #10b981"
+                            title="Esmeralda"
+                          ></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tema (Claro / Escuro / Sistema) -->
+              <div
+                class="aparencia-animacoes-config"
+                style="
+                  border-top: 1px solid rgba(148, 163, 184, 0.12);
+                  padding-top: 20px;
+                "
+              >
+                <div class="aparencia-bloco-heading">
+                  <span class="aparencia-bloco-icon aparencia-bloco-icon-muted"
+                    ><i class="fas fa-adjust"></i
+                  ></span>
+                  <div>
+                    <span class="opcao-titulo">Tema</span>
+                    <span class="opcao-descricao"
+                      >Escolha entre claro, escuro ou seguir o sistema</span
+                    >
+                  </div>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap">
+                  <button
+                    type="button"
+                    class="btn-tema"
+                    data-tema="claro"
+                    style="
+                      padding: 6px 14px;
+                      border-radius: 8px;
+                      border: 1px solid var(--cor-borda);
+                      background: var(--cor-card);
+                      color: var(--cor-texto);
+                      cursor: pointer;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Claro
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-tema"
+                    data-tema="escuro"
+                    style="
+                      padding: 6px 14px;
+                      border-radius: 8px;
+                      border: 1px solid var(--cor-borda);
+                      background: var(--cor-card);
+                      color: var(--cor-texto);
+                      cursor: pointer;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Escuro
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-tema"
+                    data-tema="sistema"
+                    style="
+                      padding: 6px 14px;
+                      border-radius: 8px;
+                      border: 1px solid var(--cor-borda);
+                      background: var(--cor-card);
+                      color: var(--cor-texto);
+                      cursor: pointer;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Sistema
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="atalho-tema-config"
+                aria-labelledby="atalhoTemaTitulo"
+              >
+                <div class="aparencia-bloco-heading">
+                  <span class="aparencia-bloco-icon aparencia-bloco-icon-muted"
+                    ><i class="fas fa-toggle-on"></i
+                  ></span>
+                  <div>
+                    <span class="opcao-titulo" id="atalhoTemaTitulo"
+                      >Atalho de tema</span
+                    >
+                    <span class="opcao-descricao"
+                      >Personalize o acesso rápido ao tema em todas as
+                      páginas.</span
+                    >
+                  </div>
+                  <label class="atalho-tema-toggle" for="atalhoTemaAtivo">
+                    <input id="atalhoTemaAtivo" type="checkbox" />
+                    <span>Ativado</span>
+                  </label>
+                </div>
+                <div class="atalho-tema-config-grid">
+                  <label
+                    >Estilo
+                    <select id="atalhoTemaEstilo">
+                      <option value="cristal-magico">Cristal Mágico</option>
+                      <option value="circular">Circular</option>
+                      <option value="sol-lua">Sol/Lua</option>
+                      <option value="gif">GIF</option>
+                      <option value="minimalista">Minimalista</option>
+                      <option value="padrao-classico">Padrão/Clássico</option>
+                    </select>
+                  </label>
+                  <label
+                    >Posição
+                    <select id="atalhoTemaPosicao">
+                      <option value="superior-direito">Superior direito</option>
+                      <option value="inferior-direito">Inferior direito</option>
+                      <option value="inferior-esquerdo">
+                        Inferior esquerdo
+                      </option>
+                      <option value="barra-lateral-inferior">
+                        Barra lateral — inferior
+                      </option>
+                    </select>
+                  </label>
+                  <label
+                    >Tamanho
+                    <select id="atalhoTemaTamanho">
+                      <option value="pequeno">Pequeno</option>
+                      <option value="medio">Médio</option>
+                      <option value="grande">Grande</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fundo personalizado (NOVO — dropdown flutuante) -->
+          <div
+            class="painel-config fundo-personalizado-painel"
+            id="painel-fundo"
+          >
+            <div class="painel-header">
+              <i class="fas fa-image"></i>
+              <h2>Fundo personalizado</h2>
+            </div>
+            <div class="painel-corpo">
+              <div class="fundo-config-bloco">
+                <p class="fundo-nota-local">
+                  A configuração fica salva apenas neste navegador/dispositivo.
+                  Não sincroniza automaticamente entre dispositivos.
+                </p>
+
+                <div class="fundo-layout">
+                  <!-- Coluna esquerda: dropdown "Modo de fundo" -->
+                  <div class="fundo-seletor-modo">
+                    <button
+                      type="button"
+                      class="fundo-modo-toggle"
+                      id="fundoModoToggle"
+                      aria-haspopup="listbox"
+                      aria-expanded="false"
+                      aria-controls="fundoModoMenu"
+                    >
+                      <span class="fundo-modo-toggle-icon" aria-hidden="true">
+                        <i class="fas fa-sliders-h"></i>
+                      </span>
+                      <span class="fundo-modo-toggle-label">Modo de fundo</span>
+                      <i
+                        class="fas fa-chevron-down fundo-modo-toggle-chevron"
+                        aria-hidden="true"
+                      ></i>
+                    </button>
+
+                    <div
+                      class="fundo-modo-menu"
+                      id="fundoModoMenu"
+                      role="listbox"
+                      aria-label="Modo de fundo"
+                    >
+                      <button
+                        type="button"
+                        class="fundo-modo-opcao ativo"
+                        data-modo="padrao"
+                        role="option"
+                        aria-selected="true"
+                      >
+                        <span class="fundo-modo-opcao-icon" aria-hidden="true"
+                          ><i class="fas fa-ban"></i
+                        ></span>
+                        <span class="fundo-modo-opcao-label">Padrão</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="fundo-modo-opcao"
+                        data-modo="cor"
+                        role="option"
+                        aria-selected="false"
+                      >
+                        <span class="fundo-modo-opcao-icon" aria-hidden="true"
+                          ><i class="fas fa-square"></i
+                        ></span>
+                        <span class="fundo-modo-opcao-label">Cor sólida</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="fundo-modo-opcao"
+                        data-modo="gradiente"
+                        role="option"
+                        aria-selected="false"
+                      >
+                        <span class="fundo-modo-opcao-icon" aria-hidden="true"
+                          ><i class="fas fa-circle-half-stroke"></i
+                        ></span>
+                        <span class="fundo-modo-opcao-label">Gradiente</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="fundo-modo-opcao"
+                        data-modo="imagem"
+                        role="option"
+                        aria-selected="false"
+                      >
+                        <span class="fundo-modo-opcao-icon" aria-hidden="true"
+                          ><i class="fas fa-image"></i
+                        ></span>
+                        <span class="fundo-modo-opcao-label">Imagem</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Coluna direita: controles do modo selecionado -->
+                  <div class="fundo-controles-wrapper">
+                    <div class="fundo-controles" data-controle="cor">
+                      <div class="fundo-linha">
+                        <div class="fundo-campo">
+                          <label for="fundoCorSolida" style="margin-left: 80%">Cor de fundo</label>
+                          <input
+                            type="color"
+                            id="fundoCorSolida"
+                            class="fundo-cor-circular"
+                            value="#0d0d1f"
+                            aria-label="Escolher cor sólida do fundo"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="fundo-controles" data-controle="gradiente">
+                      <div class="fundo-linha fundo-linha-gradiente">
+                        <div class="fundo-campo fundo-campo-angulo">
+                          <label for="fundoGradAngulo"
+                            >Ângulo:
+                            <span id="fundoGradAnguloValor">135°</span></label
+                          >
+                          <input
+                            type="range"
+                            id="fundoGradAngulo"
+                            min="0"
+                            max="360"
+                            value="135"
+                            aria-label="Ângulo do gradiente"
+                          />
+                        </div>
+                        <div class="fundo-cores-gradiente">
+                          <div class="fundo-campo fundo-campo-cor">
+                            <label for="fundoGradCor1">Cor 1</label>
+                            <input
+                              type="color"
+                              id="fundoGradCor1"
+                              class="fundo-cor-circular"
+                              value="#2e00e6"
+                            />
+                          </div>
+                          <div class="fundo-campo fundo-campo-cor">
+                            <label for="fundoGradCor2">Cor 2</label>
+                            <input
+                              type="color"
+                              id="fundoGradCor2"
+                              class="fundo-cor-circular"
+                              value="#ec4899"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="fundo-controles" data-controle="imagem">
+                      <div class="fundo-linha">
+                        <div
+                          class="fundo-campo"
+                          style="flex: 2; min-width: 220px"
+                        >
+                          <label for="fundoImagemInput"
+                            >Imagem (JPG, PNG, WebP ou GIF — máximo 5 MB)</label
+                          >
+                          <input
+                            type="file"
+                            id="fundoImagemInput"
+                            accept="image/jpeg,image/png,image/webp,image/gif"
+                          />
+                        </div>
+                        <div class="fundo-campo">
+                          <label for="fundoImagemPosicao">Posição</label>
+                          <select id="fundoImagemPosicao">
+                            <option value="center">Centro</option>
+                            <option value="center top">Centro superior</option>
+                            <option value="center bottom">
+                              Centro inferior
+                            </option>
+                            <option value="left center">Esquerda</option>
+                            <option value="right center">Direita</option>
+                          </select>
+                        </div>
+                        <div class="fundo-campo">
+                          <label for="fundoImagemTamanho">Tamanho</label>
+                          <select id="fundoImagemTamanho">
+                            <option value="cover">Cobrir</option>
+                            <option value="contain">Conter</option>
+                            <option value="auto">Original/auto</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fundo-config-bloco fundo-acoes-bloco">
+                <div class="fundo-acoes">
+                  <button type="button" class="btn-perigo" id="fundoRestaurar">
+                    <i class="fas fa-undo"></i> Restaurar padrão
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Censura e Faixa Etária -->
+          <div class="painel-config" id="painel-censura">
+            <div class="painel-header">
+              <i class="fas fa-shield-alt"></i>
+              <h2>Proteção e Faixa Etária</h2>
+            </div>
+            <div
+              class="painel-corpo"
+              style="
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+                id="bloco-censura-auto"
+              >
+                <div>
+                  <span
+                    class="opcao-titulo"
+                    style="font-size: 15px; display: block; margin-bottom: 4px"
+                    >Censura automática por idade</span
+                  >
+                  <span
+                    class="opcao-descricao"
+                    style="color: var(--cor-texto-muted); font-size: 0.85rem"
+                    >Aplica automaticamente a classificação etária baseada na
+                    idade cadastrada na conta.</span
+                  >
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="toggle-censura-auto" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div
+                style="
+                  border-top: 1px solid var(--cor-borda);
+                  padding-top: 20px;
+                "
+                id="bloco-filtro-manual"
+              >
+                <span
+                  class="opcao-titulo"
+                  style="font-size: 15px; display: block; margin-bottom: 4px"
+                  >Filtro manual de faixa etária</span
+                >
+                <span
+                  class="opcao-descricao"
+                  style="
+                    color: var(--cor-texto-muted);
+                    font-size: 0.85rem;
+                    display: block;
+                    margin-bottom: 12px;
+                  "
+                  >Utilizado quando a censura automática estiver desativada ou
+                  para visitantes.</span
+                >
+                <div
+                  style="display: flex; gap: 8px; flex-wrap: wrap"
+                  id="grupo-filtro-manual"
+                >
+                  <button
+                    type="button"
+                    class="btn-idade-manual"
+                    data-idade="0"
+                    style="
+                      padding: 6px 14px;
+                      border-radius: 8px;
+                      border: 1px solid var(--cor-borda);
+                      background: var(--cor-card);
+                      color: var(--cor-texto);
+                      cursor: pointer;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Livre
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-idade-manual"
+                    data-idade="10"
+                    style="
+                      padding: 6px 14px;
+                      border-radius: 8px;
+                      border: 1px solid var(--cor-borda);
+                      background: var(--cor-card);
+                      color: var(--cor-texto);
+                      cursor: pointer;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    10
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-idade-manual"
+                    data-idade="12"
+                    style="
+                      padding: 6px 14px;
+                      border-radius: 8px;
+                      border: 1px solid var(--cor-borda);
+                      background: var(--cor-card);
+                      color: var(--cor-texto);
+                      cursor: pointer;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    12
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-idade-manual"
+                    data-idade="14"
+                    style="
+                      padding: 6px 14px;
+                      border-radius: 8px;
+                      border: 1px solid var(--cor-borda);
+                      background: var(--cor-card);
+                      color: var(--cor-texto);
+                      cursor: pointer;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    14
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-idade-manual"
+                    data-idade="16"
+                    style="
+                      padding: 6px 14px;
+                      border-radius: 8px;
+                      border: 1px solid var(--cor-borda);
+                      background: var(--cor-card);
+                      color: var(--cor-texto);
+                      cursor: pointer;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    16
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-idade-manual"
+                    data-idade="18"
+                    style="
+                      padding: 6px 14px;
+                      border-radius: 8px;
+                      border: 1px solid var(--cor-borda);
+                      background: var(--cor-card);
+                      color: var(--cor-texto);
+                      cursor: pointer;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    18
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Zona de Perigo -->
+          <div class="painel-config zona-perigo">
+            <div class="painel-header">
+              <i class="fas fa-exclamation-triangle"></i>
+              <h2>Área de Risco</h2>
+            </div>
+            <div class="painel-corpo">
+              <div class="opcao-config">
+                <div class="opcao-texto">
+                  <span class="opcao-titulo">Sair da conta</span>
+                  <span class="opcao-descricao"
+                    >Encerra sua sessão neste dispositivo</span
+                  >
+                </div>
+                <button class="btn-perigo" type="button" data-logout>
+                  <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Sair
+                </button>
+              </div>
+
+              <div class="opcao-config">
+                <div class="opcao-texto">
+                  <span class="opcao-titulo">Excluir conta</span>
+                  <span class="opcao-descricao"
+                    >Remove permanentemente sua conta e todos os dados</span
+                  >
+                </div>
+                <button class="btn-perigo" id="btn-excluir-conta">
+                  Excluir conta
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modal de alterar senha -->
+    <div
+      id="modal-senha"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        style="
+          background: var(--cor-lateral);
+          border: 1px solid var(--cor-borda);
+          border-radius: var(--border-radius);
+          padding: 32px;
+          max-width: 400px;
+          width: 90%;
+        "
+      >
+        <h2 style="font-family: var(--font-titulo); margin-bottom: 20px">
+          Alterar Senha
+        </h2>
+        <div
+          id="modal-senha-mensagem"
+          style="
+            display: none;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+          "
+        ></div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div>
+            <label
+              style="font-size: var(--fs-xs); color: var(--cor-texto-muted)"
+              >Senha atual</label
+            >
+            <input
+              type="password"
+              id="senha-atual"
+              placeholder="Senha atual"
+              style="
+                width: 100%;
+                padding: 10px;
+                border-radius: var(--border-radius-sm);
+                background: var(--cor-dropdown);
+                border: 1px solid var(--cor-borda-forte);
+                color: var(--cor-texto);
+              "
+            />
+          </div>
+          <div>
+            <label
+              style="font-size: var(--fs-xs); color: var(--cor-texto-muted)"
+              >Nova senha</label
+            >
+            <input
+              type="password"
+              id="nova-senha"
+              placeholder="Nova senha (mín. 6 caracteres)"
+              style="
+                width: 100%;
+                padding: 10px;
+                border-radius: var(--border-radius-sm);
+                background: var(--cor-dropdown);
+                border: 1px solid var(--cor-borda-forte);
+                color: var(--cor-texto);
+              "
+            />
+          </div>
+          <div>
+            <label
+              style="font-size: var(--fs-xs); color: var(--cor-texto-muted)"
+              >Confirmar nova senha</label
+            >
+            <input
+              type="password"
+              id="confirmar-nova-senha"
+              placeholder="Confirmar nova senha"
+              style="
+                width: 100%;
+                padding: 10px;
+                border-radius: var(--border-radius-sm);
+                background: var(--cor-dropdown);
+                border: 1px solid var(--cor-borda-forte);
+                color: var(--cor-texto);
+              "
+            />
+          </div>
+        </div>
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            justify-content: flex-end;
+          "
+        >
+          <button
+            id="modal-senha-cancelar"
+            style="
+              background: none;
+              border: 1px solid var(--cor-borda);
+              color: var(--cor-texto);
+              padding: 10px 24px;
+              border-radius: var(--border-radius-xl);
+              cursor: pointer;
+            "
+          >
+            Cancelar
+          </button>
+          <button
+            id="modal-senha-salvar"
+            style="
+              background: var(--cor-primaria);
+              border: none;
+              color: var(--cor-texto-sobre-destaque);
+              padding: 10px 24px;
+              border-radius: var(--border-radius-xl);
+              cursor: pointer;
+            "
+          >
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+      <i class="fas fa-check-circle"></i>
+      <span id="toastMensagem">Alterações salvas com sucesso!</span>
+    </div>
+
+    <!-- Botão Hambúrguer para Mobile -->
+    <button
+      class="hamburger-btn"
+      id="hamburgerBtn"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/navegacao/sidebar.js"></script>
+    <script src="../js/navegacao/navegacao.js"></script>
+    <script src="../js/pages/configuracao.js"></script>
+
+    <!-- PixelBlast Background Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../js/PixelBlast.js"></script>
+    <script src="../js/pages/usuario.js"></script>
+  </body>
+</html>

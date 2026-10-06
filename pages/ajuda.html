@@ -1,0 +1,1064 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base-path" content="../" />
+    <title>Game Search — Central de Ajuda</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/PixelBlast.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Estilos exclusivos da Central de Ajuda; o layout e o tema vêm do global.css. */
+      .secao-ajuda {
+        width: 100%;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        animation: fadeInUp 0.45s ease both;
+      }
+
+      .ajuda-intro {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .ajuda-intro__texto {
+        max-width: 700px;
+      }
+
+      .ajuda-intro h1 {
+        margin: 0 0 10px;
+        color: var(--cor-texto);
+        font-family: var(--font-titulo);
+        font-size: clamp(1.45rem, 3vw, 2rem);
+        letter-spacing: 0.03em;
+      }
+
+      .ajuda-intro p {
+        margin: 0;
+        color: var(--cor-texto-muted);
+        font-size: var(--fs-md);
+        line-height: 1.6;
+      }
+
+      .ajuda-intro__icone {
+        display: grid;
+        width: 58px;
+        height: 58px;
+        place-items: center;
+        flex: 0 0 auto;
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--border-radius);
+        background: color-mix(
+          in srgb,
+          var(--cor-primaria) 16%,
+          var(--cor-card)
+        );
+        color: var(--cor-texto-destaque);
+        font-size: 1.5rem;
+        box-shadow: var(--shadow-glow);
+      }
+
+      .ajuda-grade {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .ajuda-bloco {
+        min-width: 0;
+        padding: 20px;
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--border-radius);
+        background: var(--cor-card);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .ajuda-bloco--amplo {
+        grid-column: 1 / -1;
+      }
+
+      .ajuda-bloco__titulo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 16px;
+        color: var(--cor-texto);
+        font-family: var(--font-titulo);
+        font-size: var(--fs-lg);
+        letter-spacing: 0.04em;
+      }
+
+      .ajuda-bloco__titulo i {
+        color: var(--cor-texto-destaque);
+        font-size: 1rem;
+      }
+
+      .ajuda-acordeao {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 0;
+      }
+
+      .ajuda-item {
+        overflow: hidden;
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--border-radius-sm);
+        background: var(--cor-dropdown);
+      }
+
+      .ajuda-pergunta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        width: 100%;
+        padding: 14px 16px;
+        border: 0;
+        background: transparent;
+        color: var(--cor-texto);
+        font-family: var(--font-titulo);
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        line-height: 1.4;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .ajuda-pergunta:hover,
+      .ajuda-pergunta:focus-visible {
+        background: var(--cor-hover);
+        color: var(--cor-texto-destaque);
+      }
+
+      .ajuda-pergunta:focus-visible,
+      .ajuda-cta:focus-visible {
+        outline: 2px solid var(--cor-texto-destaque);
+        outline-offset: 2px;
+      }
+
+      .ajuda-pergunta i {
+        color: var(--cor-texto-destaque);
+        font-size: 0.8rem;
+        transition: transform 0.25s ease;
+      }
+
+      .ajuda-item.aberto .ajuda-pergunta i {
+        transform: rotate(180deg);
+      }
+
+      .ajuda-resposta {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.25s ease;
+      }
+
+      .ajuda-resposta__conteudo {
+        overflow: hidden;
+        min-height: 0;
+        padding: 0 16px;
+        color: var(--cor-texto-muted);
+        font-family: var(--font-corpo);
+        font-size: var(--fs-sm);
+        line-height: 1.65;
+        transition: padding 0.25s ease;
+      }
+
+      .ajuda-item.aberto .ajuda-resposta {
+        grid-template-rows: 1fr;
+      }
+
+      .ajuda-item.aberto .ajuda-resposta__conteudo {
+        padding: 0 16px 16px;
+      }
+
+      .ajuda-resposta__conteudo a {
+        color: var(--cor-texto-destaque);
+        font-weight: 600;
+      }
+
+      .ajuda-lista {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ajuda-lista li {
+        position: relative;
+        padding-left: 22px;
+        color: var(--cor-texto-muted);
+        font-size: var(--fs-sm);
+        line-height: 1.55;
+      }
+
+      .ajuda-lista li::before {
+        position: absolute;
+        top: 0.55em;
+        left: 3px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--cor-texto-destaque);
+        content: "";
+      }
+
+      .ajuda-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        align-self: flex-start;
+        padding: 11px 18px;
+        border-radius: var(--border-radius-xl);
+        background: var(--cor-primaria);
+        color: var(--cor-texto-sobre-destaque);
+        font-family: var(--font-titulo);
+        font-size: var(--fs-sm);
+        font-weight: 700;
+        text-decoration: none;
+        transition:
+          background var(--transition-speed) ease,
+          transform var(--transition-speed) ease;
+      }
+
+      .ajuda-cta:hover {
+        background: var(--cor-primaria-hover);
+        color: var(--cor-texto-sobre-destaque);
+        transform: translateY(-2px);
+      }
+
+      .ajuda-feedback {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px;
+        border: 1px solid var(--cor-borda);
+        border-left: 3px solid var(--cor-primaria);
+        border-radius: var(--border-radius);
+        background: color-mix(in srgb, var(--cor-primaria) 8%, var(--cor-card));
+      }
+
+      .ajuda-feedback h2 {
+        margin: 0 0 6px;
+        color: var(--cor-texto);
+        font-family: var(--font-titulo);
+        font-size: var(--fs-lg);
+      }
+
+      .ajuda-feedback p {
+        margin: 0;
+        color: var(--cor-texto-muted);
+        font-size: var(--fs-sm);
+      }
+
+      @media (max-width: 760px) {
+        .ajuda-grade {
+          grid-template-columns: 1fr;
+        }
+
+        .ajuda-bloco--amplo {
+          grid-column: auto;
+        }
+
+        .ajuda-feedback {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ajuda-resposta,
+        .ajuda-resposta__conteudo,
+        .ajuda-pergunta i,
+        .ajuda-cta {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout-principal">
+      <aside class="barra-lateral" id="sidebarDrawer">
+        <div class="sidebar-logo">
+          <a href="../index.html" aria-label="Ir para a página inicial">
+            <img src="../img/logo2.png" alt="Game Search"
+          /></a>
+        </div>
+
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Navegação Principal</h3>
+          <nav class="menu-navegacao" aria-label="Navegação principal">
+            <ul>
+              <li>
+                <a href="../index.html"
+                  ><i class="fas fa-home" aria-hidden="true"></i
+                  ><span>Início</span></a
+                >
+              </li>
+              <li>
+                <a href="Apresentação.html"
+                  ><i class="fas fa-layer-group"></i
+                  ><span>Apresentação</span></a
+                >
+              </li>
+
+              <li>
+                <a href="biblioteca.html"
+                  ><i class="fas fa-book" aria-hidden="true"></i
+                  ><span>Biblioteca</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Informações</h3>
+          <nav class="menu-navegacao" aria-label="Informações">
+            <ul>
+              <li>
+                <a href="sobre.html"
+                  ><i class="fas fa-users" aria-hidden="true"></i
+                  ><span>Sobre nós</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Usuário</h3>
+          <nav class="menu-navegacao" aria-label="Área do usuário">
+            <ul>
+              <li>
+                <a href="login.html"
+                  ><i class="fas fa-sign-in-alt" aria-hidden="true"></i
+                  ><span>Entrar</span></a
+                >
+              </li>
+              <li>
+                <a href="perfil.html"
+                  ><i class="fas fa-user" aria-hidden="true"></i
+                  ><span>Perfil</span></a
+                >
+              </li>
+              <li>
+                <a href="configuracao.html"
+                  ><i class="fas fa-cog" aria-hidden="true"></i
+                  ><span>Configurações</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="sidebar-secao">
+          <h3 class="sidebar-titulo">Suporte</h3>
+          <nav class="menu-navegacao">
+            <ul>
+              <li>
+                <a href="feedback.html"
+                  ><i class="fas fa-envelope"></i><span>Feedback</span></a
+                >
+              </li>
+              <li>
+                <a href="ajuda.html"
+                  ><i class="fas fa-question-circle"></i><span>Ajuda</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="drawer-overlay" id="drawerOverlay"></div>
+
+      <main class="conteudo-principal">
+        <header class="barra-superior">
+          <div class="container-busca">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input
+              type="text"
+              placeholder="BUSCAR"
+              class="campo-busca"
+              autocomplete="off"
+              aria-label="Buscar jogos"
+            />
+          </div>
+        </header>
+
+        <nav class="breadcrumb" aria-label="Navegação estrutural">
+          <a href="../index.html"
+            ><i class="fas fa-home" aria-hidden="true"></i> Início</a
+          >
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          <span aria-current="page">Ajuda</span>
+        </nav>
+
+        <section class="secao-ajuda" aria-labelledby="titulo-ajuda">
+          <header class="ajuda-intro">
+            <div class="ajuda-intro__texto">
+              <h1 id="titulo-ajuda">Central de Ajuda</h1>
+              <p>Encontre respostas para suas dúvidas sobre o Game Search.</p>
+            </div>
+            <div class="ajuda-intro__icone" aria-hidden="true">
+              <i class="fas fa-life-ring"></i>
+            </div>
+          </header>
+
+          <div class="ajuda-grade">
+            <section class="ajuda-bloco" aria-labelledby="titulo-como-usar">
+              <h2 class="ajuda-bloco__titulo" id="titulo-como-usar">
+                <i class="fas fa-compass" aria-hidden="true"></i> Como usar o
+                site
+              </h2>
+              <div class="ajuda-acordeao">
+                <article class="ajuda-item aberto">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="true"
+                      aria-controls="resposta-pesquisa"
+                    >
+                      <span>Como pesquisar jogos?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-pesquisa"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      Use o campo de busca no topo da página e pressione Enter.
+                      O catálogo será filtrado pelo nome do jogo informado.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-filtros"
+                    >
+                      <span>Como utilizar os filtros?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-filtros"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      Na página inicial ou na Biblioteca, escolha filtros como
+                      categoria, plataforma, gênero, faixa etária, ano ou preço
+                      para refinar os resultados.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-detalhes"
+                    >
+                      <span>Como acessar os detalhes de um jogo?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-detalhes"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      Clique em “Ver detalhes” no card do jogo. A página exibirá
+                      informações, classificação e ofertas disponíveis para
+                      aquele título.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-categorias"
+                    >
+                      <span>Como navegar pelas categorias?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-categorias"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      Abra o menu de categorias na área de filtros e selecione a
+                      opção desejada. Para ver o catálogo completo novamente,
+                      escolha “Todos”.
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="ajuda-bloco" aria-labelledby="titulo-biblioteca">
+              <h2 class="ajuda-bloco__titulo" id="titulo-biblioteca">
+                <i class="fas fa-book" aria-hidden="true"></i> Biblioteca
+              </h2>
+              <div class="ajuda-acordeao">
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-adicionar"
+                    >
+                      <span>Como adicionar um jogo à biblioteca?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-adicionar"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      Entre na sua conta, abra os detalhes do jogo e use a ação
+                      de adicionar à biblioteca. O recurso fica disponível para
+                      usuários autenticados.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-remover"
+                    >
+                      <span>Como remover um jogo?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-remover"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      Na Biblioteca, localize o jogo salvo e use a opção de
+                      remover. A lista será atualizada após a confirmação da
+                      ação.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-salvos"
+                    >
+                      <span>Como acessar os jogos salvos?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-salvos"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      Acesse “Biblioteca” pelo menu lateral. É necessário estar
+                      conectado à conta para consultar os jogos salvos.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-jogo-biblioteca"
+                    >
+                      <span>O que fazer caso um jogo não apareça?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-jogo-biblioteca"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      Confira se você está na conta correta, limpe os filtros
+                      ativos e recarregue a página. Se o problema continuar,
+                      envie um feedback.
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section
+              class="ajuda-bloco ajuda-bloco--amplo"
+              aria-labelledby="titulo-precos"
+            >
+              <h2 class="ajuda-bloco__titulo" id="titulo-precos">
+                <i class="fas fa-tags" aria-hidden="true"></i> Comparação de
+                preços
+              </h2>
+              <div class="ajuda-acordeao">
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-comparacao"
+                    >
+                      <span>Como funciona a comparação de preços?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-comparacao"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      A tela de detalhes organiza as ofertas encontradas para o
+                      jogo e permite comparar os valores por loja ou plataforma.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-menor-preco"
+                    >
+                      <span>O que significa “menor preço”?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-menor-preco"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      É a menor oferta exibida entre as fontes disponíveis para
+                      aquele jogo e condição de consulta. Verifique sempre a
+                      loja e a plataforma antes de comprar.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-fontes"
+                    >
+                      <span>Quais lojas e fontes são utilizadas?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-fontes"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      O projeto apresenta as lojas e fontes configuradas no
+                      comparador, incluindo as integrações demonstrativas do
+                      TCC. A disponibilidade pode variar conforme o título.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-precos"
+                    >
+                      <span
+                        >Qual é a diferença entre preço atual e anterior?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-precos"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      O preço atual é o valor mostrado na consulta. O preço
+                      anterior é uma referência usada para indicar variação ou
+                      histórico quando esse dado está disponível.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-simulados"
+                    >
+                      <span>Os preços são reais ou simulados?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-simulados"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      As páginas de lojas “fake” e os valores de demonstração
+                      fazem parte do protótipo acadêmico. Quando uma oferta for
+                      demonstrativa ou simulada, ela não deve ser interpretada
+                      como preço real ou disponibilidade de compra.
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="ajuda-bloco" aria-labelledby="titulo-conta">
+              <h2 class="ajuda-bloco__titulo" id="titulo-conta">
+                <i class="fas fa-user-cog" aria-hidden="true"></i> Conta e
+                perfil
+              </h2>
+              <ul class="ajuda-lista">
+                <li>
+                  <strong>Cadastro:</strong> crie uma conta informando os dados
+                  solicitados na página de registro.
+                </li>
+                <li>
+                  <strong>Login:</strong> use suas credenciais em “Entrar” para
+                  acessar recursos pessoais.
+                </li>
+                <li>
+                  <strong>Perfil:</strong> consulte seus dados e preferências
+                  pelo menu lateral.
+                </li>
+                <li>
+                  <strong>Configurações:</strong> ajuste preferências de
+                  aparência e funcionamento do site.
+                </li>
+                <li>
+                  <strong>Logout:</strong> use “Sair” no menu do usuário para
+                  encerrar a sessão com segurança.
+                </li>
+              </ul>
+            </section>
+
+            <section class="ajuda-bloco" aria-labelledby="titulo-problemas">
+              <h2 class="ajuda-bloco__titulo" id="titulo-problemas">
+                <i class="fas fa-wrench" aria-hidden="true"></i> Problemas
+                comuns
+              </h2>
+              <div class="ajuda-acordeao">
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-capa"
+                    >
+                      <span>A capa do jogo não aparece</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div class="ajuda-resposta" id="resposta-capa" role="region">
+                    <div class="ajuda-resposta__conteudo">
+                      Recarregue a página e confira sua conexão. Se a imagem
+                      continuar indisponível, o catálogo pode não ter uma capa
+                      cadastrada para esse título.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-preco"
+                    >
+                      <span>O preço não aparece</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div class="ajuda-resposta" id="resposta-preco" role="region">
+                    <div class="ajuda-resposta__conteudo">
+                      Verifique se o jogo possui ofertas cadastradas e tente
+                      atualizar os dados. Alguns títulos podem não ter uma fonte
+                      de preço disponível.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-carregamento"
+                    >
+                      <span>A página não carrega ou ocorre erro nos dados</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div
+                    class="ajuda-resposta"
+                    id="resposta-carregamento"
+                    role="region"
+                  >
+                    <div class="ajuda-resposta__conteudo">
+                      Confira a conexão, atualize sem usar o cache e tente
+                      novamente. Se o erro persistir, informe a página e a
+                      mensagem exibida no seu feedback.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="resposta-login"
+                    >
+                      <span>Estou com problemas de login</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div class="ajuda-resposta" id="resposta-login" role="region">
+                    <div class="ajuda-resposta__conteudo">
+                      Confira e redigite seus dados. Caso não consiga entrar,
+                      retorne à página de login e tente novamente; erros
+                      persistentes podem ser reportados pelo feedback.
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section
+              class="ajuda-bloco ajuda-bloco--amplo"
+              aria-labelledby="titulo-faq"
+            >
+              <h2 class="ajuda-bloco__titulo" id="titulo-faq">
+                <i class="fas fa-comments" aria-hidden="true"></i> Perguntas
+                frequentes
+              </h2>
+              <div class="ajuda-acordeao">
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="faq-conta"
+                    >
+                      <span>Preciso criar uma conta para usar o site?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div class="ajuda-resposta" id="faq-conta" role="region">
+                    <div class="ajuda-resposta__conteudo">
+                      Não para pesquisar e consultar jogos. A conta é necessária
+                      para recursos pessoais, como a Biblioteca.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="faq-encontro"
+                    >
+                      <span>Como encontro um jogo?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div class="ajuda-resposta" id="faq-encontro" role="region">
+                    <div class="ajuda-resposta__conteudo">
+                      Use a busca no topo ou navegue pelo catálogo e pelos
+                      filtros de categoria.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="faq-biblioteca"
+                    >
+                      <span>Como funciona a Biblioteca?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div class="ajuda-resposta" id="faq-biblioteca" role="region">
+                    <div class="ajuda-resposta__conteudo">
+                      Ela reúne os jogos adicionados à sua conta para consulta
+                      rápida em uma área exclusiva.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="faq-comparacao"
+                    >
+                      <span>Como funciona a comparação de preços?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div class="ajuda-resposta" id="faq-comparacao" role="region">
+                    <div class="ajuda-resposta__conteudo">
+                      As ofertas disponíveis são agrupadas nos detalhes do jogo
+                      para facilitar a comparação entre fontes.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="faq-simulados"
+                    >
+                      <span>Os preços são reais ou simulados?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div class="ajuda-resposta" id="faq-simulados" role="region">
+                    <div class="ajuda-resposta__conteudo">
+                      O projeto inclui dados demonstrativos/simulados; confira a
+                      indicação apresentada na oferta antes de considerar
+                      qualquer valor.
+                    </div>
+                  </div>
+                </article>
+                <article class="ajuda-item">
+                  <h3>
+                    <button
+                      class="ajuda-pergunta"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="faq-sugestao"
+                    >
+                      <span>Posso enviar sugestões para o projeto?</span
+                      ><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                  </h3>
+                  <div class="ajuda-resposta" id="faq-sugestao" role="region">
+                    <div class="ajuda-resposta__conteudo">
+                      Sim. Use a página de Feedback para relatar problemas ou
+                      enviar sugestões.
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+
+          <aside class="ajuda-feedback" aria-labelledby="titulo-feedback-ajuda">
+            <div>
+              <h2 id="titulo-feedback-ajuda">Não encontrou o que procurava?</h2>
+              <p>Envie seu problema ou sugestão.</p>
+            </div>
+            <a class="ajuda-cta" href="feedback.html"
+              ><i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar
+              feedback</a
+            >
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <button
+      class="hamburger-btn"
+      id="hamburgerBtn"
+      type="button"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="sidebarDrawer"
+    >
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../js/PixelBlast.js"></script>
+    <script src="../js/global.js"></script>
+    <script src="../js/navegacao/sidebar.js"></script>
+    <script src="../js/navegacao/navegacao.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const perguntas = document.querySelectorAll(".ajuda-pergunta");
+
+        const fecharItem = (item) => {
+          item.classList.remove("aberto");
+          const botao = item.querySelector(".ajuda-pergunta");
+          if (botao) botao.setAttribute("aria-expanded", "false");
+        };
+
+        perguntas.forEach((pergunta) => {
+          pergunta.addEventListener("click", () => {
+            const itemAtual = pergunta.closest(".ajuda-item");
+            const estavaAberto = itemAtual.classList.contains("aberto");
+            document.querySelectorAll(".ajuda-item.aberto").forEach((item) => {
+              if (item !== itemAtual) fecharItem(item);
+            });
+            itemAtual.classList.toggle("aberto", !estavaAberto);
+            pergunta.setAttribute("aria-expanded", String(!estavaAberto));
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
